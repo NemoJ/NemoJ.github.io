@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="&amp;emsp;本文简述如何使用C#构建一个简单的串口程序。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/blogs%5Cc_serial00.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/blogs%5Cc_serial02.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/blogs%5Cc_serial03.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/c_serial/00.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/c_serial/02.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/c_serial/03.png">
 <meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
-<meta property="og:updated_time" content="2018-03-15T13:46:58.848Z">
+<meta property="og:updated_time" content="2019-01-24T13:04:46.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用C#构建一个串口程序">
 <meta name="twitter:description" content="&amp;emsp;本文简述如何使用C#构建一个简单的串口程序。">
-<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/blogs%5Cc_serial00.png">
+<meta name="twitter:image" content="https://github.com/NemoJ/blog_pics/raw/master/c_serial/00.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -311,8 +311,8 @@
           
         <p>&emsp;本文简述如何使用C#构建一个简单的串口程序。</p>
 <a id="more"></a>
-<h2 id="新建一个C-程序"><a href="#新建一个C-程序" class="headerlink" title="新建一个C#程序"></a>新建一个C#程序</h2><p>&emsp;打开VS，选择新建一个C#窗体程序并设置工程存储路径，点击确定即可。<br><img src="http://omcg8fk23.bkt.clouddn.com/blogs%5Cc_serial00.png" alt=""></p>
-<h2 id="窗体设置"><a href="#窗体设置" class="headerlink" title="窗体设置"></a>窗体设置</h2><p>&emsp;新建好程序后，在窗体中添加必要控件，添加过程这里不再叙述，完成后如图所示。<br><img src="http://omcg8fk23.bkt.clouddn.com/blogs%5Cc_serial02.png" alt=""><br>&emsp;窗体中的控件主要如下。</p>
+<h2 id="新建一个C-程序"><a href="#新建一个C-程序" class="headerlink" title="新建一个C#程序"></a>新建一个C#程序</h2><p>&emsp;打开VS，选择新建一个C#窗体程序并设置工程存储路径，点击确定即可。<br><img src="https://github.com/NemoJ/blog_pics/raw/master/c_serial/00.png" alt=""></p>
+<h2 id="窗体设置"><a href="#窗体设置" class="headerlink" title="窗体设置"></a>窗体设置</h2><p>&emsp;新建好程序后，在窗体中添加必要控件，添加过程这里不再叙述，完成后如图所示。<br><img src="https://github.com/NemoJ/blog_pics/raw/master/c_serial/02.png" alt=""><br>&emsp;窗体中的控件主要如下。</p>
 <h3 id="Label"><a href="#Label" class="headerlink" title="Label"></a>Label</h3><p>&emsp;Port、Receive等为label，无交互功能，仅仅作为提示显示。</p>
 <h3 id="ComboBox"><a href="#ComboBox" class="headerlink" title="ComboBox"></a>ComboBox</h3><p>&emsp;COM1处为ComboBox，具有下拉选择功能。</p>
 <h3 id="Button"><a href="#Button" class="headerlink" title="Button"></a>Button</h3><p>&emsp;Open、Close等为Button，具有点击功能。</p>
@@ -335,7 +335,7 @@
 <p>&emsp;这段代码的主要功能是：当串口接收到数据时，读取数据并显示在Receive文本区域。</p>
 <h3 id="关闭IllegalCrossThreadCalls"><a href="#关闭IllegalCrossThreadCalls" class="headerlink" title="关闭IllegalCrossThreadCalls"></a>关闭IllegalCrossThreadCalls</h3><p>&emsp;在Form1()中关闭IllegalCrossThreadCalls检查。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Form1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    InitializeComponent();</span><br><span class="line">    CheckForIllegalCrossThreadCalls = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="Form1-FormClosing-Events设置"><a href="#Form1-FormClosing-Events设置" class="headerlink" title="Form1_FormClosing Events设置"></a>Form1_FormClosing Events设置</h3><p>&emsp;当窗体关闭时候，应当释放串口，代码如下。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Form1_FormClosing</span><span class="params">(object sender, FormClosingEventArgs e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (serialPort1.IsOpen)</span><br><span class="line">        serialPort1.Close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h2><p>&emsp;运行上述程序，可以看到串口可以正常进行发送接收功能。<br><img src="http://omcg8fk23.bkt.clouddn.com/blogs%5Cc_serial03.png" alt=""></p>
+<h2 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h2><p>&emsp;运行上述程序，可以看到串口可以正常进行发送接收功能。<br><img src="https://github.com/NemoJ/blog_pics/raw/master/c_serial/03.png" alt=""></p>
 <p>&emsp;至此，一个简单的串口程序就完成啦~~~ 😄😄😄</p>
 <p>学习过程主要参考了YouTube的视频：<a href="https://www.youtube.com/watch?v=Fer_q9LXDnQ" target="_blank" rel="noopener">C# Tutorial - Serial Communication | FoxLearn</a>。</p>
 <p><img src="http://omcg8fk23.bkt.clouddn.com/Reward.jpg" alt=""></p>
@@ -350,7 +350,7 @@
         <p><span>本文标题:</span><a href="/2017/11/16/myserial/">使用C#构建一个串口程序</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2017-11-16, 23:11:21</p>
-        <p><span>最后更新:</span>2018-03-15, 21:46:58</p>
+        <p><span>最后更新:</span>2019-01-24, 21:04:46</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/16/myserial/" title="使用C#构建一个串口程序">http://jiaodi.tech/2017/11/16/myserial/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2017/11/16/myserial/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

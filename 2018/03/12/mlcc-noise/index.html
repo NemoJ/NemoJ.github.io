@@ -23,18 +23,17 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="&amp;emsp;本文分析电源应用中MLCC啸叫产生的机理与抑制手段。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise01.gif">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise04.gif">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise02.jpg">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise03.jpg">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise05.jpg">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise06.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
-<meta property="og:updated_time" content="2018-03-14T15:52:32.155Z">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/01.gif">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/04.gif">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/02.jpg">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/03.jpg">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/05.jpg">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/06.png">
+<meta property="og:updated_time" content="2019-01-24T13:03:27.675Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="电源应用中MLCC啸叫问题的分析与解决">
 <meta name="twitter:description" content="&amp;emsp;本文分析电源应用中MLCC啸叫产生的机理与抑制手段。">
-<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise01.gif">
+<meta name="twitter:image" content="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/01.gif">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -320,7 +319,7 @@
 <p><a href="https://e2e.ti.com/blogs_/b/powerhouse/archive/2016/08/09/how-to-reduce-acoustic-noise-of-mlccs-in-power-applications" target="_blank" rel="noopener">How to reduce acoustic noise of MLCCs in power applications</a></p>
 <p><a href="http://www.eenewsanalog.com/content/reducing-mlccs-piezoelectric-effects-and-audible-noise" target="_blank" rel="noopener">Reducing MLCCs’ piezoelectric effects and audible noise</a></p>
 </blockquote>
-<h2 id="MLCC啸叫现象"><a href="#MLCC啸叫现象" class="headerlink" title="MLCC啸叫现象"></a>MLCC啸叫现象</h2><p><img src="http://omcg8fk23.bkt.clouddn.com/mlcc_noise01.gif" alt=""></p>
+<h2 id="MLCC啸叫现象"><a href="#MLCC啸叫现象" class="headerlink" title="MLCC啸叫现象"></a>MLCC啸叫现象</h2><p><img src="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/01.gif" alt=""></p>
 <p>&emsp;MLCC在电源应用中具有广泛的用途，其优点主要在于：</p>
 <ul>
 <li>高密度容值</li>
@@ -332,11 +331,11 @@
 <li>低成本</li>
 </ul>
 <p>&emsp;通常情况下，MLCC并不会产生噪声。但在某些特殊场合下，MLCC会引发啸叫现象。MLCC的形态如下图所示：</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/mlcc_noise04.gif" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/04.gif" alt=""></p>
 <p>&emsp;由于陶瓷材料的<code>压电效应</code>(piezoelectric effect)，当外加<code>交流电压</code>时其将进行收缩，如下图所示。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/mlcc_noise02.jpg" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/02.jpg" alt=""></p>
 <p>&emsp;当电容器收缩时，将牵引PCB震动，如下图所示。注意图中“电解的施加方向”标注错误，应为“电场的施加方向”。芯片以及电路板的振幅仅为1pm~1nm。当电路板的振动周期在<code>人耳可以听到的频率带</code>(20~20kHz)是，则声音可以被人耳识别。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/mlcc_noise03.jpg" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/03.jpg" alt=""></p>
 <h2 id="影响啸叫的因素"><a href="#影响啸叫的因素" class="headerlink" title="影响啸叫的因素"></a>影响啸叫的因素</h2><p>&emsp;影响啸叫的因素主要有以下几点，啸叫程度可以用声压级(SPL:Sound Pressure Level)衡量：</p>
 <ul>
 <li>交流电压的频率是否在可闻频率带(20~20kHz)</li>
@@ -345,17 +344,16 @@
 <li>电容的介电常数：介电常数越大则压电效应越强</li>
 <li>电容的层数：电容的层数越少，产生的形变小，则SPL降低</li>
 </ul>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/mlcc_noise05.jpg" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/05.jpg" alt=""></p>
 <h2 id="抑制啸叫的手段"><a href="#抑制啸叫的手段" class="headerlink" title="抑制啸叫的手段"></a>抑制啸叫的手段</h2><h3 id="降低交流电压幅值"><a href="#降低交流电压幅值" class="headerlink" title="降低交流电压幅值"></a>降低交流电压幅值</h3><p>&emsp;降低纹波幅值可以通过增大电容值来实现。更重要的是，需要侧重降低可闻频率带的纹波幅值。可以测量纹波噪声的频率，针对该频带设置合理类型与容值的电容进行滤波。</p>
 <h3 id="使用耐压更高的电容"><a href="#使用耐压更高的电容" class="headerlink" title="使用耐压更高的电容"></a>使用耐压更高的电容</h3><p>&emsp;直流偏置电压越高SPL越大(本人猜想这与电容的容值-直流偏置电压特性有关，直流偏置电压增加，则容值降低，则纹波幅值增加，则SPL增加)。相对地，如果提高电容的耐压值，则可以降低啸叫水平。</p>
 <h3 id="优化PCB布局"><a href="#优化PCB布局" class="headerlink" title="优化PCB布局"></a>优化PCB布局</h3><p>&emsp;电容器牵引PCB引起噪声。增加PCB板的厚度有助于降低牵引影响，可以降低噪声；同时，如果<code>将电容器对称放置在PCB两侧</code>，则理想状态下牵引力抵消，则PCB不会发生形变。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/mlcc_noise06.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/mlcc_noise/06.png" alt=""></p>
 <h3 id="使用低噪声电容"><a href="#使用低噪声电容" class="headerlink" title="使用低噪声电容"></a>使用低噪声电容</h3><p>&emsp;目前村田等已经有低噪声产品推出，主要有两种降噪思路：</p>
 <ul>
 <li>使用独特的陶瓷材料抑制电容器的震动；</li>
 <li>使用支架等结构降低电容震动引起的应力。</li>
 </ul>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/Reward.jpg" alt=""></p>
 
       
     </div>
@@ -367,7 +365,7 @@
         <p><span>本文标题:</span><a href="/2018/03/12/mlcc-noise/">电源应用中MLCC啸叫问题的分析与解决</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2018-03-12, 21:56:56</p>
-        <p><span>最后更新:</span>2018-03-14, 23:52:32</p>
+        <p><span>最后更新:</span>2019-01-24, 21:03:27</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/03/12/mlcc-noise/" title="电源应用中MLCC啸叫问题的分析与解决">http://jiaodi.tech/2018/03/12/mlcc-noise/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2018/03/12/mlcc-noise/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
