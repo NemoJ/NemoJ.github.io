@@ -5,15 +5,27 @@
   
 
   
-  <title>Archives | Hexo</title>
+  <title>使用STM32CubeMX新建STM32F7工程 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="&amp;emsp;本文记录STM32F7的开发环境配置与STM32CubeMX的安装配置。">
+<meta name="keywords" content="STM32F7,STM32CubeMX,Keil">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用STM32CubeMX新建STM32F7工程">
+<meta property="og:url" content="http://yoursite.com/2018/03/17/stm32f767-start/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;emsp;本文记录STM32F7的开发环境配置与STM32CubeMX的安装配置。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_start01.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_start02.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_start03.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_start04.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_start05.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
+<meta property="og:updated_time" content="2018-03-17T10:52:52.117Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="使用STM32CubeMX新建STM32F7工程">
+<meta name="twitter:description" content="&amp;emsp;本文记录STM32F7的开发环境配置与STM32CubeMX的安装配置。">
+<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_start01.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,216 +72,95 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/31/stm32f767-lwip/" class="archive-article-date">
-  <time datetime="2018-10-31T02:20:46.000Z" itemprop="datePublished">Oct 31</time>
+        <section id="main"><article id="post-stm32f767-start" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/17/stm32f767-start/" class="article-date">
+  <time datetime="2018-03-17T09:25:48.000Z" itemprop="datePublished">2018-03-17</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/嵌入式/">嵌入式</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/31/stm32f767-lwip/">STM32F767上LwIP的移植</a>
+    <h1 class="article-title" itemprop="name">
+      使用STM32CubeMX新建STM32F7工程
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/11/stm32f767-fmc-ad7616/" class="archive-article-date">
-  <time datetime="2018-08-11T12:45:50.000Z" itemprop="datePublished">Aug 11</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/11/stm32f767-fmc-ad7616/">利用SMT32F767驱动AD7616</a>
-    </h1>
-  
+        <p>&emsp;本文记录STM32F7的开发环境配置与STM32CubeMX的安装配置。</p>
+<a id="more"></a>
+<p>&emsp;STM32F7系列是ST公司Cortex M7内核的高性能处理器。从本文开始，将逐步记录学习该处理器的心得体会。</p>
+<h2 id="硬件环境"><a href="#硬件环境" class="headerlink" title="硬件环境"></a>硬件环境</h2><ul>
+<li>电脑：Windows 10 Home x64</li>
+<li>Apollo STM32F767开发板(ST-LINK V2仿真器)</li>
+</ul>
+<h2 id="Keil的安装与配置"><a href="#Keil的安装与配置" class="headerlink" title="Keil的安装与配置"></a>Keil的安装与配置</h2><ul>
+<li>Keil Version 5.24.1</li>
+<li>Pack Installer：Keil.STM32F7xx_DFP.2.9.0.pack</li>
+</ul>
+<h2 id="STM32CubeMX的安装与配置"><a href="#STM32CubeMX的安装与配置" class="headerlink" title="STM32CubeMX的安装与配置"></a>STM32CubeMX的安装与配置</h2><ul>
+<li>STM32CubeMX Version 4.25.0</li>
+<li>Packages Manager：STM32CubeF7</li>
+</ul>
+<h2 id="生成LED闪烁工程"><a href="#生成LED闪烁工程" class="headerlink" title="生成LED闪烁工程"></a>生成LED闪烁工程</h2><h3 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h3><p>&emsp;打开STM32CubeMX，选择所用的芯片型号，本次为STM32F767IGT6。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_start01.png" alt=""></p>
+<h3 id="配置IO"><a href="#配置IO" class="headerlink" title="配置IO"></a>配置IO</h3><p>&emsp;在Pinout页面中选择所用的IO，设置为GPIO Output；</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_start02.png" alt=""></p>
+<p>&emsp;在Configuration中对IO进一步设置，例如初始化电平、输出模式、上拉下拉、输出速度等；</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_start03.png" alt=""></p>
+<h3 id="生成代码"><a href="#生成代码" class="headerlink" title="生成代码"></a>生成代码</h3><p>&emsp;选择Project-Settings，输入工程名与保存路径，选择开发工具。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_start04.png" alt=""></p>
+<p>&emsp;注意在Code Generator中勾选如下选项，这样初始化代码会分成独立的源文件与头文件保存在工程中。同时，第一个选项中可以选择<code>copy only the necessary library files</code>，这样可以降低工程文件大小。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_start05.png" alt=""></p>
+<h3 id="添加执行代码"><a href="#添加执行代码" class="headerlink" title="添加执行代码"></a>添加执行代码</h3><p>&emsp;STM32CubeMX已经完成了系统以及GPIO的初始化代码，在main中添加如下代码可以控制IO翻转进而使LED闪烁。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* USER CODE END WHILE */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* USER CODE BEGIN 3 */</span></span><br><span class="line">HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);</span><br><span class="line">HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);</span><br><span class="line">HAL_Delay(<span class="number">500</span>);</span><br><span class="line">loop++;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* USER CODE END 3 */</span></span><br></pre></td></tr></table></figure>
+<h3 id="烧录程序"><a href="#烧录程序" class="headerlink" title="烧录程序"></a>烧录程序</h3><p>&emsp;编译并烧录程序，可以观察到IO对应的LED闪烁。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/Reward.jpg" alt=""></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/27/stm32f767-mpu/" class="archive-article-date">
-  <time datetime="2018-07-27T15:59:00.000Z" itemprop="datePublished">Jul 27</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/27/stm32f767-mpu/">STM32F767 MPU的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/16/stm32f767-sdram/" class="archive-article-date">
-  <time datetime="2018-07-16T14:10:41.000Z" itemprop="datePublished">Jul 16</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/17/stm32f767-start/" data-id="cjra726cn0029zcud26hca8rp" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/16/stm32f767-sdram/">STM32F767 FMC-SDRAM的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/06/30/stm32f767-qspi/" class="archive-article-date">
-  <time datetime="2018-06-30T03:26:08.000Z" itemprop="datePublished">Jun 30</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/30/stm32f767-qspi/">STM32F767 QUADSPI的基本用法</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keil/">Keil</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STM32CubeMX/">STM32CubeMX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STM32F7/">STM32F7</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/18/stm32f767newpro/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          新建一个STM32F767工程(基于HAL库)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/12/mlcc-noise/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">电源应用中MLCC啸叫问题的分析与解决</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/27/stm32f767-flash/" class="archive-article-date">
-  <time datetime="2018-05-27T03:26:08.000Z" itemprop="datePublished">May 27</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/27/stm32f767-flash/">STM32F767 Flash的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/21/stm32f767-rtc/" class="archive-article-date">
-  <time datetime="2018-05-21T15:12:27.000Z" itemprop="datePublished">May 21</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/21/stm32f767-rtc/">STM32F767 RTC的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/19/stm32f767-uart-dma/" class="archive-article-date">
-  <time datetime="2018-05-19T12:19:51.000Z" itemprop="datePublished">May 19</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/19/stm32f767-uart-dma/">STM32F767 DMA的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/07/stm32f767-pwm/" class="archive-article-date">
-  <time datetime="2018-05-07T12:18:11.000Z" itemprop="datePublished">May 7</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/07/stm32f767-pwm/">STM32F767 PWM的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/28/feedforward-cap/" class="archive-article-date">
-  <time datetime="2018-04-28T11:53:05.000Z" itemprop="datePublished">Apr 28</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/28/feedforward-cap/">优化前馈电容改善DCDC的瞬态响应(未完成)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         

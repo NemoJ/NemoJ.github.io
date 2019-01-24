@@ -5,15 +5,22 @@
   
 
   
-  <title>Archives | Hexo</title>
+  <title>PyInstaller基本用法 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="&amp;emsp;PyInstaller可以将Python程序打包为一个独立的可执行程序，适用于Windows、Linux与Mac OS X等。本文简述PyInstaller的安装与基本使用方法。">
+<meta name="keywords" content="Python,PyInstaller">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PyInstaller基本用法">
+<meta property="og:url" content="http://yoursite.com/2018/01/23/python-pyinstaller/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;emsp;PyInstaller可以将Python程序打包为一个独立的可执行程序，适用于Windows、Linux与Mac OS X等。本文简述PyInstaller的安装与基本使用方法。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
+<meta property="og:updated_time" content="2018-01-25T14:45:24.157Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="PyInstaller基本用法">
+<meta name="twitter:description" content="&amp;emsp;PyInstaller可以将Python程序打包为一个独立的可执行程序，适用于Windows、Linux与Mac OS X等。本文简述PyInstaller的安装与基本使用方法。">
+<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,216 +67,143 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/31/stm32f767-lwip/" class="archive-article-date">
-  <time datetime="2018-10-31T02:20:46.000Z" itemprop="datePublished">Oct 31</time>
+        <section id="main"><article id="post-python-pyinstaller" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/23/python-pyinstaller/" class="article-date">
+  <time datetime="2018-01-23T14:51:58.000Z" itemprop="datePublished">2018-01-23</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/31/stm32f767-lwip/">STM32F767上LwIP的移植</a>
+    <h1 class="article-title" itemprop="name">
+      PyInstaller基本用法
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/11/stm32f767-fmc-ad7616/" class="archive-article-date">
-  <time datetime="2018-08-11T12:45:50.000Z" itemprop="datePublished">Aug 11</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/11/stm32f767-fmc-ad7616/">利用SMT32F767驱动AD7616</a>
-    </h1>
-  
+        <p>&emsp;PyInstaller可以将Python程序打包为一个独立的可执行程序，适用于Windows、Linux与Mac OS X等。本文简述PyInstaller的安装与基本使用方法。</p>
+<a id="more"></a>
+<p>&emsp;Python用于开发一些小程序非常方便，但是使用的话一般需要安装开发环境。通过<a href="http://www.pyinstaller.org/" target="_blank" rel="noopener">PyInstaller</a>可以将Python程序转化为一个可执行文件，例如可以在Windows下直接执行的exe文件。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>&emsp;本文中开发环境如下：</p>
+<ul>
+<li>操作系统：Windows 10 Home x64</li>
+<li>Python版本：2.7.13 x64</li>
+</ul>
+<h2 id="PyInstaller的安装"><a href="#PyInstaller的安装" class="headerlink" title="PyInstaller的安装"></a>PyInstaller的安装</h2><h3 id="安装PyInstaller"><a href="#安装PyInstaller" class="headerlink" title="安装PyInstaller"></a>安装PyInstaller</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyinstaller</span><br></pre></td></tr></table></figure>
+<h3 id="更新PyInstaller"><a href="#更新PyInstaller" class="headerlink" title="更新PyInstaller"></a>更新PyInstaller</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade pyinstaller</span><br></pre></td></tr></table></figure>
+<h3 id="安装当前开发者版本"><a href="#安装当前开发者版本" class="headerlink" title="安装当前开发者版本"></a>安装当前开发者版本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install https://github.com/pyinstaller/pyinstaller/tarball/develop</span><br></pre></td></tr></table></figure>
+<h2 id="PyInstaller的使用"><a href="#PyInstaller的使用" class="headerlink" title="PyInstaller的使用"></a>PyInstaller的使用</h2><p>&emsp;PyInstaller命令的语法如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller [options] script [script …] | specfile</span><br></pre></td></tr></table></figure>
+<p>&emsp;关于该语法的详细介绍见<a href="http://pyinstaller.readthedocs.io/en/stable/usage.html" target="_blank" rel="noopener">官网</a>。这里只列举出一些相对常用的用法。</p>
+<h3 id="option选项"><a href="#option选项" class="headerlink" title="option选项"></a>option选项</h3><p>&emsp;option中可以设置的参数较多，常用的列举如下。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Parameter</th>
+<th style="text-align:center">Function</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-D, –onedir</td>
+<td style="text-align:center">Create a one-folder bundle containing an executable (default)</td>
+<td style="text-align:center">生成一个包含程序的文件夹</td>
+</tr>
+<tr>
+<td style="text-align:center">-F, –onefile</td>
+<td style="text-align:center">Create a one-file bundled executable.</td>
+<td style="text-align:center">生成一个独立程序</td>
+</tr>
+<tr>
+<td style="text-align:center">p DIR, –paths DIR</td>
+<td style="text-align:center">A path to search for imports (like using PYTHONPATH). Multiple paths are allowed, separated by ‘:’, or use this option multiple times</td>
+<td style="text-align:center">设置import文件路径</td>
+</tr>
+<tr>
+<td style="text-align:center">c, –console, –nowindowed</td>
+<td style="text-align:center">Open a console window for standard i/o (default)</td>
+<td style="text-align:center">使用控制台程序</td>
+</tr>
+<tr>
+<td style="text-align:center">-w, –windowed, –noconsole</td>
+<td style="text-align:center">Windows and Mac OS X: do not provide a console window for standard i/o. On Mac OS X this also triggers building an OS X .app bundle. This option is ignored in *NIX systems.</td>
+<td style="text-align:center">使用非控制台程序</td>
+</tr>
+<tr>
+<td style="text-align:center">-i &lt;FILE.ico&gt;, –icon</td>
+<td style="text-align:center">FILE.ico: apply that icon to a Windows executable. FILE.exe,ID, extract the icon with ID from an exe. FILE.icns: apply the icon to the .app bundle on Mac OS X</td>
+<td style="text-align:center">设置程序的icon</td>
+</tr>
+<tr>
+<td style="text-align:center">-n NAME, –name NAME</td>
+<td style="text-align:center">Name to assign to the bundled app and spec file (default: first script’s basename)</td>
+<td style="text-align:center">命名生成的程序</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;使用一个简单的获取系统时间然后打印的程序，代码如下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:UTF-8</span></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timer</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        print(datetime.now().strftime(<span class="string">"%Y-%m-%d %H:%M:%S"</span>))</span><br><span class="line">        time.sleep(n)</span><br><span class="line">timer(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>&emsp;对PyInstaller的使用举例如下：</p>
+<h4 id="生成独立exe文件"><a href="#生成独立exe文件" class="headerlink" title="生成独立exe文件"></a>生成独立exe文件</h4><p>&emsp;首先将在CMD命令框定位到程序所在路径，输入如下命令即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd -d D:\python</span><br><span class="line">pyinstaller -F timer.py</span><br></pre></td></tr></table></figure>
+<p>&emsp;之后在该目录下dist文件夹下可以看到timer.exe文件，点击执行，会发现与运行python程序效果一致。</p>
+<h4 id="增加程序icon"><a href="#增加程序icon" class="headerlink" title="增加程序icon"></a>增加程序icon</h4><p>&emsp;命令修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller -F  -i D:\python\qq.ico timer.py</span><br></pre></td></tr></table></figure>
+<p>&emsp;之后在该目录下dist文件夹下可以看到timer.exe文件，此时程序使用了icon。</p>
+<h4 id="禁用控制台"><a href="#禁用控制台" class="headerlink" title="禁用控制台"></a>禁用控制台</h4><p>&emsp;对于窗体程序，可以禁用控制台。举例一个小程序：使用graphics绘制一个圆，鼠标点击后消失，同时在程序运行中输出一个start字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> graphics <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">win = GraphWin(<span class="string">'shape'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"start"</span>)</span><br><span class="line"></span><br><span class="line">center = Point(<span class="number">100</span>,<span class="number">100</span>)</span><br><span class="line">circ = Circle(center,<span class="number">30</span>)</span><br><span class="line">circ.setFill(<span class="string">'blue'</span>)</span><br><span class="line">circ.draw(win)</span><br><span class="line"></span><br><span class="line">win.getMouse()</span><br><span class="line">win.close()</span><br></pre></td></tr></table></figure>
+<p>&emsp;当程序直接通过python运行时，将输出start并画圆。</p>
+<p>&emsp;使用如下命令生成exe文件禁用控制台，则程序仅仅进行画圆。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller -F -w -i D:\python\qq.ico graph_1.py</span><br></pre></td></tr></table></figure>
+<p>&emsp;PyInstaller的基本使用介绍完毕。😄</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/Reward.jpg" alt=""></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/27/stm32f767-mpu/" class="archive-article-date">
-  <time datetime="2018-07-27T15:59:00.000Z" itemprop="datePublished">Jul 27</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/27/stm32f767-mpu/">STM32F767 MPU的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/16/stm32f767-sdram/" class="archive-article-date">
-  <time datetime="2018-07-16T14:10:41.000Z" itemprop="datePublished">Jul 16</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/23/python-pyinstaller/" data-id="cjra726cc001nzcud3qb3zwa2" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/16/stm32f767-sdram/">STM32F767 FMC-SDRAM的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/06/30/stm32f767-qspi/" class="archive-article-date">
-  <time datetime="2018-06-30T03:26:08.000Z" itemprop="datePublished">Jun 30</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/30/stm32f767-qspi/">STM32F767 QUADSPI的基本用法</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyInstaller/">PyInstaller</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/28/F28379D-new-pro-cpu1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          F28379D新建工程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/14/HDC1010-C2000/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用F28069驱动温湿度传感器HDC1010</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/27/stm32f767-flash/" class="archive-article-date">
-  <time datetime="2018-05-27T03:26:08.000Z" itemprop="datePublished">May 27</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/27/stm32f767-flash/">STM32F767 Flash的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/21/stm32f767-rtc/" class="archive-article-date">
-  <time datetime="2018-05-21T15:12:27.000Z" itemprop="datePublished">May 21</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/21/stm32f767-rtc/">STM32F767 RTC的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/19/stm32f767-uart-dma/" class="archive-article-date">
-  <time datetime="2018-05-19T12:19:51.000Z" itemprop="datePublished">May 19</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/19/stm32f767-uart-dma/">STM32F767 DMA的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/07/stm32f767-pwm/" class="archive-article-date">
-  <time datetime="2018-05-07T12:18:11.000Z" itemprop="datePublished">May 7</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/07/stm32f767-pwm/">STM32F767 PWM的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/28/feedforward-cap/" class="archive-article-date">
-  <time datetime="2018-04-28T11:53:05.000Z" itemprop="datePublished">Apr 28</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/28/feedforward-cap/">优化前馈电容改善DCDC的瞬态响应(未完成)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         

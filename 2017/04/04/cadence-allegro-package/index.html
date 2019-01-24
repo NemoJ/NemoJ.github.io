@@ -5,15 +5,38 @@
   
 
   
-  <title>Archives | Hexo</title>
+  <title>使用Ultra Librarian创建Cadence原理图与PCB封装 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="&amp;emsp;元器件的封装制作是原理图与PCB设计的第一步。自行设计封装固然可行，但通常要花费一定时间。使用芯片厂家提供的封装库是一个便捷的手段，尤其对于具有通用性的PCB封装。例如德州仪器公司与 Accelerated Designs公司合作制作了自己几乎全部元器件的封装库，整合为bxl文件，可以使用Ultra Librarian创建Cadence原理图与PCB封装。 &amp;emsp;以C2000处理">
+<meta name="keywords" content="Cadence,Allegro,封装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Ultra Librarian创建Cadence原理图与PCB封装">
+<meta property="og:url" content="http://yoursite.com/2017/04/04/cadence-allegro-package/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;emsp;元器件的封装制作是原理图与PCB设计的第一步。自行设计封装固然可行，但通常要花费一定时间。使用芯片厂家提供的封装库是一个便捷的手段，尤其对于具有通用性的PCB封装。例如德州仪器公司与 Accelerated Designs公司合作制作了自己几乎全部元器件的封装库，整合为bxl文件，可以使用Ultra Librarian创建Cadence原理图与PCB封装。 &amp;emsp;以C2000处理">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-01.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-01-1.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-02.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-03.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-04.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-05.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-06.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-12.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-07.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-08.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-09.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-10.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-11.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-13.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-14.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-16.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
+<meta property="og:updated_time" content="2018-03-15T13:46:14.055Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="使用Ultra Librarian创建Cadence原理图与PCB封装">
+<meta name="twitter:description" content="&amp;emsp;元器件的封装制作是原理图与PCB设计的第一步。自行设计封装固然可行，但通常要花费一定时间。使用芯片厂家提供的封装库是一个便捷的手段，尤其对于具有通用性的PCB封装。例如德州仪器公司与 Accelerated Designs公司合作制作了自己几乎全部元器件的封装库，整合为bxl文件，可以使用Ultra Librarian创建Cadence原理图与PCB封装。 &amp;emsp;以C2000处理">
+<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/2017-04-05-01.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,216 +83,75 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/31/stm32f767-lwip/" class="archive-article-date">
-  <time datetime="2018-10-31T02:20:46.000Z" itemprop="datePublished">Oct 31</time>
+        <section id="main"><article id="post-cadence-allegro-package" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/04/cadence-allegro-package/" class="article-date">
+  <time datetime="2017-04-04T07:49:27.000Z" itemprop="datePublished">2017-04-04</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/EDA/">EDA</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/31/stm32f767-lwip/">STM32F767上LwIP的移植</a>
+    <h1 class="article-title" itemprop="name">
+      使用Ultra Librarian创建Cadence原理图与PCB封装
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/11/stm32f767-fmc-ad7616/" class="archive-article-date">
-  <time datetime="2018-08-11T12:45:50.000Z" itemprop="datePublished">Aug 11</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/11/stm32f767-fmc-ad7616/">利用SMT32F767驱动AD7616</a>
-    </h1>
-  
+        <p>&emsp;元器件的封装制作是原理图与PCB设计的第一步。自行设计封装固然可行，但通常要花费一定时间。使用芯片厂家提供的封装库是一个便捷的手段，尤其对于具有通用性的PCB封装。例如德州仪器公司与 Accelerated Designs公司合作制作了自己几乎全部元器件的封装库，整合为bxl文件，可以使用Ultra Librarian创建Cadence原理图与PCB封装。</p>
+<p>&emsp;以C2000处理器TMS320F28069芯片为例，本文将介绍使用该工具生成封装库的方法。</p>
+<a id="more"></a>
+<h2 id="Ultra-Librarian的安装与bxl文件的下载"><a href="#Ultra-Librarian的安装与bxl文件的下载" class="headerlink" title="Ultra Librarian的安装与bxl文件的下载"></a>Ultra Librarian的安装与bxl文件的下载</h2><p>&emsp;Ultra Librarian软件可以在ti官网直接下载。在ti官网搜索TMS320F28069，在<a href="http://www.ti.com.cn/product/cn/TMS320F28069/quality" target="_blank" rel="noopener">芯片主页</a>打开<strong>质量与封装</strong>选项，页面下方可以看到bxl文件与Ultra Librarian软件的下载链接。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-01.png" alt=""><br>&emsp;<strong>Ultra Librarian</strong>软件按照默认安装即可。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-01-1.png" alt=""><br>&emsp;TMS320F28069封装中，下载<strong>LQFP100</strong>为例。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-02.png" alt=""></p>
+<h2 id="使用Ultra-Librarian生成Cadence原理图与PCB封装"><a href="#使用Ultra-Librarian生成Cadence原理图与PCB封装" class="headerlink" title="使用Ultra Librarian生成Cadence原理图与PCB封装"></a>使用Ultra Librarian生成Cadence原理图与PCB封装</h2><p>&emsp;Ultra Librarian可以直接打开bxl文件，其中左侧为PCB封装预览，右侧为原理图封装预览（上面还有一个3D封装，我不知道是哪里来的…）。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-03.png" alt=""><br>&emsp;Ultra Librarian软件设置如下：其中勾选<strong>Cadence Allegro</strong>选项，注意<strong>选择自己的Cadence软件版本</strong>，本文以16.6版本为例。该选项对应PCB封装；同时勾选<strong>Cadence Allegro Capture</strong>选项，该选项对应原理图封装。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-04.png" alt=""><br>&emsp;点击<strong>Step 3. Export to Selected Tools</strong>生成封装。PCB封装生成过程中，需要调用Allegro软件。处理过程可能比较长，请耐心等待。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-05.png" alt=""></p>
+<h2 id="PCB封装的处理以及加入3D模型"><a href="#PCB封装的处理以及加入3D模型" class="headerlink" title="PCB封装的处理以及加入3D模型"></a>PCB封装的处理以及加入3D模型</h2><p>&emsp;封装生成之后，可以打开Ultra Librarian输出文件夹（<code>UltraLibrarian\Library\Exported\Allegro</code>）中对应时间生成的文件，其中<code>.dra .psm .pad</code>文件均为必须文件，其中<code>pz100</code>代表中等密度封装，<code>pz100-l</code>代表高密度封装，<code>pz100-m</code>代表低密度封装。此时可以用Allegro软件打开dra文件查看具体封装。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-06.png" alt=""><br>&emsp;为了便于整理，可以将上述文件复制到自己的封装库文件夹中，本文中将其复制到<code>C:\Cadence\mypcblib</code>目录下。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-12.png" alt=""><br>&emsp;为了使得PCB封装更接近于实际效果，可以下载其3D外形加入到封装中。这里推荐到<a href="http://www.3dcontentcentral.com/default.aspx" target="_blank" rel="noopener">3D ContentCentral</a>下载3D封装。<br>&emsp;搜索<code>LQFP100</code>，选择合适的器件。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-07.png" alt=""><br>&emsp;打开器件页面，选择STEP文件下载并保存在3D封装文件夹中，本文对应为<code>C:\Cadence\step</code>。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-08.png" alt=""><br>&emsp;打开Allegro软件，添加<code>steppath</code>路径。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-09.png" alt=""><br>&emsp;打开<code>pz100</code>封装，选择<code>setup-Step Packaging Mapping</code>，选择<code>LQFP100</code>并进行方向位置的微调，点击<code>Save</code>进行保存并退出。此时，如果Allegro调用该PCB封装，则会自动加载其3D模型。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-10.png" alt=""></p>
+<h2 id="原理图封装的处理"><a href="#原理图封装的处理" class="headerlink" title="原理图封装的处理"></a>原理图封装的处理</h2><p>&emsp;Ultra Librarian生成的封装需要经过Cadence导入方可使用。打开Cadence Capture软件，选择<code>file-Import Design</code>，打开<code>UltraLibrarian\Library\Exported\Orcad</code>路径下对应的edf cfg文件，如图所示。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-11.png" alt=""><br>&emsp;生成完毕后，文件夹内会出现OLB，即为原理图库文件。为了方便起见，可以将库里的元器件复制到自建库中，同时指定PCB封装为<code>pz100</code>。</p>
+<h2 id="新建工程进行测试"><a href="#新建工程进行测试" class="headerlink" title="新建工程进行测试"></a>新建工程进行测试</h2><p>&emsp;新建一个工程进行原理图与PCB封装测试。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-13.png" alt=""><br>&emsp;原理图中仅仅放置F28069，然后生成网络表并用Allegro软件打开。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-14.png" alt=""><br>此时可以在Allegro软件中对该器件进行放置，选择3D方式进行查看，可以看到器件的3D效果。<br><img src="http://omcg8fk23.bkt.clouddn.com/2017-04-05-16.png" alt=""></p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/Reward.jpg" alt=""></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/27/stm32f767-mpu/" class="archive-article-date">
-  <time datetime="2018-07-27T15:59:00.000Z" itemprop="datePublished">Jul 27</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/27/stm32f767-mpu/">STM32F767 MPU的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/16/stm32f767-sdram/" class="archive-article-date">
-  <time datetime="2018-07-16T14:10:41.000Z" itemprop="datePublished">Jul 16</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/04/cadence-allegro-package/" data-id="cjra726c00017zcuddwtzhemy" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/16/stm32f767-sdram/">STM32F767 FMC-SDRAM的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/06/30/stm32f767-qspi/" class="archive-article-date">
-  <time datetime="2018-06-30T03:26:08.000Z" itemprop="datePublished">Jun 30</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/30/stm32f767-qspi/">STM32F767 QUADSPI的基本用法</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Allegro/">Allegro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cadence/">Cadence</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/封装/">封装</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/11/allegro-guide-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Allegro学习笔记-基础篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/06/新建一个C2000工程/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">新建一个C2000工程</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/27/stm32f767-flash/" class="archive-article-date">
-  <time datetime="2018-05-27T03:26:08.000Z" itemprop="datePublished">May 27</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/27/stm32f767-flash/">STM32F767 Flash的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/21/stm32f767-rtc/" class="archive-article-date">
-  <time datetime="2018-05-21T15:12:27.000Z" itemprop="datePublished">May 21</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/21/stm32f767-rtc/">STM32F767 RTC的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/19/stm32f767-uart-dma/" class="archive-article-date">
-  <time datetime="2018-05-19T12:19:51.000Z" itemprop="datePublished">May 19</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/19/stm32f767-uart-dma/">STM32F767 DMA的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/07/stm32f767-pwm/" class="archive-article-date">
-  <time datetime="2018-05-07T12:18:11.000Z" itemprop="datePublished">May 7</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/07/stm32f767-pwm/">STM32F767 PWM的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/28/feedforward-cap/" class="archive-article-date">
-  <time datetime="2018-04-28T11:53:05.000Z" itemprop="datePublished">Apr 28</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/28/feedforward-cap/">优化前馈电容改善DCDC的瞬态响应(未完成)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         

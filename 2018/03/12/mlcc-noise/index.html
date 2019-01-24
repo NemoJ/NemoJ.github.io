@@ -5,15 +5,28 @@
   
 
   
-  <title>Archives | Hexo</title>
+  <title>电源应用中MLCC啸叫问题的分析与解决 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="&amp;emsp;本文分析电源应用中MLCC啸叫产生的机理与抑制手段。">
+<meta name="keywords" content="MLCC,Noise,PCB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电源应用中MLCC啸叫问题的分析与解决">
+<meta property="og:url" content="http://yoursite.com/2018/03/12/mlcc-noise/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;emsp;本文分析电源应用中MLCC啸叫产生的机理与抑制手段。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise01.gif">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise04.gif">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise02.jpg">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise03.jpg">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise05.jpg">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise06.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
+<meta property="og:updated_time" content="2018-03-14T15:52:32.155Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="电源应用中MLCC啸叫问题的分析与解决">
+<meta name="twitter:description" content="&amp;emsp;本文分析电源应用中MLCC啸叫产生的机理与抑制手段。">
+<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/mlcc_noise01.gif">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,216 +73,110 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/31/stm32f767-lwip/" class="archive-article-date">
-  <time datetime="2018-10-31T02:20:46.000Z" itemprop="datePublished">Oct 31</time>
+        <section id="main"><article id="post-mlcc-noise" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/12/mlcc-noise/" class="article-date">
+  <time datetime="2018-03-12T13:56:56.000Z" itemprop="datePublished">2018-03-12</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hardware/">Hardware</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/31/stm32f767-lwip/">STM32F767上LwIP的移植</a>
+    <h1 class="article-title" itemprop="name">
+      电源应用中MLCC啸叫问题的分析与解决
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/11/stm32f767-fmc-ad7616/" class="archive-article-date">
-  <time datetime="2018-08-11T12:45:50.000Z" itemprop="datePublished">Aug 11</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/11/stm32f767-fmc-ad7616/">利用SMT32F767驱动AD7616</a>
-    </h1>
-  
+        <p>&emsp;本文分析电源应用中MLCC啸叫产生的机理与抑制手段。</p>
+<a id="more"></a>
+<p>&emsp;本文根据以下文章整理综合：</p>
+<blockquote>
+<p><a href="https://www.murata.com/products/capacitor/mlcc/solution/naki" target="_blank" rel="noopener">啸叫对策事例 (动画)</a></p>
+<p><a href="https://e2e.ti.com/blogs_/b/powerhouse/archive/2016/08/09/how-to-reduce-acoustic-noise-of-mlccs-in-power-applications" target="_blank" rel="noopener">How to reduce acoustic noise of MLCCs in power applications</a></p>
+<p><a href="http://www.eenewsanalog.com/content/reducing-mlccs-piezoelectric-effects-and-audible-noise" target="_blank" rel="noopener">Reducing MLCCs’ piezoelectric effects and audible noise</a></p>
+</blockquote>
+<h2 id="MLCC啸叫现象"><a href="#MLCC啸叫现象" class="headerlink" title="MLCC啸叫现象"></a>MLCC啸叫现象</h2><p><img src="http://omcg8fk23.bkt.clouddn.com/mlcc_noise01.gif" alt=""></p>
+<p>&emsp;MLCC在电源应用中具有广泛的用途，其优点主要在于：</p>
+<ul>
+<li>高密度容值</li>
+<li>低寄生电阻(ESR)</li>
+<li>低寄生电感(ESL)</li>
+<li>高频阻抗低</li>
+<li>无极性，易于安装制造</li>
+<li>相比于钽电容与铝电解电容可靠性更高</li>
+<li>低成本</li>
+</ul>
+<p>&emsp;通常情况下，MLCC并不会产生噪声。但在某些特殊场合下，MLCC会引发啸叫现象。MLCC的形态如下图所示：</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/mlcc_noise04.gif" alt=""></p>
+<p>&emsp;由于陶瓷材料的<code>压电效应</code>(piezoelectric effect)，当外加<code>交流电压</code>时其将进行收缩，如下图所示。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/mlcc_noise02.jpg" alt=""></p>
+<p>&emsp;当电容器收缩时，将牵引PCB震动，如下图所示。注意图中“电解的施加方向”标注错误，应为“电场的施加方向”。芯片以及电路板的振幅仅为1pm~1nm。当电路板的振动周期在<code>人耳可以听到的频率带</code>(20~20kHz)是，则声音可以被人耳识别。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/mlcc_noise03.jpg" alt=""></p>
+<h2 id="影响啸叫的因素"><a href="#影响啸叫的因素" class="headerlink" title="影响啸叫的因素"></a>影响啸叫的因素</h2><p>&emsp;影响啸叫的因素主要有以下几点，啸叫程度可以用声压级(SPL:Sound Pressure Level)衡量：</p>
+<ul>
+<li>交流电压的频率是否在可闻频率带(20~20kHz)</li>
+<li>交流电压的幅值：幅值增大则SPL增加</li>
+<li>直流偏置电压：直流偏置电压越大，则SPL增加</li>
+<li>电容的介电常数：介电常数越大则压电效应越强</li>
+<li>电容的层数：电容的层数越少，产生的形变小，则SPL降低</li>
+</ul>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/mlcc_noise05.jpg" alt=""></p>
+<h2 id="抑制啸叫的手段"><a href="#抑制啸叫的手段" class="headerlink" title="抑制啸叫的手段"></a>抑制啸叫的手段</h2><h3 id="降低交流电压幅值"><a href="#降低交流电压幅值" class="headerlink" title="降低交流电压幅值"></a>降低交流电压幅值</h3><p>&emsp;降低纹波幅值可以通过增大电容值来实现。更重要的是，需要侧重降低可闻频率带的纹波幅值。可以测量纹波噪声的频率，针对该频带设置合理类型与容值的电容进行滤波。</p>
+<h3 id="使用耐压更高的电容"><a href="#使用耐压更高的电容" class="headerlink" title="使用耐压更高的电容"></a>使用耐压更高的电容</h3><p>&emsp;直流偏置电压越高SPL越大(本人猜想这与电容的容值-直流偏置电压特性有关，直流偏置电压增加，则容值降低，则纹波幅值增加，则SPL增加)。相对地，如果提高电容的耐压值，则可以降低啸叫水平。</p>
+<h3 id="优化PCB布局"><a href="#优化PCB布局" class="headerlink" title="优化PCB布局"></a>优化PCB布局</h3><p>&emsp;电容器牵引PCB引起噪声。增加PCB板的厚度有助于降低牵引影响，可以降低噪声；同时，如果<code>将电容器对称放置在PCB两侧</code>，则理想状态下牵引力抵消，则PCB不会发生形变。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/mlcc_noise06.png" alt=""></p>
+<h3 id="使用低噪声电容"><a href="#使用低噪声电容" class="headerlink" title="使用低噪声电容"></a>使用低噪声电容</h3><p>&emsp;目前村田等已经有低噪声产品推出，主要有两种降噪思路：</p>
+<ul>
+<li>使用独特的陶瓷材料抑制电容器的震动；</li>
+<li>使用支架等结构降低电容震动引起的应力。</li>
+</ul>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/Reward.jpg" alt=""></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/27/stm32f767-mpu/" class="archive-article-date">
-  <time datetime="2018-07-27T15:59:00.000Z" itemprop="datePublished">Jul 27</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/27/stm32f767-mpu/">STM32F767 MPU的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/16/stm32f767-sdram/" class="archive-article-date">
-  <time datetime="2018-07-16T14:10:41.000Z" itemprop="datePublished">Jul 16</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/12/mlcc-noise/" data-id="cjra726c3001azcudvw7rxpky" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/16/stm32f767-sdram/">STM32F767 FMC-SDRAM的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/06/30/stm32f767-qspi/" class="archive-article-date">
-  <time datetime="2018-06-30T03:26:08.000Z" itemprop="datePublished">Jun 30</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/30/stm32f767-qspi/">STM32F767 QUADSPI的基本用法</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MLCC/">MLCC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Noise/">Noise</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PCB/">PCB</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/17/stm32f767-start/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用STM32CubeMX新建STM32F7工程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/02/04/pierce-oscillator/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Pierce振荡器的原理与设计方法</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/27/stm32f767-flash/" class="archive-article-date">
-  <time datetime="2018-05-27T03:26:08.000Z" itemprop="datePublished">May 27</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/27/stm32f767-flash/">STM32F767 Flash的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/21/stm32f767-rtc/" class="archive-article-date">
-  <time datetime="2018-05-21T15:12:27.000Z" itemprop="datePublished">May 21</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/21/stm32f767-rtc/">STM32F767 RTC的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/19/stm32f767-uart-dma/" class="archive-article-date">
-  <time datetime="2018-05-19T12:19:51.000Z" itemprop="datePublished">May 19</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/19/stm32f767-uart-dma/">STM32F767 DMA的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/07/stm32f767-pwm/" class="archive-article-date">
-  <time datetime="2018-05-07T12:18:11.000Z" itemprop="datePublished">May 7</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/07/stm32f767-pwm/">STM32F767 PWM的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/28/feedforward-cap/" class="archive-article-date">
-  <time datetime="2018-04-28T11:53:05.000Z" itemprop="datePublished">Apr 28</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/28/feedforward-cap/">优化前馈电容改善DCDC的瞬态响应(未完成)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         

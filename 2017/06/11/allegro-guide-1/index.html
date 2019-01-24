@@ -5,15 +5,32 @@
   
 
   
-  <title>Archives | Hexo</title>
+  <title>Allegro学习笔记-基础篇 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="&amp;emsp;Allegro是Cadence公司旗下的功能强大的PCB设计工具，在高速电路设计中应用较多。最近学习Allegro整理了一些笔记，这里与大家分享。">
+<meta name="keywords" content="Cadence,Allegro,高速电路,封装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Allegro学习笔记-基础篇">
+<meta property="og:url" content="http://yoursite.com/2017/06/11/allegro-guide-1/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;emsp;Allegro是Cadence公司旗下的功能强大的PCB设计工具，在高速电路设计中应用较多。最近学习Allegro整理了一些笔记，这里与大家分享。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/allegro-guide-01.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/allegro-guide-02.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/allegro-guide-03.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/allegro-guide-04.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/allegro-guide-05.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/allegro-guide-06.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/allegro-guide-07.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/allegro-guide-08.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/allegro-guide-09.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/allegro-guide-10.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
+<meta property="og:updated_time" content="2018-03-15T13:46:26.316Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Allegro学习笔记-基础篇">
+<meta name="twitter:description" content="&amp;emsp;Allegro是Cadence公司旗下的功能强大的PCB设计工具，在高速电路设计中应用较多。最近学习Allegro整理了一些笔记，这里与大家分享。">
+<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/allegro-guide-01.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,216 +77,76 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/31/stm32f767-lwip/" class="archive-article-date">
-  <time datetime="2018-10-31T02:20:46.000Z" itemprop="datePublished">Oct 31</time>
+        <section id="main"><article id="post-allegro-guide-1" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/11/allegro-guide-1/" class="article-date">
+  <time datetime="2017-06-11T15:47:54.000Z" itemprop="datePublished">2017-06-11</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/EDA/">EDA</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/31/stm32f767-lwip/">STM32F767上LwIP的移植</a>
+    <h1 class="article-title" itemprop="name">
+      Allegro学习笔记-基础篇
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/11/stm32f767-fmc-ad7616/" class="archive-article-date">
-  <time datetime="2018-08-11T12:45:50.000Z" itemprop="datePublished">Aug 11</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/11/stm32f767-fmc-ad7616/">利用SMT32F767驱动AD7616</a>
-    </h1>
-  
+        <p>&emsp;Allegro是Cadence公司旗下的功能强大的PCB设计工具，在高速电路设计中应用较多。最近学习Allegro整理了一些笔记，这里与大家分享。</p>
+<a id="more"></a>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>&emsp;首先建立一个简单的工程，本文建立的工程如图所示，即DAC8552的一个接口电路，包括DAC的模拟输入输出以及SPI数字接口。<br>&emsp;原理图及封装设计这里不再说明。<br><img src="http://omcg8fk23.bkt.clouddn.com/allegro-guide-01.png" alt=""><br><img src="http://omcg8fk23.bkt.clouddn.com/allegro-guide-02.png" alt=""></p>
+<h2 id="为PCB添加outline板框以及Route-Keepin区域"><a href="#为PCB添加outline板框以及Route-Keepin区域" class="headerlink" title="为PCB添加outline板框以及Route Keepin区域"></a>为PCB添加outline板框以及Route Keepin区域</h2><p>&emsp;建立PCB后，首先要添加一个板框，即规定了PCB的外形。在菜单栏中选择<code>Add-line</code>，Options栏中选择<code>Board Geometry-Outline</code>，之后可以按照所需大小进行画线即可。如果需要精确控制外板框大小，可以在命令窗口中通过<code>x</code>，<code>ix</code>，<code>iy</code>指令进行精确绘制。绘制完毕后，单击鼠标右键选择D<code>one</code>即完成。<br>&emsp;Outline绘制完成后，需要规定允许布线区域，在菜单栏中选择Edit-Z-Copy，Options栏中选择<code>ROUTE KEEPIN-ALL</code>，Offset设置为所需要的安全距离，例如<code>20mil</code>，Find栏中选择<code>Lines</code>，之后点击板框的任何一个边线即可生成Route Keepin边框。如下图所示。<br><img src="http://omcg8fk23.bkt.clouddn.com/allegro-guide-03.png" alt=""><br>&emsp;同理，还可以设置元器件的允许摆放区域，即Package Keepin。设置该区域即规定了元器件的摆放范围，主要是PCB进行焊接过程中的间距要求，以及防止拼版之后隔板过程损伤器件。</p>
+<h2 id="通过Constraint-Manager设置基本规则"><a href="#通过Constraint-Manager设置基本规则" class="headerlink" title="通过Constraint Manager设置基本规则"></a>通过Constraint Manager设置基本规则</h2><p>&emsp;硬件设计中，完成原理图设计仅仅是第一步，PCB设计是更为关键的一步。PCB layout中需要关注信号完整性、电源完整性、电磁辐射、热设计以及结构设计等等要素，因此设计基本的规则非常重要。在Cadence中，可以在原理图中完成部分规则设计，但是考虑到通常的设计流程是硬件工程师完成原理图设计，提供网表给CAD工程师完成PCB layout工作。通常来说，硬件工程师给出布局以及阻抗控制等要求，CAD工程师设计规则并具体实现。因此，本文的思路是不在原理图中设置规则，全部规则在PCB中设置。<br>&emsp;Constraint Manager可以在Setup-Constraint中打开，或者直接点击菜单栏CM图标。Constraint Manager共Electrical、Physical、Spacing、Same net spacing、Properties与DRC，其中前4项较为常用。<br>&emsp;通常情况下，可以按照类型对走线网络进行分类，例如按照电源、射频、高速信号等对网络分类，之后可以对同一类型网络设置一致规则，可以提高效率。因此首先介绍对网络分类的方法。</p>
+<h2 id="1-对网络进行分类"><a href="#1-对网络进行分类" class="headerlink" title="1. 对网络进行分类"></a>1. 对网络进行分类</h2><p>&emsp;打开Constraint Manager，选择<code>Objects-Create-Class</code>，进入Net Class设置页面。这里举例设置SPI接口的SYNC、SCLK与DIN为同一个class。<br>&emsp;将Net Class命名为SPI，同时<strong>勾选“Create for both physical and spacing”</strong>，以便网络分类可以在不同的规则环境下均可使用。点击OK进入下一步设置。<br><img src="http://omcg8fk23.bkt.clouddn.com/allegro-guide-04.png" alt=""><br>&emsp;在Physical-Net-All Layers中选择SPI Net Class，右键选择Net Class Members，添加DIN、SCLK、SYNC网络，点击OK完成设置。<br><img src="http://omcg8fk23.bkt.clouddn.com/allegro-guide-05.png" alt=""></p>
+<h2 id="2-Physical规则设置"><a href="#2-Physical规则设置" class="headerlink" title="2. Physical规则设置"></a>2. Physical规则设置</h2><p>&emsp;Physical即为物理规则的设置，通常用于设置走线的宽度以及差分线的一些性质等。关于差分线的设置将会单独开一篇博客讲解，所以这里仅仅进行线宽的设置。举例来说，PCB中通常电源为了满足电流要求，线宽一般大于信号线宽度，所以可以设置一个physical约束规则用于控制电源线线宽。<br>&emsp;打开Constraint Manager，选中Physical Constraint Set，菜单栏中选择<code>Objects-Create-Physical CSet</code>，进入Net Class设置页面，将规则约束命名为<code>Power</code>。此时，可以看到Physical页面下存在2条约束规则，DEFAULT与POWER。DEFAULT表示PCB的默认规则，没有单独设置约束规则的网络将遵循此规则，此时将线宽设置为6mil；POWER为设置的电源网络规则，设置线宽为12mil。<br><img src="http://omcg8fk23.bkt.clouddn.com/allegro-guide-06.png" alt=""><br>&emsp;之后对相应网络应用规则。对网络<code>P5V</code>应用<code>POWER</code>规则，其余网络默认为<code>DEFAULT</code>规则。可以看到属于同一个Class的网络可以统一应用规则。<br><img src="http://omcg8fk23.bkt.clouddn.com/allegro-guide-07.png" alt=""></p>
+<h2 id="3-Spacing规则设置"><a href="#3-Spacing规则设置" class="headerlink" title="3. Spacing规则设置"></a>3. Spacing规则设置</h2><p>&emsp;Physical即为间距规则的设置，通常用于设置指定网络与其它网络、过孔及敷铜等的间距。与物理规则设置近似，可以针对指定网络设置相应规则，例如POWER网络与其它网络的间距可以适当增大。<br><img src="http://omcg8fk23.bkt.clouddn.com/allegro-guide-08.png" alt=""></p>
+<h2 id="4-Region区域设置"><a href="#4-Region区域设置" class="headerlink" title="4. Region区域设置"></a>4. Region区域设置</h2><p>&emsp;PCB layout中经常遇到的一个问题是：对于CPU以及其它高密度封装区域布局时，需要适当减小线宽与走线距离等，而在PCB其它区域，应当保证足够的线宽与线距以获取最佳加工可靠性。Allegro中可以设置独立的区域来解决此问题。<br>&emsp;选择<code>Objects-Create-Region</code>，设置为<code>DGK8</code>，此时<code>DGK8</code>的规则约束可以独立设置，可以调整线宽与线距。<br><img src="http://omcg8fk23.bkt.clouddn.com/allegro-guide-09.png" alt=""><br>&emsp;之后，在PCB layout界面中选择<code>Shape-Polygon</code>，OPtions中选择<code>Constraint Region</code>以及对应的区域<code>DKG8</code>，完成区域边框的设置即可。<br><img src="http://omcg8fk23.bkt.clouddn.com/allegro-guide-10.png" alt=""></p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/Reward.jpg" alt=""></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/27/stm32f767-mpu/" class="archive-article-date">
-  <time datetime="2018-07-27T15:59:00.000Z" itemprop="datePublished">Jul 27</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/27/stm32f767-mpu/">STM32F767 MPU的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/16/stm32f767-sdram/" class="archive-article-date">
-  <time datetime="2018-07-16T14:10:41.000Z" itemprop="datePublished">Jul 16</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/06/11/allegro-guide-1/" data-id="cjra726b90005zcud93f7ky75" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/16/stm32f767-sdram/">STM32F767 FMC-SDRAM的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/06/30/stm32f767-qspi/" class="archive-article-date">
-  <time datetime="2018-06-30T03:26:08.000Z" itemprop="datePublished">Jun 30</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/30/stm32f767-qspi/">STM32F767 QUADSPI的基本用法</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Allegro/">Allegro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cadence/">Cadence</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/封装/">封装</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/高速电路/">高速电路</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/09/allegro-guide-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Allegro学习笔记-差分线与等长线
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/04/cadence-allegro-package/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用Ultra Librarian创建Cadence原理图与PCB封装</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/27/stm32f767-flash/" class="archive-article-date">
-  <time datetime="2018-05-27T03:26:08.000Z" itemprop="datePublished">May 27</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/27/stm32f767-flash/">STM32F767 Flash的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/21/stm32f767-rtc/" class="archive-article-date">
-  <time datetime="2018-05-21T15:12:27.000Z" itemprop="datePublished">May 21</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/21/stm32f767-rtc/">STM32F767 RTC的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/19/stm32f767-uart-dma/" class="archive-article-date">
-  <time datetime="2018-05-19T12:19:51.000Z" itemprop="datePublished">May 19</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/19/stm32f767-uart-dma/">STM32F767 DMA的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/07/stm32f767-pwm/" class="archive-article-date">
-  <time datetime="2018-05-07T12:18:11.000Z" itemprop="datePublished">May 7</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/07/stm32f767-pwm/">STM32F767 PWM的基本用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/28/feedforward-cap/" class="archive-article-date">
-  <time datetime="2018-04-28T11:53:05.000Z" itemprop="datePublished">Apr 28</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/28/feedforward-cap/">优化前馈电容改善DCDC的瞬态响应(未完成)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         

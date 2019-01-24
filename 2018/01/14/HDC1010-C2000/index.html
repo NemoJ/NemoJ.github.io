@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>使用F28069驱动温湿度传感器HDC1010 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;emsp;HDC1010是德州仪器公司的一款高精度数字温湿度传感器，本文将介绍如何使用C2000中F28069驱动该芯片。因为篇幅限制，本文给出重要但非完整实现过程，同时有一定优化空间。">
+<meta name="keywords" content="C2000,HDC1010,I2C,Sensor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用F28069驱动温湿度传感器HDC1010">
+<meta property="og:url" content="http://yoursite.com/2018/01/14/HDC1010-C2000/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;emsp;HDC1010是德州仪器公司的一款高精度数字温湿度传感器，本文将介绍如何使用C2000中F28069驱动该芯片。因为篇幅限制，本文给出重要但非完整实现过程，同时有一定优化空间。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200002.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200001.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200003.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200004.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200005.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200006.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200007.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200008.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200009.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200010.png">
+<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
+<meta property="og:updated_time" content="2018-02-04T14:51:25.506Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用F28069驱动温湿度传感器HDC1010">
+<meta name="twitter:description" content="&amp;emsp;HDC1010是德州仪器公司的一款高精度数字温湿度传感器，本文将介绍如何使用C2000中F28069驱动该芯片。因为篇幅限制，本文给出重要但非完整实现过程，同时有一定优化空间。">
+<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200002.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-HDC1010-C2000" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/14/HDC1010-C2000/" class="article-date">
+  <time datetime="2018-01-14T12:50:21.000Z" itemprop="datePublished">2018-01-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/嵌入式/">嵌入式</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用F28069驱动温湿度传感器HDC1010
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;HDC1010是德州仪器公司的一款高精度数字温湿度传感器，本文将介绍如何使用C2000中F28069驱动该芯片。因为篇幅限制，本文给出重要但非完整实现过程，同时有一定优化空间。</p>
+<a id="more"></a>
+<h2 id="传感器主要特性"><a href="#传感器主要特性" class="headerlink" title="传感器主要特性"></a>传感器主要特性</h2><p>&emsp;<a href="http://www.ti.com.cn/product/cn/HDC1010" target="_blank" rel="noopener">HDC1010</a>是一款低功耗、高精度的数字温湿度传感器。该传感器的主要特性如下：</p>
+<ul>
+<li>相对湿度精度为±2%，温度精度为±0.2度；</li>
+<li>14位测量分辨率；</li>
+<li>睡眠模式的电流为100nA；</li>
+<li>电源电压为2.7V至5V；</li>
+<li>I2C接口；</li>
+</ul>
+<h2 id="物理连接"><a href="#物理连接" class="headerlink" title="物理连接"></a>物理连接</h2><h3 id="HDC1010引脚"><a href="#HDC1010引脚" class="headerlink" title="HDC1010引脚"></a>HDC1010引脚</h3><p>&emsp;芯片的引脚图如下：</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200002.png" alt=""></p>
+<ul>
+<li>ADR设置：ADR1与ADR0用于设置I2C地址，当2个引脚都下拉到GND时，HDC1010的7位地址为1000000；</li>
+<li>SCL与SDA：为I2C管脚的时钟线与数据线，为开漏输出；</li>
+<li>DRDYn：数据ready标志位，低电平有效，为开漏输出。</li>
+</ul>
+<h3 id="控制器硬件连接"><a href="#控制器硬件连接" class="headerlink" title="控制器硬件连接"></a>控制器硬件连接</h3><p>&emsp;HDC1010的物理连接如下所示：</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200001.png" alt=""></p>
+<p>&emsp;本次使用的MCU为德州仪器公司的TMS320F28069，连接图如上图所示。HDC1010的SCL、SDA与DRDYn需要进行上拉。其中SCL与SDA使用F28069的硬件I2C-A，DRDYn使用一个GPIO输入端口即可。</p>
+<h2 id="初始化软件流程与底层配置"><a href="#初始化软件流程与底层配置" class="headerlink" title="初始化软件流程与底层配置"></a>初始化软件流程与底层配置</h2><p>&emsp;本节将按照初始化软件流程、硬件底层配置的流程介绍。</p>
+<h3 id="初始化软件流程"><a href="#初始化软件流程" class="headerlink" title="初始化软件流程"></a>初始化软件流程</h3><p>&emsp;初始化流程代码如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//I2C-A initialize</span></span><br><span class="line">InitI2CGpio();</span><br><span class="line">I2CA_Init();</span><br><span class="line"></span><br><span class="line"><span class="comment">//HDC DRDY PIN initialize</span></span><br><span class="line">HDC_DRDY_Pin_Init();</span><br><span class="line"></span><br><span class="line">ManufacturerID = HDC_GetData(Manufacturer_ID);</span><br><span class="line">DeviceID = HDC_GetData(Device_ID);</span><br><span class="line"></span><br><span class="line">HDC_GetConfig();</span><br><span class="line">DELAY_US(<span class="number">40</span>);</span><br><span class="line">HDC_Config = HDC_GetData(ConfigADDR);</span><br></pre></td></tr></table></figure>
+<p>&emsp;初始化代码主要功能如下：</p>
+<ul>
+<li>初始化I2C-A：用于与HDC1010通讯；</li>
+<li>初始化DRDY PIN：用于判断data ready；</li>
+<li>读取ManufacturerID与DeviceID：用于判断I2C通讯是否成功；</li>
+<li>配置HDC1010：按照需求配置HDC1010；</li>
+</ul>
+<h3 id="I2C-A初始化"><a href="#I2C-A初始化" class="headerlink" title="I2C-A初始化"></a>I2C-A初始化</h3><ul>
+<li>GPIO初始化：初始化I2C GPIO，尽管硬件上已经进行上拉操作，此处I2C IO依旧进行了上拉操作；</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitI2CGpio</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">   EALLOW;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Enable internal pull-up for the selected pins */</span></span><br><span class="line">    GpioCtrlRegs.GPBPUD.bit.GPIO32 = <span class="number">0</span>;    <span class="comment">// Enable pull-up for GPIO32 (SDAA)</span></span><br><span class="line">    GpioCtrlRegs.GPBPUD.bit.GPIO33 = <span class="number">0</span>;    <span class="comment">// Enable pull-up for GPIO33 (SCLA)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Set qualification for selected pins to asynch only */</span></span><br><span class="line">    GpioCtrlRegs.GPBQSEL1.bit.GPIO32 = <span class="number">3</span>;  <span class="comment">// Asynch input GPIO32 (SDAA)</span></span><br><span class="line">    GpioCtrlRegs.GPBQSEL1.bit.GPIO33 = <span class="number">3</span>;  <span class="comment">// Asynch input GPIO33 (SCLA)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Configure I2C pins using GPIO regs*/</span></span><br><span class="line">    GpioCtrlRegs.GPBMUX1.bit.GPIO32 = <span class="number">1</span>;   <span class="comment">// Configure GPIO32 for SDAA operation</span></span><br><span class="line">    GpioCtrlRegs.GPBMUX1.bit.GPIO33 = <span class="number">1</span>;   <span class="comment">// Configure GPIO33 for SCLA operation</span></span><br><span class="line"></span><br><span class="line">    EDIS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时钟设置：HDC1010支持的I2C最高时钟频率为400kHz，本次设置理论值为327kHz，具体计算过程请自行查阅F28069手册确定(也许我开心了就会写一篇介绍I2C的小文😄)；</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Initialize I2C</span></span><br><span class="line">I2caRegs.I2CMDR.all = <span class="number">0x0000</span>;</span><br><span class="line">I2caRegs.I2CSAR = <span class="number">0</span>;		<span class="comment">// Slave address</span></span><br><span class="line"></span><br><span class="line">I2caRegs.I2CPSC.all = <span class="number">10</span>;		    		<span class="comment">// Prescaler - need 7-12 Mhz on module clk</span></span><br><span class="line">I2caRegs.I2CCLKL = <span class="number">10</span>;					<span class="comment">// <span class="doctag">NOTE:</span> must be non zero</span></span><br><span class="line">I2caRegs.I2CCLKH = <span class="number">5</span>;					<span class="comment">// <span class="doctag">NOTE:</span> must be non zero</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>I2C中断设置：使能STOP与ARDY中断；</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//I2caRegs.I2CIER.all = 0x24;			// Enable SCD &amp; ARDY interrupts  0010 0100</span></span><br><span class="line">I2caRegs.I2CIER.bit.AAS = <span class="number">0</span>;				<span class="comment">// Addressed as slave interrupt enable bit</span></span><br><span class="line">I2caRegs.I2CIER.bit.SCD = <span class="number">1</span>;				<span class="comment">// Stop condition detected interrupt enable bit</span></span><br><span class="line">I2caRegs.I2CIER.bit.XRDY = <span class="number">0</span>;			<span class="comment">// Transmit-data-ready interrupt enable bit</span></span><br><span class="line">I2caRegs.I2CIER.bit.XRDY = <span class="number">0</span>;			<span class="comment">// Receive-data-ready interrupt enable bit</span></span><br><span class="line">I2caRegs.I2CIER.bit.ARDY = <span class="number">1</span>;			<span class="comment">// Register-access-ready interrupt enable bit</span></span><br><span class="line">I2caRegs.I2CIER.bit.NACK = <span class="number">0</span>;			<span class="comment">// No-acknowledgment interrupt enable bit</span></span><br><span class="line">I2caRegs.I2CIER.bit.ARBL = <span class="number">0</span>;			<span class="comment">// Arbitration-lost interrupt enable bit</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>模式与FIFO设置：使能I2C模块，使能FIFO功能；</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//I2caRegs.I2CMDR.all = 0x0020;			// Take I2C out of reset,Stop I2C when suspended</span></span><br><span class="line">I2caRegs.I2CMDR.bit.NACKMOD = <span class="number">0</span>;			<span class="comment">// NACK mode bit</span></span><br><span class="line">I2caRegs.I2CMDR.bit.FREE = <span class="number">0</span>;			<span class="comment">// Stop I2C when suspended</span></span><br><span class="line">I2caRegs.I2CMDR.bit.STT = <span class="number">0</span>;				<span class="comment">// START condition bit</span></span><br><span class="line">I2caRegs.I2CMDR.bit.STP = <span class="number">0</span>;				<span class="comment">// STOP condition bit</span></span><br><span class="line">I2caRegs.I2CMDR.bit.MST = <span class="number">0</span>;				<span class="comment">// Slave mode</span></span><br><span class="line">I2caRegs.I2CMDR.bit.TRX = <span class="number">0</span>;				<span class="comment">// Receiver mode</span></span><br><span class="line">I2caRegs.I2CMDR.bit.XA = <span class="number">0</span>;				<span class="comment">// 7-bit addressing mode</span></span><br><span class="line">I2caRegs.I2CMDR.bit.RM = <span class="number">0</span>;				<span class="comment">// Nonrepeat mode</span></span><br><span class="line">I2caRegs.I2CMDR.bit.DLB = <span class="number">0</span>;				<span class="comment">// Digital loopback mode is disabled</span></span><br><span class="line">I2caRegs.I2CMDR.bit.IRS = <span class="number">1</span>;				<span class="comment">// The I2C module is enabled</span></span><br><span class="line">I2caRegs.I2CMDR.bit.STB = <span class="number">0</span>;				<span class="comment">// The I2C module is not in the START byte mode</span></span><br><span class="line">I2caRegs.I2CMDR.bit.FDF = <span class="number">0</span>;				<span class="comment">// Free data format mode is disabled</span></span><br><span class="line">I2caRegs.I2CMDR.bit.BC = <span class="number">0</span>;				<span class="comment">// 8 bits per data byte</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//I2caRegs.I2CFFTX.all = 0x6000;			// Enable FIFO mode and TXFIFO</span></span><br><span class="line">I2caRegs.I2CFFTX.bit.I2CFFEN = <span class="number">1</span>;		<span class="comment">// Enable the I2C FIFO mode</span></span><br><span class="line">I2caRegs.I2CFFTX.bit.TXFFRST = <span class="number">1</span>;		<span class="comment">// Enable the transmit FIFO operation</span></span><br><span class="line">I2caRegs.I2CFFTX.bit.TXFFINTCLR = <span class="number">0</span>;		<span class="comment">// Clear the TXFFINT flag</span></span><br><span class="line">I2caRegs.I2CFFTX.bit.TXFFIENA = <span class="number">0</span>;		<span class="comment">// TXFFINT flag does not generate an interrupt when set</span></span><br><span class="line">I2caRegs.I2CFFTX.bit.TXFFIL = <span class="number">0</span>;			<span class="comment">// Transmit FIFO interrupt level</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//I2caRegs.I2CFFRX.all = 0x2040;			// Enable RXFIFO, clear RXFFINT</span></span><br><span class="line">I2caRegs.I2CFFRX.bit.RXFFRST = <span class="number">1</span>;		<span class="comment">// Enable the receive FIFO operation</span></span><br><span class="line">I2caRegs.I2CFFRX.bit.RXFFINTCLR = <span class="number">1</span>;		<span class="comment">// Clear the RXFFINT flag</span></span><br><span class="line">I2caRegs.I2CFFRX.bit.RXFFIENA = <span class="number">0</span>;		<span class="comment">// RXFFINT flag does generate an interrupt when set</span></span><br><span class="line">I2caRegs.I2CFFRX.bit.RXFFIL = <span class="number">0</span>;			<span class="comment">// Receive FIFO interrupt level</span></span><br></pre></td></tr></table></figure>
+<h3 id="DRDYn-PIN初始化"><a href="#DRDYn-PIN初始化" class="headerlink" title="DRDYn PIN初始化"></a>DRDYn PIN初始化</h3><p>&emsp;设置一个GPIO输入端口。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HDC_DRDY_Pin_Init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    EALLOW;</span><br><span class="line">    GpioCtrlRegs.GPAMUX1.bit.GPIO12 = <span class="number">0</span>;</span><br><span class="line">    GpioCtrlRegs.GPADIR.bit.GPIO12 = <span class="number">0</span>;</span><br><span class="line">    EDIS;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">uint8 <span class="title">HDC_DRDY_Read</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> GpioDataRegs.GPADAT.bit.GPIO12;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，底层初始化完成。</p>
+<h2 id="传感器信息读取"><a href="#传感器信息读取" class="headerlink" title="传感器信息读取"></a>传感器信息读取</h2><h3 id="设备信息读取"><a href="#设备信息读取" class="headerlink" title="设备信息读取"></a>设备信息读取</h3><p>&emsp;ManufacturerID与DeviceID为传感器的固有信息，可以读取该信息确认I2C通讯有效性。</p>
+<p>&emsp;HDC1010手册提供了Configuration寄存器的读写操作，可以类推到ManufacturerID与DeviceID寄存器的读取方法，如下图所示。注意ManufacturerID与DeviceID寄存器均为只读寄存器。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200003.png" alt=""></p>
+<p>I2C读取寄存器的代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">uint16 <span class="title">HDC_GetData</span><span class="params">(<span class="keyword">char</span> REG_Address)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    I2CA_ReadData(HDC1010_ADDR, REG_Address, <span class="number">2</span>, HDC_buffer);</span><br><span class="line">    <span class="keyword">return</span> (HDC_buffer[<span class="number">0</span>]&lt;&lt;<span class="number">8</span>) + HDC_buffer[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">I2CA_ReadData</span><span class="params">(uint16 addr, uint16 reg, uint16 readCount, uint8 *buffer)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    uint16 i;</span><br><span class="line"></span><br><span class="line">    I2caRegs.I2CMDR.bit.IRS = <span class="number">1</span>;                <span class="comment">// reset I2C</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Make sure I2C is not busy and has stopped</span></span><br><span class="line">    <span class="keyword">while</span> (I2caRegs.I2CSTR.bit.BB == <span class="number">1</span>);        <span class="comment">// busy loop</span></span><br><span class="line">    I2caRegs.I2CSTR.bit.SCD = <span class="number">1</span>;                <span class="comment">// Clear the SCD bit (stop condition bit)</span></span><br><span class="line">    <span class="comment">//while(I2caRegs.I2CMDR.bit.STP == 1);        // stop bit loop</span></span><br><span class="line"></span><br><span class="line">    I2caRegs.I2CSAR = addr;             <span class="comment">// I2C slave address</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (I2caRegs.I2CSTR.bit.BB == <span class="number">1</span>);        <span class="comment">// still busy?</span></span><br><span class="line"></span><br><span class="line">    I2caRegs.I2CMDR.all = <span class="number">0x2620</span>;               <span class="comment">// start, no stop bit, master, tx, reset I2C 00100110</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.NACKMOD = 0;            // 15:NACK mode bit</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.FREE = 0;               // 14:Stop I2C when suspended</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.STT = 1;                // 13:START condition bit</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.STP = 0;                // 11:STOP condition bit</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.MST = 1;                // 10:Master mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.TRX = 1;                //  9:Transmitter mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.XA = 0;                 //  8:7-bit addressing mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.RM = 0;                 //  7:Nonrepeat mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.DLB = 0;                //  6:Digital loopback mode is disabled</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.IRS = 1;                //  5:The I2C module is enabled</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.STB = 0;                //  4:The I2C module is not in the START byte mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.FDF = 0;                //  3:Free data format mode is disabled</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.BC = 0;                 //  2-0:8 bits per data byte</span></span><br><span class="line"></span><br><span class="line">    I2caRegs.I2CCNT     = <span class="number">1</span>;                    <span class="comment">// assume register address is one byte</span></span><br><span class="line">    I2caRegs.I2CDXR     = reg;                  <span class="comment">// register address of the sensor (1 byte)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!I2caRegs.I2CSTR.bit.ARDY);           <span class="comment">// all ready?</span></span><br><span class="line"></span><br><span class="line">    I2caRegs.I2CMDR.all = <span class="number">0x2C20</span>;               <span class="comment">// start, stop bit when CNT =0, master, rx, reset I2C 00101100</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.NACKMOD = 0;            // 15:NACK mode bit</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.FREE = 0;               // 14:Stop I2C when suspended</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.STT = 1;                // 13:START condition bit</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.STP = 1;                // 11:STOP condition bit</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.MST = 1;                // 10:Master mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.TRX = 0;                //  9:Transmitter mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.XA = 0;                 //  8:7-bit addressing mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.RM = 0;                 //  7:Nonrepeat mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.DLB = 0;                //  6:Digital loopback mode is disabled</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.IRS = 1;                //  5:The I2C module is enabled</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.STB = 0;                //  4:The I2C module is not in the START byte mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.FDF = 0;                //  3:Free data format mode is disabled</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.BC = 0;                 //  2-0:8 bits per data byte</span></span><br><span class="line">    I2caRegs.I2CCNT     = readCount;                    <span class="comment">// only read one byte data</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(I2caRegs.I2CSTR.bit.NACK == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">         I2caRegs.I2CSTR.all = I2C_CLR_NACK_BIT;    <span class="comment">// 0x0002</span></span><br><span class="line">    &#125;</span><br><span class="line">    I2caRegs.I2CMDR.bit.STP = <span class="number">1</span>;                    <span class="comment">// stop bit when CNT=0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!I2caRegs.I2CSTR.bit.SCD);                <span class="comment">// stop bit detected?</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; readCount; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        buffer[i] = I2caRegs.I2CDRR;                <span class="comment">// read one byte data</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;以读取ManufacturerID与DeviceID为例，使用逻辑分析仪得到的时序图如下所示。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200004.png" alt=""></p>
+<p>&emsp;可见ManufacturerID与DeviceID寄存器读取到的值分别为0x5449、0x1000，与数据手册描述一致，读取正确。</p>
+<h3 id="Configuration寄存器"><a href="#Configuration寄存器" class="headerlink" title="Configuration寄存器"></a>Configuration寄存器</h3><p>&emsp;对Configuration寄存器进行配置并读取确保写入已生效。Configuration寄存器的说明如下图所示。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200005.png" alt=""></p>
+<p>&emsp;这里可以将Configuration设置为0x00，即关闭heater、温湿度独立读取、温湿度均为14位分辨率。</p>
+<p>&emsp;逻辑分析仪得到的时序图如下图所示。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200006.png" alt=""></p>
+<h3 id="温湿度寄存器"><a href="#温湿度寄存器" class="headerlink" title="温湿度寄存器"></a>温湿度寄存器</h3><p>&emsp;HDC1010中温湿度数据获取流程如下：触发采样-等待采样结束-读取采样信息。当采样未结束时读取数据将获得到一个NACK。数据手册中时序图如下图所示。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200007.png" alt=""></p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200008.png" alt=""></p>
+<p>&emsp;代码实现如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">uint16 <span class="title">HDC_GetTemperature</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    int32 temp;</span><br><span class="line">    HDC_GetSensor(HDC1010_ADDR, TemperatureA, <span class="number">2</span>, temperature_buffer);</span><br><span class="line">    <span class="comment">//HDC_GetSensor(HDC1010_ADDR, TemperatureA, 2, humidity_buffer);</span></span><br><span class="line">    temp = (temperature_buffer[<span class="number">0</span>]&lt;&lt;<span class="number">8</span>) + temperature_buffer[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> (temp * <span class="number">1650</span>&gt;&gt;<span class="number">16</span>) - <span class="number">400</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">uint16 <span class="title">HDC_GetHumidity</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    int32 humi;</span><br><span class="line">    HDC_GetSensor(HDC1010_ADDR, HumidityA, <span class="number">2</span>, humidity_buffer);</span><br><span class="line">    humi = (humidity_buffer[<span class="number">0</span>]&lt;&lt;<span class="number">8</span>) + humidity_buffer[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> humi * <span class="number">1000</span> &gt;&gt; <span class="number">16</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HDC_GetSensor</span><span class="params">(uint16 addr, uint16 reg, uint16 readCount, uint8 *buffer)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    uint16 i;</span><br><span class="line"></span><br><span class="line">    I2caRegs.I2CMDR.bit.IRS = <span class="number">1</span>;                <span class="comment">// reset I2C</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Make sure I2C is not busy and has stopped</span></span><br><span class="line">    <span class="keyword">while</span> (I2caRegs.I2CSTR.bit.BB == <span class="number">1</span>);        <span class="comment">// busy loop</span></span><br><span class="line">    I2caRegs.I2CSTR.bit.SCD = <span class="number">1</span>;                <span class="comment">// Clear the SCD bit (stop condition bit)</span></span><br><span class="line">    <span class="comment">//while(I2caRegs.I2CMDR.bit.STP == 1);        // stop bit loop</span></span><br><span class="line"></span><br><span class="line">    I2caRegs.I2CSAR = addr;             <span class="comment">// I2C slave address</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (I2caRegs.I2CSTR.bit.BB == <span class="number">1</span>);        <span class="comment">// still busy?</span></span><br><span class="line"></span><br><span class="line">    I2caRegs.I2CMDR.all = <span class="number">0x2620</span>;               <span class="comment">// start, no stop bit, master, tx, reset I2C 00100110</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.NACKMOD = 0;            // 15:NACK mode bit</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.FREE = 0;               // 14:Stop I2C when suspended</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.STT = 1;                // 13:START condition bit</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.STP = 0;                // 11:STOP condition bit</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.MST = 1;                // 10:Master mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.TRX = 1;                //  9:Transmitter mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.XA = 0;                 //  8:7-bit addressing mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.RM = 0;                 //  7:Nonrepeat mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.DLB = 0;                //  6:Digital loopback mode is disabled</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.IRS = 1;                //  5:The I2C module is enabled</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.STB = 0;                //  4:The I2C module is not in the START byte mode</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.FDF = 0;                //  3:Free data format mode is disabled</span></span><br><span class="line"><span class="comment">//  I2caRegs.I2CMDR.bit.BC = 0;                 //  2-0:8 bits per data byte</span></span><br><span class="line"></span><br><span class="line">    I2caRegs.I2CCNT     = <span class="number">1</span>;                    <span class="comment">// assume register address is one byte</span></span><br><span class="line">    I2caRegs.I2CDXR     = reg;                  <span class="comment">// register address of the sensor (1 byte)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!I2caRegs.I2CSTR.bit.ARDY);           <span class="comment">// all ready?</span></span><br><span class="line">    <span class="comment">//while (HDC_DRDY_Read() != HDC_Ready);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// first read and should return a NACK</span></span><br><span class="line">    I2caRegs.I2CMDR.all = <span class="number">0x2C20</span>;               <span class="comment">// start, stop bit when CNT =0, master, rx, reset I2C 00101100</span></span><br><span class="line">    I2caRegs.I2CCNT     = readCount;                    <span class="comment">// only read one byte data</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (HDC_DRDY_Read() != HDC_Ready);</span><br><span class="line"></span><br><span class="line">    I2caRegs.I2CMDR.all = <span class="number">0x2C20</span>;               <span class="comment">// start, stop bit when CNT =0, master, rx, reset I2C 00101100</span></span><br><span class="line">    I2caRegs.I2CCNT     = readCount;                    <span class="comment">// only read one byte data</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(I2caRegs.I2CSTR.bit.NACK == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">         I2caRegs.I2CSTR.all = I2C_CLR_NACK_BIT;    <span class="comment">// 0x0002</span></span><br><span class="line">    &#125;</span><br><span class="line">    I2caRegs.I2CMDR.bit.STP = <span class="number">1</span>;                    <span class="comment">// stop bit when CNT=0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!I2caRegs.I2CSTR.bit.SCD);                <span class="comment">// stop bit detected?</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; readCount; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        buffer[i] = I2caRegs.I2CDRR;                <span class="comment">// read one byte data</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;使用逻辑分析仪获取的时序图分为2部分展示：1是触发采样，尝试读取结果得到一个NACK，同时DRDYn变为高电平，表示采样进行中；2是DRDYn出现下降沿代表采样完成，控制器读取采样结果。</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200009.png" alt=""></p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/HDC1010_C200010.png" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&emsp;至此，初步说明了HDC1010传感器的基本使用原则。由于篇幅限制，其中例如寄存器原始数据转化为温湿度值等过程这里不再叙述。😄</p>
+<p><img src="http://omcg8fk23.bkt.clouddn.com/Reward.jpg" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/14/HDC1010-C2000/" data-id="cjra726c7001ezcudhdxv9qmj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C2000/">C2000</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HDC1010/">HDC1010</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/I2C/">I2C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sensor/">Sensor</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/23/python-pyinstaller/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          PyInstaller基本用法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/14/IEEEStd802-11/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">IEEE Std 802.11a/g/n/ac</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/802-11/">802.11</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/EDA/">EDA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hardware/">Hardware</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/嵌入式/">嵌入式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电源/">电源</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/802-11/">802.11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AD7616/">AD7616</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Allegro/">Allegro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Buck/">Buck</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C2000/">C2000</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CCS/">CCS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cadence/">Cadence</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DCDC/">DCDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DMA/">DMA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DSP/">DSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/F28379D/">F28379D</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FMC/">FMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flash/">Flash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HDC1010/">HDC1010</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/I2C/">I2C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IWDG/">IWDG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keil/">Keil</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LwIP/">LwIP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MLCC/">MLCC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPU/">MPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Noise/">Noise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCB/">PCB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHY/">PHY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWM/">PWM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pierce/">Pierce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QUADSPI/">QUADSPI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTC/">RTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SDRAM/">SDRAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STM32CubeMX/">STM32CubeMX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STM32F7/">STM32F7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sensor/">Sensor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Systick/">Systick</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Timer/">Timer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UART/">UART</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WWDG/">WWDG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XDS100/">XDS100</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crystal/">crystal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/interrupt/">interrupt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oscillator/">oscillator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/串口/">串口</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前馈电容/">前馈电容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态响应/">动态响应</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/封装/">封装</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/差分线/">差分线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/等长线/">等长线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高速电路/">高速电路</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/802-11/" style="font-size: 10px;">802.11</a> <a href="/tags/AD7616/" style="font-size: 10px;">AD7616</a> <a href="/tags/Allegro/" style="font-size: 14px;">Allegro</a> <a href="/tags/Buck/" style="font-size: 10px;">Buck</a> <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/C2000/" style="font-size: 18px;">C2000</a> <a href="/tags/CCS/" style="font-size: 12px;">CCS</a> <a href="/tags/Cadence/" style="font-size: 14px;">Cadence</a> <a href="/tags/DCDC/" style="font-size: 12px;">DCDC</a> <a href="/tags/DMA/" style="font-size: 10px;">DMA</a> <a href="/tags/DSP/" style="font-size: 12px;">DSP</a> <a href="/tags/F28379D/" style="font-size: 10px;">F28379D</a> <a href="/tags/FMC/" style="font-size: 12px;">FMC</a> <a href="/tags/Flash/" style="font-size: 10px;">Flash</a> <a href="/tags/GPIO/" style="font-size: 14px;">GPIO</a> <a href="/tags/HDC1010/" style="font-size: 10px;">HDC1010</a> <a href="/tags/I2C/" style="font-size: 10px;">I2C</a> <a href="/tags/IWDG/" style="font-size: 10px;">IWDG</a> <a href="/tags/Keil/" style="font-size: 14px;">Keil</a> <a href="/tags/LwIP/" style="font-size: 10px;">LwIP</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MLCC/" style="font-size: 10px;">MLCC</a> <a href="/tags/MPU/" style="font-size: 10px;">MPU</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Noise/" style="font-size: 10px;">Noise</a> <a href="/tags/PCB/" style="font-size: 10px;">PCB</a> <a href="/tags/PHY/" style="font-size: 10px;">PHY</a> <a href="/tags/PWM/" style="font-size: 10px;">PWM</a> <a href="/tags/Pierce/" style="font-size: 10px;">Pierce</a> <a href="/tags/PyInstaller/" style="font-size: 10px;">PyInstaller</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/QUADSPI/" style="font-size: 10px;">QUADSPI</a> <a href="/tags/RTC/" style="font-size: 10px;">RTC</a> <a href="/tags/SDRAM/" style="font-size: 10px;">SDRAM</a> <a href="/tags/STM32CubeMX/" style="font-size: 16px;">STM32CubeMX</a> <a href="/tags/STM32F7/" style="font-size: 20px;">STM32F7</a> <a href="/tags/Sensor/" style="font-size: 10px;">Sensor</a> <a href="/tags/Systick/" style="font-size: 10px;">Systick</a> <a href="/tags/TCP-IP/" style="font-size: 10px;">TCP/IP</a> <a href="/tags/Timer/" style="font-size: 10px;">Timer</a> <a href="/tags/UART/" style="font-size: 10px;">UART</a> <a href="/tags/WWDG/" style="font-size: 10px;">WWDG</a> <a href="/tags/XDS100/" style="font-size: 10px;">XDS100</a> <a href="/tags/crystal/" style="font-size: 10px;">crystal</a> <a href="/tags/interrupt/" style="font-size: 12px;">interrupt</a> <a href="/tags/oscillator/" style="font-size: 10px;">oscillator</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/串口/" style="font-size: 12px;">串口</a> <a href="/tags/前馈电容/" style="font-size: 10px;">前馈电容</a> <a href="/tags/动态响应/" style="font-size: 10px;">动态响应</a> <a href="/tags/封装/" style="font-size: 12px;">封装</a> <a href="/tags/差分线/" style="font-size: 10px;">差分线</a> <a href="/tags/等长线/" style="font-size: 10px;">等长线</a> <a href="/tags/高速电路/" style="font-size: 12px;">高速电路</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/31/stm32f767-lwip/">STM32F767上LwIP的移植</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/11/stm32f767-fmc-ad7616/">利用SMT32F767驱动AD7616</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/27/stm32f767-mpu/">STM32F767 MPU的基本用法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/16/stm32f767-sdram/">STM32F767 FMC-SDRAM的基本用法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/30/stm32f767-qspi/">STM32F767 QUADSPI的基本用法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
