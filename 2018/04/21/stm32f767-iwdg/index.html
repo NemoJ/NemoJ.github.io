@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="&amp;emsp;本文介绍STM32F767 IWDG(Independent watchdog)的基本用法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_iwdg01.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_iwdg02.png">
-<meta property="og:updated_time" content="2018-04-27T15:02:39.770Z">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_iwdg/01.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_iwdg/02.png">
+<meta property="og:updated_time" content="2019-01-24T13:11:29.877Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STM32F767 IWDG的基本用法">
 <meta name="twitter:description" content="&amp;emsp;本文介绍STM32F767 IWDG(Independent watchdog)的基本用法。">
-<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_iwdg01.png">
+<meta name="twitter:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_iwdg/01.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -318,7 +318,7 @@
 <li>STM32CubeMX Version 4.25.0(Packages Manager：STM32CubeF7)</li>
 </ul>
 <h2 id="IWDG的基本特性"><a href="#IWDG的基本特性" class="headerlink" title="IWDG的基本特性"></a>IWDG的基本特性</h2><h3 id="系统框图"><a href="#系统框图" class="headerlink" title="系统框图"></a>系统框图</h3><p>&emsp;IWDG的系统框图如下所示。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_iwdg01.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_iwdg/01.png" alt=""></p>
 <h3 id="主要特性"><a href="#主要特性" class="headerlink" title="主要特性"></a>主要特性</h3><ul>
 <li>自由计数<code>递减计数器</code></li>
 <li><code>时钟源</code>为独立LSI RC振荡器(可以在待机与停止模式下运行)</li>
@@ -329,7 +329,7 @@
 </li>
 </ul>
 <h3 id="LSI特性"><a href="#LSI特性" class="headerlink" title="LSI特性"></a>LSI特性</h3><p>&emsp;IWDG使用LSI作为时钟源，LSI的基本特性如下所示。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_iwdg02.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_iwdg/02.png" alt=""></p>
 <p>&emsp;由LSI参数可以，其<code>时钟频率并不准确</code>。因此其作为时钟源时必须充分考虑其参数范围，计算出IWDG复位的<code>最短时间</code>，并在此时间内进行重载操作。</p>
 <h3 id="IWDG溢出时间计算"><a href="#IWDG溢出时间计算" class="headerlink" title="IWDG溢出时间计算"></a>IWDG溢出时间计算</h3><p>&emsp;独立看门狗的溢出时间计算公式如下所示：</p>
 <p>$$T_{overflow}=\frac{1}{f_{IWDG}}\cdot Period=\frac{1}{\frac{f_{LSI}}{Prescaler}}\cdot Period$$</p>
@@ -374,7 +374,7 @@
         <p><span>本文标题:</span><a href="/2018/04/21/stm32f767-iwdg/">STM32F767 IWDG的基本用法</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2018-04-21, 18:15:04</p>
-        <p><span>最后更新:</span>2018-04-27, 23:02:39</p>
+        <p><span>最后更新:</span>2019-01-24, 21:11:29</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/04/21/stm32f767-iwdg/" title="STM32F767 IWDG的基本用法">http://jiaodi.tech/2018/04/21/stm32f767-iwdg/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2018/04/21/stm32f767-iwdg/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

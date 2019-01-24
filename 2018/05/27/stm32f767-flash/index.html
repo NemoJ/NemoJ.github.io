@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="&amp;emsp;本文介绍STM32F767 Flash的基本用法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f757_flash01.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f757_flash02.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f757_flash04.png">
-<meta property="og:updated_time" content="2018-05-28T16:04:36.637Z">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f757_flash/01.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f757_flash/02.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f757_flash/04.png">
+<meta property="og:updated_time" content="2019-01-24T13:08:29.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STM32F767 Flash的基本用法">
 <meta name="twitter:description" content="&amp;emsp;本文介绍STM32F767 Flash的基本用法。">
-<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f757_flash01.png">
+<meta name="twitter:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f757_flash/01.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -330,8 +330,8 @@
 <li>主存储器块：分为 4 个 32 KB 扇区、1 个 128 KB 扇区和 3 个 256 KB 扇区；</li>
 <li>信息块：系统存储器、OTP和选项字节</li>
 </ul>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f757_flash01.png" alt=""></p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f757_flash02.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/stm32f757_flash/01.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/stm32f757_flash/02.png" alt=""></p>
 <h3 id="读访问延时"><a href="#读访问延时" class="headerlink" title="读访问延时"></a>读访问延时</h3><p>&emsp;该部分内容在系统内核与时钟设置文中已经讲解，这里不再介绍。</p>
 <h3 id="Flash控制器解锁"><a href="#Flash控制器解锁" class="headerlink" title="Flash控制器解锁"></a>Flash控制器解锁</h3><p>&emsp;复位后，Flash 控制寄存器 (<code>FLASH_CR</code>) 不允许执行写操作，以防因电气干扰等原因出现对Flash 的意外操作。此寄存器的解锁顺序如下：</p>
 <ol>
@@ -339,7 +339,7 @@
 <li>在 Flash 密钥寄存器 (<code>FLASH_KEYR</code>) 中写入 KEY2 = <code>0xCDEF89AB</code>。</li>
 </ol>
 <h3 id="编程-擦除并行位数"><a href="#编程-擦除并行位数" class="headerlink" title="编程/擦除并行位数"></a>编程/擦除并行位数</h3><p>&emsp;通过 <code>FLASH_CR</code> 寄存器中的 <code>PSIZE</code> 域配置并行位数。并行位数表示每次对 Flash 进行写操作时将编程的字节数。PSIZE 受限于电源电压以及是否使用外部 VPP 电源。因此，在进行任何编程/擦除操作前，必须在 <code>FLASH_CR</code> 寄存器中对其进行正确配置。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f757_flash04.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/stm32f757_flash/04.png" alt=""></p>
 <h3 id="Flash擦除顺序"><a href="#Flash擦除顺序" class="headerlink" title="Flash擦除顺序"></a>Flash擦除顺序</h3><p>&emsp;Flash 擦除操作可针对扇区或整个 Flash（批量擦除）执行。执行批量擦除时，不会影响 OTP扇区或配置扇区。</p>
 <h4 id="扇区擦除"><a href="#扇区擦除" class="headerlink" title="扇区擦除"></a>扇区擦除</h4><p>&emsp;扇区擦除的具体步骤如下：</p>
 <ol>
@@ -359,7 +359,7 @@
 <ol>
 <li>检查 <code>FLASH_SR</code> 中的 <code>BSY</code> 位，以确认当前未执行任何主要 Flash 操作；</li>
 <li>将 <code>FLASH_CR</code> 寄存器中的 <code>PG</code> 位置 1；</li>
-<li>针对所需存储器地址（主存储器块或 OTP 区域内）执行数据写入操作：<br>– 并行位数为 x8 时按字节写入<br>– 并行位数为 x16 时按半字写入<br>– 并行位数为 x32 时按字写入<br>– 并行位数为 x64 时按双字写入</li>
+<li>针对所需存储器地址（主存储器块或 OTP 区域内）执行数据写入操作：<br> – 并行位数为 x8 时按字节写入<br> – 并行位数为 x16 时按半字写入<br> – 并行位数为 x32 时按字写入<br> – 并行位数为 x64 时按双字写入</li>
 <li>等待 <code>BSY</code> 位清零。</li>
 </ol>
 <h2 id="HAL库Flash读写操作实现"><a href="#HAL库Flash读写操作实现" class="headerlink" title="HAL库Flash读写操作实现"></a>HAL库Flash读写操作实现</h2><p>&emsp;Flash擦除的最小单位为扇区，同时写入数据前必须对扇区进行擦除。因此一次Flash的写入过程为：确认写入的扇区、擦除对应扇区、写入数据。</p>
@@ -432,7 +432,7 @@
         <p><span>本文标题:</span><a href="/2018/05/27/stm32f767-flash/">STM32F767 Flash的基本用法</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2018-05-27, 11:26:08</p>
-        <p><span>最后更新:</span>2018-05-29, 00:04:36</p>
+        <p><span>最后更新:</span>2019-01-24, 21:08:29</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/05/27/stm32f767-flash/" title="STM32F767 Flash的基本用法">http://jiaodi.tech/2018/05/27/stm32f767-flash/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2018/05/27/stm32f767-flash/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
