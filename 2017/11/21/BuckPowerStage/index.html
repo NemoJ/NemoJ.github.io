@@ -23,19 +23,19 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="&amp;emsp;Buck电路是嵌入式系统中最常见的电源模块，本文将对Buck电路的功率部分设计进行简单总结。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage00.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage01.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage02.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage03.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage04.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage05.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage06.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/00.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/01.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/02.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/03.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/04.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/05.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/06.png">
 <meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
-<meta property="og:updated_time" content="2018-01-25T14:45:24.152Z">
+<meta property="og:updated_time" content="2019-01-24T12:40:46.204Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Buck电路的功率部分设计">
 <meta name="twitter:description" content="&amp;emsp;Buck电路是嵌入式系统中最常见的电源模块，本文将对Buck电路的功率部分设计进行简单总结。">
-<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage00.png">
+<meta name="twitter:image" content="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/00.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -316,14 +316,14 @@
         <p>&emsp;Buck电路是嵌入式系统中最常见的电源模块，本文将对Buck电路的功率部分设计进行简单总结。</p>
 <a id="more"></a>
 <p>&emsp;本文的主要内容摘录总结自<em>Basic Calculation of a Buck Converter’s Power Stage</em> by RICHTEK，也可直接读取该文档。</p>
-<h2 id="Buck电路的基本原理"><a href="#Buck电路的基本原理" class="headerlink" title="Buck电路的基本原理"></a>Buck电路的基本原理</h2><p><img src="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage00.png" alt=""></p>
+<h2 id="Buck电路的基本原理"><a href="#Buck电路的基本原理" class="headerlink" title="Buck电路的基本原理"></a>Buck电路的基本原理</h2><p><img src="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/00.png" alt=""></p>
 <p>&emsp;Buck电路的基本原理是电感的伏秒平衡。伏秒平衡的含义在于一个开关周期内电感的电流变化量为零。上图为一个同步整流的Buck电路，设定输入电压为Vin，输出电压为Vout，开关周期为T，开关频率为$f_{sw}$，占空比为D，则伏秒平衡表示如下:</p>
 <p>$$(V_{in}-V_{out})\cdot T\cdot D= V_{out}\cdot T\cdot (1-D)$$</p>
 <p>&emsp;即有：<br>$$V_{in}\cdot D= V_{out}$$</p>
 <p>&emsp;主要的电流电压波形如下，这里不再详细说明：</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage01.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/01.png" alt=""></p>
 <h2 id="反馈电阻"><a href="#反馈电阻" class="headerlink" title="反馈电阻"></a>反馈电阻</h2><p>&emsp;Buck电路需要利用反馈电阻进行分压，通过feedback管脚输入到内部误差放大器进行比较，进而进行输出补偿。分压电阻的电路如图所示：</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage02.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/02.png" alt=""></p>
 <p>&emsp;其中$V_{out}$为输出电压，$R_{1}$与$R_{2}$为分压电阻，$I_{FB}$为反馈引脚的偏置电流，偏置执电流的值可以在数据手册中获取。反馈电阻的选取主要需要考虑以下几点。</p>
 <h3 id="输出电压精度"><a href="#输出电压精度" class="headerlink" title="输出电压精度"></a>输出电压精度</h3><p>&emsp;输出精度主要受3点影响。</p>
 <h4 id="IC本身误差"><a href="#IC本身误差" class="headerlink" title="IC本身误差"></a>IC本身误差</h4><p>&emsp;IC本身有精度范围，通常情况下输出精度为1%~2%，这由半导体厂商控制，无法通过设计弥补。</p>
@@ -348,7 +348,7 @@
 <p>$$L_{min}\geqslant \frac{V_{in}-V_{out}}{I_{out}\cdot ICRR}\cdot \frac{V_{out}}{V_{in}}\cdot \frac{1}{f_{sw}}$$</p>
 <h3 id="饱和电流限制"><a href="#饱和电流限制" class="headerlink" title="饱和电流限制"></a>饱和电流限制</h3><p>&emsp;计算电感电流的最大值，可以用于确定电感的饱和电流要求，电感电流的最大值计算如下：</p>
 <p>$$I_{max}= \frac{1}{2}\cdot  \frac{V_{in}-V_{out}}{L}\cdot \frac{V_{out}}{V_{in}}\cdot \frac{1}{f_{sw}}+I_{out}$$</p>
-<h3 id="温升电流限制"><a href="#温升电流限制" class="headerlink" title="温升电流限制"></a>温升电流限制</h3><p>&emsp;对于功率电感，温升电流一般定义为电感的温升为40摄氏度时对应地电流RMS值。电感的RMS值计算如下：<br><img src="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage03.png" alt=""><br>&emsp;Maple已经尽力了，但是这个结果并不够优雅，不能使我满意，那么化简一下：</p>
+<h3 id="温升电流限制"><a href="#温升电流限制" class="headerlink" title="温升电流限制"></a>温升电流限制</h3><p>&emsp;对于功率电感，温升电流一般定义为电感的温升为40摄氏度时对应地电流RMS值。电感的RMS值计算如下：<br><img src="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/03.png" alt=""><br>&emsp;Maple已经尽力了，但是这个结果并不够优雅，不能使我满意，那么化简一下：</p>
 <p>$$I_{L,rms}=\sqrt{I{_{out}}^{2}+\frac{1}{12}\cdot (\frac{V_{in}-V_{out}}{L}\cdot \frac{V_{out}}{V_{in}}\cdot \frac{1}{f_{sw}})^{2}}$$</p>
 <p>&emsp;注意看，括号里的部分就是<strong>最大电感纹波电流</strong>。</p>
 <h2 id="输入滤波电容"><a href="#输入滤波电容" class="headerlink" title="输入滤波电容"></a>输入滤波电容</h2><p>&emsp;输入滤波电容主要用于稳定输入电压，将输入纹波电压控制在一个较小的范围以内，以满足DCDC芯片的输入电压要求。如果DCDC芯片给出明确的输入纹波电压范围，可以参照该参数进行设计；否则通常将其控制在100mV峰峰值以内足以满足绝大多数要求。</p>
@@ -356,7 +356,7 @@
 <p>$$V_{in}\cdot I_{in}= V_{out}\cdot I_{out}$$</p>
 <p>$$I_{in}= D\cdot I_{out}$$</p>
 <p>&emsp;输入滤波电容的电流RMS值计算过程如下：</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage04.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/04.png" alt=""></p>
 <p>&emsp;Maple的运算结果可以进行优化，最终结果如下：</p>
 <p>$$I_{Cin,rms}=\sqrt{I{_{out}}^{2}\cdot D\cdot (1-D)+\frac{1}{12}\cdot (\frac{V_{in}-V_{out}}{L}\cdot \frac{V_{out}}{V_{in}}\cdot \frac{1}{f_{sw}})^{2}\cdot D}​$$</p>
 <p>&emsp;上式确定了输入滤波电容的电流RMS值要求。</p>
@@ -371,7 +371,7 @@
 <h3 id="输出电压纹波限制"><a href="#输出电压纹波限制" class="headerlink" title="输出电压纹波限制"></a>输出电压纹波限制</h3><p>&emsp;为了保证输入电压纹波在一个较小范围以内，定义电容电压纹波系数CVRR(capacitor voltage ripple ratio)如下，其中$\Delta V_{out}$为输出电压纹波的峰峰值：</p>
 <p>$$CVRR=\frac{\Delta V_{out}}{V_{out}}$$</p>
 <p>&emsp;对于输出滤波电容，其电流波形如下图所示。当电感电流大于输出电流时，电容充电，电容电压上升；当电感电流小于输出电流时，电容放电，电容电压下降。稳态状态下，电容的充电电荷与放电电荷相等，电流平均值为0。因此，阴影部分中电容充电电荷引起的电容电压变化即为电容电压纹波的峰峰值。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage05.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/05.png" alt=""></p>
 <p>则有：</p>
 <p>$$C_{out,min}\geqslant \frac{\Delta Q}{\Delta V_{out} }=\frac{\Delta I_{L}\cdot\Delta t}{\Delta V_{out} }$$</p>
 <p>即为：</p>
@@ -379,7 +379,7 @@
 <p>有：</p>
 <p>$$C_{out,min}\geqslant \frac{I_{out}\cdot ICRR}{8\cdot f_{sw}\cdot V_{out}\cdot CVRR}$$</p>
 <h3 id="RMS电流限制-1"><a href="#RMS电流限制-1" class="headerlink" title="RMS电流限制"></a>RMS电流限制</h3><p>&emsp;输出滤波电容的电流RMS值计算如下：</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/blogs%5CBuckPowerStage06.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/BuckPowerStage/06.png" alt=""></p>
 <p>&emsp;化简后可得：</p>
 <p>$$I_{C_{out},RMS}= \sqrt{I{_{out}}^{2}\cdot (1-D)^{2}+\frac{1}{12}\cdot (\frac{V_{in}-V_{out}}{L}\cdot \frac{V_{out}}{V_{in}}\cdot \frac{1}{f_{sw}})^{2}}$$</p>
 <p>&emsp;至此，buck电路的功率部分计算完毕。😄</p>
@@ -395,7 +395,7 @@
         <p><span>本文标题:</span><a href="/2017/11/21/BuckPowerStage/">Buck电路的功率部分设计</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2017-11-21, 21:49:52</p>
-        <p><span>最后更新:</span>2018-01-25, 22:45:24</p>
+        <p><span>最后更新:</span>2019-01-24, 20:40:46</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/21/BuckPowerStage/" title="Buck电路的功率部分设计">http://jiaodi.tech/2017/11/21/BuckPowerStage/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2017/11/21/BuckPowerStage/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
