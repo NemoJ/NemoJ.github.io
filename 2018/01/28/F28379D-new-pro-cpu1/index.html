@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="&amp;emsp;TMS320F28379D是德州仪器公司C2000系列中双核系列高性能微处理器。本文简述如何为CPU1与CPU2分别新建一个工程。随着学习的深入，本文将不断更新优化。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/F28379D_NewPro01.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/F28379D_NewPro02.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/F28379D_NewPro03.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/F28379D_NewPro/01.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/F28379D_NewPro/02.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/F28379D_NewPro/03.png">
 <meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
-<meta property="og:updated_time" content="2018-01-28T13:34:45.694Z">
+<meta property="og:updated_time" content="2019-01-24T12:43:36.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="F28379D新建工程">
 <meta name="twitter:description" content="&amp;emsp;TMS320F28379D是德州仪器公司C2000系列中双核系列高性能微处理器。本文简述如何为CPU1与CPU2分别新建一个工程。随着学习的深入，本文将不断更新优化。">
-<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/F28379D_NewPro01.png">
+<meta name="twitter:image" content="https://github.com/NemoJ/blog_pics/raw/master/F28379D_NewPro/01.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -320,7 +320,7 @@
 </ul>
 <h2 id="CPU1程序"><a href="#CPU1程序" class="headerlink" title="CPU1程序"></a>CPU1程序</h2><p>&emsp;新建工程的步骤与<a href="http://jiaodi.tech/2017/03/06/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AAC2000%E5%B7%A5%E7%A8%8B/">新建一个C2000工程</a>类似，这里将介绍主要步骤。</p>
 <h3 id="新建一个空项目"><a href="#新建一个空项目" class="headerlink" title="新建一个空项目"></a>新建一个空项目</h3><p>&emsp;如图所示，在CCS中新建一个F28379D空项目。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/F28379D_NewPro01.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/F28379D_NewPro/01.png" alt=""></p>
 <h3 id="增加头文件"><a href="#增加头文件" class="headerlink" title="增加头文件"></a>增加头文件</h3><p>&emsp;在工程中新建include文件夹，将controlSuite中下列文件复制到该文件夹下：</p>
 <ul>
 <li><code>controlSUITE\device_support\F2837xD\v210\F2837xD_headers\include</code></li>
@@ -340,9 +340,9 @@
 <li><code>controlSUITE\device_support\F2837xD\v210\F2837xD_common\cmd\2837xD_RAM_lnk_cpu1.cmd</code></li>
 </ul>
 <h3 id="设置包含选项"><a href="#设置包含选项" class="headerlink" title="设置包含选项"></a>设置包含选项</h3><p>&emsp;将include文件夹添加到包含路径。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/F28379D_NewPro02.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/F28379D_NewPro/02.png" alt=""></p>
 <h3 id="设置Predefined-Symbols"><a href="#设置Predefined-Symbols" class="headerlink" title="设置Predefined Symbols"></a>设置Predefined Symbols</h3><p>&emsp;TI的库文件中使用宏定义形式设置一些初始化参数以及CPU指定，需要增加如下预定义：</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/F28379D_NewPro03.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/F28379D_NewPro/03.png" alt=""></p>
 <h3 id="使用新工程进行LED闪烁实验"><a href="#使用新工程进行LED闪烁实验" class="headerlink" title="使用新工程进行LED闪烁实验"></a>使用新工程进行LED闪烁实验</h3><p>&emsp;新建项目中<code>main</code>为空函数。为了检验创建的工程是否可以正常使用，这里进行简单的测试。<br>&emsp;在这里，将<code>main.c</code>文件内容替换为如下内容。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"F28x_Project.h"</span></span></span><br><span class="line"><span class="keyword">int</span> main_loop = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   InitSysCtrl();</span><br><span class="line"></span><br><span class="line">   DINT;</span><br><span class="line">   InitPieCtrl();</span><br><span class="line"></span><br><span class="line">   IER = <span class="number">0x0000</span>;</span><br><span class="line">   IFR = <span class="number">0x0000</span>;</span><br><span class="line"></span><br><span class="line">   InitPieVectTable();</span><br><span class="line"></span><br><span class="line">   EALLOW;</span><br><span class="line">   GpioCtrlRegs.GPBGMUX1.bit.GPIO34 = <span class="number">0</span>;</span><br><span class="line">   GpioCtrlRegs.GPBMUX1.bit.GPIO34 = <span class="number">0</span>;</span><br><span class="line">   GpioCtrlRegs.GPBDIR.bit.GPIO34 = <span class="number">1</span>;</span><br><span class="line">   GpioCtrlRegs.GPBCSEL1.bit.GPIO34 = <span class="number">0</span>;    <span class="comment">//CPU1 selected</span></span><br><span class="line"></span><br><span class="line">   GpioCtrlRegs.GPAGMUX2.bit.GPIO31 = <span class="number">0</span>;</span><br><span class="line">   GpioCtrlRegs.GPAMUX2.bit.GPIO31 = <span class="number">0</span>;</span><br><span class="line">   GpioCtrlRegs.GPADIR.bit.GPIO31 = <span class="number">1</span>;</span><br><span class="line">   GpioCtrlRegs.GPACSEL4.bit.GPIO31 = <span class="number">2</span>;    <span class="comment">//CPU2 selected</span></span><br><span class="line">   EDIS;</span><br><span class="line"></span><br><span class="line">   EINT;</span><br><span class="line">   ERTM;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span>(;;)</span><br><span class="line">   &#123;</span><br><span class="line">       GpioDataRegs.GPBTOGGLE.bit.GPIO34 = <span class="number">1</span>;</span><br><span class="line">       DELAY_US(<span class="number">500000</span>);</span><br><span class="line">       main_loop++;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>&emsp;编译程序，选择CPU1进行烧写，运行程序。可以看到板子上<code>GPIO34</code>控制的RED LED开始闪烁，闪烁频率约为<code>1Hz</code>。</p>
@@ -386,7 +386,7 @@
         <p><span>本文标题:</span><a href="/2018/01/28/F28379D-new-pro-cpu1/">F28379D新建工程</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2018-01-28, 16:17:50</p>
-        <p><span>最后更新:</span>2018-01-28, 21:34:45</p>
+        <p><span>最后更新:</span>2019-01-24, 20:43:36</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/01/28/F28379D-new-pro-cpu1/" title="F28379D新建工程">http://jiaodi.tech/2018/01/28/F28379D-new-pro-cpu1/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2018/01/28/F28379D-new-pro-cpu1/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
