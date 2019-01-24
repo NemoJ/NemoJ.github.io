@@ -23,15 +23,14 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="&amp;emsp;本文介绍皮尔斯振荡器(Pierce Oscillator)的原理与设计方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/pierce_oscillator01.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/pierce_oscillator03.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/pierce_oscillator02.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
-<meta property="og:updated_time" content="2018-02-10T11:30:15.216Z">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/pierce_oscillator/01.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/pierce_oscillator/03.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/pierce_oscillator/02.png">
+<meta property="og:updated_time" content="2019-01-24T13:07:06.486Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pierce振荡器的原理与设计方法">
 <meta name="twitter:description" content="&amp;emsp;本文介绍皮尔斯振荡器(Pierce Oscillator)的原理与设计方法。">
-<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/pierce_oscillator01.png">
+<meta name="twitter:image" content="https://github.com/NemoJ/blog_pics/raw/master/pierce_oscillator/01.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -313,7 +312,7 @@
 <a id="more"></a>
 <p>&emsp;晶体电路是硬件设计中一个重要环节，其电路的稳定可靠直接关系到产品的使用寿命。皮尔斯振荡器(Pierce Oscillator)在硬件电路中应用广泛，本文对该电路进行学习总结。</p>
 <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>&emsp;皮尔斯振荡器的简化框图如下：可以看作一个放大器与一个反馈网络构成。放大器的电压增益为a，相位差为$\alpha $；反馈网络的增益为f，相位差为$\beta $ 。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/pierce_oscillator01.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/pierce_oscillator/01.png" alt=""></p>
 <p>&emsp;皮尔斯振荡器是一个典型的反馈电路，其环路增益是：</p>
 <p>$$\left | a \right |\cdot \left | f \right |\cdot e^{j(\alpha +\beta )}$$</p>
 <p>&emsp;振荡器的起振条件包含幅值与相位要求如下：</p>
@@ -321,7 +320,7 @@
 <p>$$\alpha +\beta = 2\cdot n\cdot \pi $$</p>
 <p>&emsp;该条件即为振荡器的<strong>巴克豪森稳定性准则</strong>(<a href="https://en.wikipedia.org/wiki/Barkhausen_stability_criterion" target="_blank" rel="noopener">Barkhausen stability criterion</a>)。在振荡器的环路中，运放可以提供高增益与180°的相位差；此时反馈网络将产生额外的180°相位差。当运放的相位差存在误差时，反馈网络也将自适应地调节自身相位差，以使得环路总相位差为360°。</p>
 <h2 id="晶体等效电路"><a href="#晶体等效电路" class="headerlink" title="晶体等效电路"></a>晶体等效电路</h2><p>&emsp;晶体等效电路如图所示。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/pierce_oscillator03.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/pierce_oscillator/03.png" alt=""></p>
 <blockquote>
 <p>其中$C_{0}$为静态电容，与晶体封装以及外部电路有关，一般为若干个pF；</p>
 <p>$C_{m}$为动态等效电容，一般为若干fF；</p>
@@ -343,7 +342,7 @@
 <p>$$f_{par}=f_{ser}\cdot \sqrt{1+\frac{C_{1}}{C_{0}}}$$</p>
 <p>&emsp;从结果上看，在并联谐振频率$f_{par}$的表达式中引入了$C_{0}$参数，$C_{0}$与晶体封装设计有关，无法保证足够的精度，因此使得并联谐振频率$f_{par}$的稳定性低于串联谐振频率$f_{ser}$ 。但是当等效电路处于串联谐振状态时，其阻抗近似等于动态串联等效电阻$R_{s}$，而芯片晶体输入管脚一般为CMOS类型，其具有高输入阻抗，这将形成严重的<code>不匹配</code>。</p>
 <p>&emsp;当等效电路处于并联谐振状态时，其阻抗很高，具体阻抗值后续有推导。为了提高并联谐振频率的稳定性，可以通过增加负载电容$C_{L}$的方式降低$C_{0}$对谐振频率的影响。如下图所示：</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/pierce_oscillator02.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/pierce_oscillator/02.png" alt=""></p>
 <p>&emsp;当增加负载电容$C_{L}$时，并联谐振频率的表达式如下所示：</p>
 <p>$$f_{par}=\frac{s_{par}}{j\cdot 2\cdot \pi }=\frac{1}{2\cdot \pi\cdot \sqrt{L_{m}\cdot C_{1}}}\cdot \sqrt{1+\frac{C_{1}}{C_{0}+C_{L}}}$$</p>
 <p>&emsp;注意到$C_{L}$通常为数十pF，其远大于$C_{1}$，最终提高了$f_{par}$的频率稳定性，并使得$f_{par}$趋向于$f_{ser}$ 。</p>
@@ -374,7 +373,6 @@
 <p>$$Z_{i}=\frac{R_{F}}{a+1} \approx \frac{R_{F}}{a} $$</p>
 <p>&emsp;令$Z_{i}=R_{p}$，有</p>
 <p>$$R_{F}=a\cdot \frac{1}{R\cdot \omega ^{2}\cdot (C_{0}+C_{L})^{2}}$$</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/Reward.jpg" alt=""></p>
 
       
     </div>
@@ -386,7 +384,7 @@
         <p><span>本文标题:</span><a href="/2018/02/04/pierce-oscillator/">Pierce振荡器的原理与设计方法</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2018-02-04, 15:33:59</p>
-        <p><span>最后更新:</span>2018-02-10, 19:30:15</p>
+        <p><span>最后更新:</span>2019-01-24, 21:07:06</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/02/04/pierce-oscillator/" title="Pierce振荡器的原理与设计方法">http://jiaodi.tech/2018/02/04/pierce-oscillator/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2018/02/04/pierce-oscillator/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
