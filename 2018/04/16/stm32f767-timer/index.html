@@ -23,12 +23,12 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="&amp;emsp;本文介绍STM32F767 Timer中断的基本用法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_timer01.png">
-<meta property="og:updated_time" content="2018-05-09T14:58:23.165Z">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_timer/01.png">
+<meta property="og:updated_time" content="2019-01-25T03:53:35.485Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STM32F767 Timer中断的基本用法">
 <meta name="twitter:description" content="&amp;emsp;本文介绍STM32F767 Timer中断的基本用法。">
-<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_timer01.png">
+<meta name="twitter:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_timer/01.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -362,7 +362,7 @@
 <li>时钟源为<strong>APB1</strong>，频率为<strong>108MHz</strong>。</li>
 </ul>
 <h2 id="基于TIM2的timer中断基本用法"><a href="#基于TIM2的timer中断基本用法" class="headerlink" title="基于TIM2的timer中断基本用法"></a>基于TIM2的timer中断基本用法</h2><h3 id="系统框图"><a href="#系统框图" class="headerlink" title="系统框图"></a>系统框图</h3><p>&emsp;通用定时器的系统框图如图所示。本次进行定时器中断实验只需要用到计数以及中断部分。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_timer01.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_timer/01.png" alt=""></p>
 <h3 id="Timer代码设置"><a href="#Timer代码设置" class="headerlink" title="Timer代码设置"></a>Timer代码设置</h3><h4 id="代码概述"><a href="#代码概述" class="headerlink" title="代码概述"></a>代码概述</h4><p>&emsp;Timer的初始化代码如下所示。其初始化主要由3个函数完成，以下将对这3个函数进行简要说明。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">TIM_HandleTypeDef htim2;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* TIM2 init function */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MX_TIM2_Init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  TIM_ClockConfigTypeDef sClockSourceConfig;</span><br><span class="line">  TIM_MasterConfigTypeDef sMasterConfig;</span><br><span class="line"></span><br><span class="line">  htim2.Instance = TIM2;</span><br><span class="line">  htim2.Init.Prescaler = <span class="number">10800</span> - <span class="number">1</span>;</span><br><span class="line">  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;</span><br><span class="line">  htim2.Init.Period = <span class="number">5000</span> - <span class="number">1</span>;</span><br><span class="line">  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;</span><br><span class="line">  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;</span><br><span class="line">  <span class="keyword">if</span> (HAL_TIM_Base_Init(&amp;htim2) != HAL_OK)</span><br><span class="line">  &#123;</span><br><span class="line">    _Error_Handler(__FILE__, __LINE__);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;</span><br><span class="line">  <span class="keyword">if</span> (HAL_TIM_ConfigClockSource(&amp;htim2, &amp;sClockSourceConfig) != HAL_OK)</span><br><span class="line">  &#123;</span><br><span class="line">    _Error_Handler(__FILE__, __LINE__);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;</span><br><span class="line">  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;</span><br><span class="line">  <span class="keyword">if</span> (HAL_TIMEx_MasterConfigSynchronization(&amp;htim2, &amp;sMasterConfig) != HAL_OK)</span><br><span class="line">  &#123;</span><br><span class="line">    _Error_Handler(__FILE__, __LINE__);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="时基单元初始化"><a href="#时基单元初始化" class="headerlink" title="时基单元初始化"></a>时基单元初始化</h4><p>&emsp;时基单元初始化通过<code>HAL_TIM_Base_Init()</code>函数实现，具体如下。</p>
@@ -453,7 +453,7 @@
         <p><span>本文标题:</span><a href="/2018/04/16/stm32f767-timer/">STM32F767 Timer中断的基本用法</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2018-04-16, 22:52:17</p>
-        <p><span>最后更新:</span>2018-05-09, 22:58:23</p>
+        <p><span>最后更新:</span>2019-01-25, 11:53:35</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/04/16/stm32f767-timer/" title="STM32F767 Timer中断的基本用法">http://jiaodi.tech/2018/04/16/stm32f767-timer/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2018/04/16/stm32f767-timer/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

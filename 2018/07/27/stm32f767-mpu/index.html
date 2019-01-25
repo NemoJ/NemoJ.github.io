@@ -23,12 +23,12 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="本文介绍STM32F767 MPU的基本用法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_mpu01.png">
-<meta property="og:updated_time" content="2018-07-28T17:15:13.754Z">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_mpu/01.png">
+<meta property="og:updated_time" content="2019-01-25T03:40:22.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STM32F767 MPU的基本用法">
 <meta name="twitter:description" content="本文介绍STM32F767 MPU的基本用法。">
-<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_mpu01.png">
+<meta name="twitter:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_mpu/01.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -452,7 +452,7 @@
 </tbody>
 </table>
 <p>对于TEX, C, B, S位的设置，常用模式下TEX取1，此时配置方法为如下：</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_mpu01.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_mpu/01.png" alt=""></p>
 <h2 id="基于MPU对SDRAM数据区进行保护"><a href="#基于MPU对SDRAM数据区进行保护" class="headerlink" title="基于MPU对SDRAM数据区进行保护"></a>基于MPU对SDRAM数据区进行保护</h2><h3 id="MPU的设置"><a href="#MPU的设置" class="headerlink" title="MPU的设置"></a>MPU的设置</h3><p>MPU的设置代码如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  Configures the main MPU regions.</span></span><br><span class="line"><span class="comment">  * @param  None</span></span><br><span class="line"><span class="comment">  * @retval None</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MPU_Config</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  MPU_Region_InitTypeDef MPU_InitStruct;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Disable MPU */</span></span><br><span class="line">  HAL_MPU_Disable();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* SDRAM配置 */</span></span><br><span class="line">  MPU_InitStruct.Enable = MPU_REGION_ENABLE;</span><br><span class="line">	</span><br><span class="line">  MPU_InitStruct.Number = MPU_REGION_NUMBER0;</span><br><span class="line">	</span><br><span class="line">  MPU_InitStruct.BaseAddress = SDRAM_BASE_ADDRESS;</span><br><span class="line">  MPU_InitStruct.Size = MPU_REGION_SIZE_32MB;</span><br><span class="line">	</span><br><span class="line">  MPU_InitStruct.SubRegionDisable = <span class="number">0x00</span>;</span><br><span class="line">  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;</span><br><span class="line">	</span><br><span class="line">  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;</span><br><span class="line">	</span><br><span class="line">  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;</span><br><span class="line">  MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;</span><br><span class="line">  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;</span><br><span class="line">   </span><br><span class="line">  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;</span><br><span class="line">  </span><br><span class="line">  HAL_MPU_ConfigRegion(&amp;MPU_InitStruct);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Enable MPU (any access not covered by any enabled region will cause a fault) */</span></span><br><span class="line">  HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其设置功能主要有：</p>
@@ -477,7 +477,7 @@
         <p><span>本文标题:</span><a href="/2018/07/27/stm32f767-mpu/">STM32F767 MPU的基本用法</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2018-07-27, 23:59:00</p>
-        <p><span>最后更新:</span>2018-07-29, 01:15:13</p>
+        <p><span>最后更新:</span>2019-01-25, 11:40:22</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/07/27/stm32f767-mpu/" title="STM32F767 MPU的基本用法">http://jiaodi.tech/2018/07/27/stm32f767-mpu/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2018/07/27/stm32f767-mpu/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="&amp;emsp;本文记录STM32F7的开发环境配置与STM32CubeMX的安装配置。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_start01.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_start02.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_start03.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_start04.png">
-<meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_start05.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_start/01.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_start/02.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_start/03.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_start/04.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_start/05.png">
 <meta property="og:image" content="http://omcg8fk23.bkt.clouddn.com/Reward.jpg">
-<meta property="og:updated_time" content="2018-03-17T10:52:52.117Z">
+<meta property="og:updated_time" content="2019-01-25T03:52:21.728Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用STM32CubeMX新建STM32F7工程">
 <meta name="twitter:description" content="&amp;emsp;本文记录STM32F7的开发环境配置与STM32CubeMX的安装配置。">
-<meta name="twitter:image" content="http://omcg8fk23.bkt.clouddn.com/stm32f767_start01.png">
+<meta name="twitter:image" content="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_start/01.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -327,15 +327,15 @@
 <li>Packages Manager：STM32CubeF7</li>
 </ul>
 <h2 id="生成LED闪烁工程"><a href="#生成LED闪烁工程" class="headerlink" title="生成LED闪烁工程"></a>生成LED闪烁工程</h2><h3 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h3><p>&emsp;打开STM32CubeMX，选择所用的芯片型号，本次为STM32F767IGT6。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_start01.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_start/01.png" alt=""></p>
 <h3 id="配置IO"><a href="#配置IO" class="headerlink" title="配置IO"></a>配置IO</h3><p>&emsp;在Pinout页面中选择所用的IO，设置为GPIO Output；</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_start02.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_start/02.png" alt=""></p>
 <p>&emsp;在Configuration中对IO进一步设置，例如初始化电平、输出模式、上拉下拉、输出速度等；</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_start03.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_start/03.png" alt=""></p>
 <h3 id="生成代码"><a href="#生成代码" class="headerlink" title="生成代码"></a>生成代码</h3><p>&emsp;选择Project-Settings，输入工程名与保存路径，选择开发工具。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_start04.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_start/04.png" alt=""></p>
 <p>&emsp;注意在Code Generator中勾选如下选项，这样初始化代码会分成独立的源文件与头文件保存在工程中。同时，第一个选项中可以选择<code>copy only the necessary library files</code>，这样可以降低工程文件大小。</p>
-<p><img src="http://omcg8fk23.bkt.clouddn.com/stm32f767_start05.png" alt=""></p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/stm32f767_start/05.png" alt=""></p>
 <h3 id="添加执行代码"><a href="#添加执行代码" class="headerlink" title="添加执行代码"></a>添加执行代码</h3><p>&emsp;STM32CubeMX已经完成了系统以及GPIO的初始化代码，在main中添加如下代码可以控制IO翻转进而使LED闪烁。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* USER CODE END WHILE */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* USER CODE BEGIN 3 */</span></span><br><span class="line">HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);</span><br><span class="line">HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);</span><br><span class="line">HAL_Delay(<span class="number">500</span>);</span><br><span class="line">loop++;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* USER CODE END 3 */</span></span><br></pre></td></tr></table></figure>
 <h3 id="烧录程序"><a href="#烧录程序" class="headerlink" title="烧录程序"></a>烧录程序</h3><p>&emsp;编译并烧录程序，可以观察到IO对应的LED闪烁。</p>
@@ -351,7 +351,7 @@
         <p><span>本文标题:</span><a href="/2018/03/17/stm32f767-start/">使用STM32CubeMX新建STM32F7工程</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2018-03-17, 17:25:48</p>
-        <p><span>最后更新:</span>2018-03-17, 18:52:52</p>
+        <p><span>最后更新:</span>2019-01-25, 11:52:21</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/03/17/stm32f767-start/" title="使用STM32CubeMX新建STM32F7工程">http://jiaodi.tech/2018/03/17/stm32f767-start/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2018/03/17/stm32f767-start/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
