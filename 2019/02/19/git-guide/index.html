@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/01.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/02.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/03.png">
-<meta property="og:updated_time" content="2019-03-03T05:52:56.661Z">
+<meta property="og:updated_time" content="2019-03-03T05:55:27.153Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git学习笔记">
 <meta name="twitter:description" content="&amp;emsp;本文为Git学习笔记。">
@@ -481,7 +481,45 @@
 </tr>
 </tbody>
 </table>
-<h4 id="限制输出长度"><a href="#限制输出长度" class="headerlink" title="限制输出长度"></a>限制输出长度</h4><h2 id="新建远程仓库"><a href="#新建远程仓库" class="headerlink" title="新建远程仓库"></a>新建远程仓库</h2><h2 id="本地仓库同步到远程仓库"><a href="#本地仓库同步到远程仓库" class="headerlink" title="本地仓库同步到远程仓库"></a>本地仓库同步到远程仓库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo "# git_train" &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m "first commit"</span><br><span class="line">git remote add origin git@github.com:git_address</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<h4 id="限制输出长度"><a href="#限制输出长度" class="headerlink" title="限制输出长度"></a>限制输出长度</h4><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-(n)</code></td>
+<td>仅显示最近的 n 条提交</td>
+</tr>
+<tr>
+<td><code>--since</code>, <code>--after</code></td>
+<td>仅显示指定时间之后的提交。</td>
+</tr>
+<tr>
+<td><code>--until</code>, <code>--before</code></td>
+<td>仅显示指定时间之前的提交。</td>
+</tr>
+<tr>
+<td><code>--author</code></td>
+<td>仅显示指定作者相关的提交。</td>
+</tr>
+<tr>
+<td><code>--committer</code></td>
+<td>仅显示指定提交者相关的提交。</td>
+</tr>
+<tr>
+<td><code>--grep</code></td>
+<td>仅显示含指定关键字的提交</td>
+</tr>
+<tr>
+<td><code>-S</code></td>
+<td>仅显示添加或移除了某个关键字的提交</td>
+</tr>
+</tbody>
+</table>
+<h2 id="新建远程仓库"><a href="#新建远程仓库" class="headerlink" title="新建远程仓库"></a>新建远程仓库</h2><h2 id="本地仓库同步到远程仓库"><a href="#本地仓库同步到远程仓库" class="headerlink" title="本地仓库同步到远程仓库"></a>本地仓库同步到远程仓库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo "# git_train" &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m "first commit"</span><br><span class="line">git remote add origin git@github.com:git_address</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
 <h2 id="新建分支进行开发"><a href="#新建分支进行开发" class="headerlink" title="新建分支进行开发"></a>新建分支进行开发</h2><h3 id="新建分支"><a href="#新建分支" class="headerlink" title="新建分支"></a>新建分支</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br><span class="line">git checkout -b jiaodi_dev</span><br><span class="line">git push origin jiaodi_dev</span><br></pre></td></tr></table></figure>
 <h3 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
 
@@ -495,7 +533,7 @@
         <p><span>本文标题:</span><a href="/2019/02/19/git-guide/">Git学习笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-02-19, 20:51:36</p>
-        <p><span>最后更新:</span>2019-03-03, 13:52:56</p>
+        <p><span>最后更新:</span>2019-03-03, 13:55:27</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/02/19/git-guide/" title="Git学习笔记">http://jiaodi.tech/2019/02/19/git-guide/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/02/19/git-guide/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
