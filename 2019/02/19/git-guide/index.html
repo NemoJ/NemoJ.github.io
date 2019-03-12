@@ -52,7 +52,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/27.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/28.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/29.png">
-<meta property="og:updated_time" content="2019-03-12T06:14:11.245Z">
+<meta property="og:updated_time" content="2019-03-12T06:28:44.908Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git学习笔记">
 <meta name="twitter:description" content="&amp;emsp;本文为Git学习笔记。">
@@ -744,7 +744,16 @@
 <p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/28.png" alt="添加另一个远程仓库"></p>
 <p>现在，可以运行 <code>git fetch teamone</code> 来抓取远程仓库 <code>teamone</code> 有而本地没有的数据。 因为那台服务器上现有的数据是 <code>origin</code> 服务器上的一个子集，所以 Git 并不会抓取数据而是会设置远程跟踪分支 <code>teamone/master</code> 指向 <code>teamone</code> 的 <code>master</code> 分支。</p>
 <p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/29.png" alt="远程跟踪分支 teamone/master"></p>
-<h4 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h4><h3 id="变基"><a href="#变基" class="headerlink" title="变基"></a>变基</h3><h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3>
+<h4 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h4><p>当你想要公开分享一个分支时，需要将其推送到有写入权限的远程仓库上。 本地的分支并不会自动与远程仓库同步 - 你必须显式地推送想要分享的分支。 这样，你就可以把不愿意分享的内容放到私人分支上，而将需要和别人协作的内容推送到公开分支。</p>
+<p>如果希望和别人一起在名为 <code>serverfix</code> 的分支上工作，你可以像推送第一个分支那样推送它。 运行 <code>git push (remote) (branch)</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git push origin serverfix</span><br><span class="line">Counting objects: 24, done.</span><br><span class="line">Delta compression using up to 8 threads.</span><br><span class="line">Compressing objects: 100% (15/15), done.</span><br><span class="line">Writing objects: 100% (24/24), 1.91 KiB | 0 bytes/s, done.</span><br><span class="line">Total 24 (delta 2), reused 0 (delta 0)</span><br><span class="line">To https://github.com/schacon/simplegit</span><br><span class="line"> * [new branch]      serverfix -&gt; serverfix</span><br></pre></td></tr></table></figure>
+<p>下一次其他协作者从服务器上抓取数据时，他们会在本地生成一个远程分支 <code>origin/serverfix</code>，指向服务器的 <code>serverfix</code> 分支的引用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git fetch origin</span><br><span class="line">remote: Counting objects: 7, done.</span><br><span class="line">remote: Compressing objects: 100% (2/2), done.</span><br><span class="line">remote: Total 3 (delta 0), reused 3 (delta 0)</span><br><span class="line">Unpacking objects: 100% (3/3), done.</span><br><span class="line">From https://github.com/schacon/simplegit</span><br><span class="line"> * [new branch]      serverfix    -&gt; origin/serverfix</span><br></pre></td></tr></table></figure>
+<p>要特别注意的一点是当抓取到新的远程跟踪分支时，本地不会自动生成一份可编辑的副本（拷贝）。 换一句话说，这种情况下，不会有一个新的 <code>serverfix</code> 分支 - 只有一个不可以修改的 <code>origin/serverfix</code> 指针。</p>
+<p>可以运行 <code>git merge origin/serverfix</code> 将这些工作合并到当前所在的分支。 如果想要在自己的 <code>serverfix</code> 分支上工作，可以将其建立在远程跟踪分支之上：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git checkout -b serverfix origin/serverfix</span><br><span class="line">Branch serverfix set up to track remote branch serverfix from origin.</span><br><span class="line">Switched to a new branch 'serverfix'</span><br></pre></td></tr></table></figure>
+<p>这会给你一个用于工作的本地分支，并且起点位于 <code>origin/serverfix</code>。</p>
+<h3 id="变基"><a href="#变基" class="headerlink" title="变基"></a>变基</h3><h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3>
       
     </div>
     
@@ -755,7 +764,7 @@
         <p><span>本文标题:</span><a href="/2019/02/19/git-guide/">Git学习笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-02-19, 20:51:36</p>
-        <p><span>最后更新:</span>2019-03-12, 14:14:11</p>
+        <p><span>最后更新:</span>2019-03-12, 14:28:44</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/02/19/git-guide/" title="Git学习笔记">http://jiaodi.tech/2019/02/19/git-guide/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/02/19/git-guide/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
