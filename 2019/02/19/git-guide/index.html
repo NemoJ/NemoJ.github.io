@@ -47,7 +47,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/22.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/23.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/24.png">
-<meta property="og:updated_time" content="2019-03-12T03:33:30.940Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/25.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/25.png">
+<meta property="og:updated_time" content="2019-03-12T04:00:21.022Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git学习笔记">
 <meta name="twitter:description" content="&amp;emsp;本文为Git学习笔记。">
@@ -724,7 +726,15 @@
 <p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/23.png" alt=""></p>
 <p>现在，我们假设两件事情：你决定使用第二个方案来解决那个问题，即使用在 <code>iss91v2</code> 分支中方案；另外，你将 <code>dumbidea</code> 分支拿给你的同事看过之后，结果发现这是个惊人之举。 这时你可以抛弃 <code>iss91</code> 分支（即丢弃 <code>C5</code> 和 <code>C6</code> 提交），然后把另外两个分支合并入主干分支。 最终你的提交历史看起来像下面这个样子：</p>
 <p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/24.png" alt=""></p>
-<h3 id="远程分支"><a href="#远程分支" class="headerlink" title="远程分支"></a>远程分支</h3><h3 id="变基"><a href="#变基" class="headerlink" title="变基"></a>变基</h3><h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3>
+<h3 id="远程分支"><a href="#远程分支" class="headerlink" title="远程分支"></a>远程分支</h3><p>远程跟踪分支是远程分支状态的引用。 它们是你不能移动的本地引用，当你做任何网络通信操作时，它们会自动移动。 远程跟踪分支像是你上次连接到远程仓库时，那些分支所处状态的书签。</p>
+<p>它们以 <code>(remote)/(branch)</code> 形式命名。 例如，如果你想要看你最后一次与远程仓库 <code>origin</code> 通信时 <code>master</code> 分支的状态，你可以查看 <code>origin/master</code> 分支。 你与同事合作解决一个问题并且他们推送了一个 <code>iss53</code> 分支，你可能有自己的本地 <code>iss53</code> 分支；但是在服务器上的分支会指向 <code>origin/iss53</code> 的提交。</p>
+<p>这可能有一点儿难以理解，让我们来看一个例子。 假设你的网络里有一个在 <code>git.ourcompany.com</code> 的 Git 服务器。 如果你从这里克隆，Git 的 <code>clone</code> 命令会为你自动将其命名为 <code>origin</code>，拉取它的所有数据，创建一个指向它的 <code>master</code> 分支的指针，并且在本地将其命名为 <code>origin/master</code>。 Git 也会给你一个与 origin 的 <code>master</code> 分支在指向同一个地方的本地 <code>master</code> 分支，这样你就有工作的基础。</p>
+<p>克隆之后的服务器与本地仓库如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/25.png" alt=""></p>
+<p>如果你在本地的 <code>master</code> 分支做了一些工作，然而在同一时间，其他人推送提交到 <code>git.ourcompany.com</code>并更新了它的 <code>master</code> 分支，那么你的提交历史将向不同的方向前进。 也许，只要你不与 origin 服务器连接，你的 <code>origin/master</code> 指针就不会移动。</p>
+<p>本地与远程的工作可以分叉，如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/25.png" alt="本地与远程的工作可以分叉"></p>
+<h3 id="变基"><a href="#变基" class="headerlink" title="变基"></a>变基</h3><h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3>
       
     </div>
     
@@ -735,7 +745,7 @@
         <p><span>本文标题:</span><a href="/2019/02/19/git-guide/">Git学习笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-02-19, 20:51:36</p>
-        <p><span>最后更新:</span>2019-03-12, 11:33:30</p>
+        <p><span>最后更新:</span>2019-03-12, 12:00:21</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/02/19/git-guide/" title="Git学习笔记">http://jiaodi.tech/2019/02/19/git-guide/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/02/19/git-guide/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
