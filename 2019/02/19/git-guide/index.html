@@ -48,8 +48,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/23.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/24.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/25.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/25.png">
-<meta property="og:updated_time" content="2019-03-12T04:00:21.022Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/26.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/27.png">
+<meta property="og:updated_time" content="2019-03-12T04:04:05.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git学习笔记">
 <meta name="twitter:description" content="&amp;emsp;本文为Git学习笔记。">
@@ -733,7 +734,11 @@
 <p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/25.png" alt=""></p>
 <p>如果你在本地的 <code>master</code> 分支做了一些工作，然而在同一时间，其他人推送提交到 <code>git.ourcompany.com</code>并更新了它的 <code>master</code> 分支，那么你的提交历史将向不同的方向前进。 也许，只要你不与 origin 服务器连接，你的 <code>origin/master</code> 指针就不会移动。</p>
 <p>本地与远程的工作可以分叉，如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/25.png" alt="本地与远程的工作可以分叉"></p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/26.png" alt="本地与远程的工作可以分叉"></p>
+<p>如果要同步你的工作，运行 <code>git fetch origin</code> 命令。 这个命令查找 “origin” 是哪一个服务器（在本例中，它是 <code>git.ourcompany.com</code>），从中抓取本地没有的数据，并且更新本地数据库，移动 <code>origin/master</code> 指针指向新的、更新后的位置。</p>
+<p>git fetch更新你的远程仓库引用，如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_guide/27.png" alt="git fetch更新你的远程仓库引用"></p>
+<p>为了演示有多个远程仓库与远程分支的情况，我们假定你有另一个内部 Git 服务器，仅用于你的 sprint 小组的开发工作。 这个服务器位于 <code>git.team1.ourcompany.com</code>。 你可以运行 <code>git remote add</code> 命令添加一个新的远程仓库引用到当前的项目，这个命令我们会在 <a href="https://git-scm.com/book/zh/v2/ch00/ch02-git-basics" target="_blank" rel="noopener">Git 基础</a> 中详细说明。 将这个远程仓库命名为 <code>teamone</code>，将其作为整个 URL 的缩写。</p>
 <h3 id="变基"><a href="#变基" class="headerlink" title="变基"></a>变基</h3><h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3>
       
     </div>
@@ -745,7 +750,7 @@
         <p><span>本文标题:</span><a href="/2019/02/19/git-guide/">Git学习笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-02-19, 20:51:36</p>
-        <p><span>最后更新:</span>2019-03-12, 12:00:21</p>
+        <p><span>最后更新:</span>2019-03-12, 12:04:05</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/02/19/git-guide/" title="Git学习笔记">http://jiaodi.tech/2019/02/19/git-guide/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/02/19/git-guide/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
