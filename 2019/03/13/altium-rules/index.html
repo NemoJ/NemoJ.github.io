@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="本文介绍Altium Designer常用规则设置。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-29T10:13:38.181Z">
+<meta property="og:updated_time" content="2019-04-01T09:31:37.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Altium Designer常用规则设置">
 <meta name="twitter:description" content="本文介绍Altium Designer常用规则设置。">
@@ -306,11 +306,60 @@
           
         <p>本文介绍Altium Designer常用规则设置。</p>
 <a id="more"></a>
-<h2 id="Design-Rules"><a href="#Design-Rules" class="headerlink" title="Design Rules"></a>Design Rules</h2><h3 id="Electrical"><a href="#Electrical" class="headerlink" title="Electrical"></a>Electrical</h3><h4 id="Clearance"><a href="#Clearance" class="headerlink" title="Clearance"></a>Clearance</h4><p>安全间隙约束：设置为6mil。</p>
+<h2 id="Design-Rules"><a href="#Design-Rules" class="headerlink" title="Design Rules"></a>Design Rules</h2><h3 id="Electrical"><a href="#Electrical" class="headerlink" title="Electrical"></a>Electrical</h3><h4 id="Clearance"><a href="#Clearance" class="headerlink" title="Clearance"></a>Clearance</h4><p>安全距离约束：设置为6mil。</p>
 <h4 id="Short-Circuit"><a href="#Short-Circuit" class="headerlink" title="Short-Circuit"></a>Short-Circuit</h4><p>短路：ALL不允许。</p>
 <h4 id="Un-Routed-Net"><a href="#Un-Routed-Net" class="headerlink" title="Un-Routed Net"></a>Un-Routed Net</h4><p>未布线网络：全部飞线提示；注意<code>勾选</code>Check for incomplete connections。</p>
 <h3 id="Routing"><a href="#Routing" class="headerlink" title="Routing"></a>Routing</h3><h4 id="Width"><a href="#Width" class="headerlink" title="Width"></a>Width</h4><p>走线宽度：设置为Min 6mil，Preferred 10mil， Max 500mil。</p>
 <h4 id="Routing-Topology"><a href="#Routing-Topology" class="headerlink" title="Routing Topology"></a>Routing Topology</h4><p>布线拓扑：设置为shortest，即节点连线最短原则。</p>
+<h4 id="Routing-Priority"><a href="#Routing-Priority" class="headerlink" title="Routing Priority"></a>Routing Priority</h4><p>布线优先级设置，保持默认。</p>
+<h4 id="Routing-Layers"><a href="#Routing-Layers" class="headerlink" title="Routing Layers"></a>Routing Layers</h4><p>布线层，根据PCB板层数确认，保持默认。</p>
+<h4 id="Routing-Corners"><a href="#Routing-Corners" class="headerlink" title="Routing Corners"></a>Routing Corners</h4><p>布线拐角，可以选择45 Degrees或者Rounded。</p>
+<h4 id="Routing-Via-Style"><a href="#Routing-Via-Style" class="headerlink" title="Routing Via Style"></a>Routing Via Style</h4><p>过孔尺寸设置，具体设置如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Via Diameter</th>
+<th style="text-align:center">Via Hole Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Minimum</td>
+<td style="text-align:center">24</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td style="text-align:center">Maximum</td>
+<td style="text-align:center">220</td>
+<td style="text-align:center">200</td>
+</tr>
+<tr>
+<td style="text-align:center">Preferred</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">16</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Fanout-Control"><a href="#Fanout-Control" class="headerlink" title="Fanout Control"></a>Fanout Control</h4><p>扇出控制：后续补充。</p>
+<h4 id="Differential-Pairs-Routing"><a href="#Differential-Pairs-Routing" class="headerlink" title="Differential Pairs Routing"></a>Differential Pairs Routing</h4><p>差分对布线：后续补充。</p>
+<h3 id="SMT"><a href="#SMT" class="headerlink" title="SMT"></a>SMT</h3><h3 id="Mask"><a href="#Mask" class="headerlink" title="Mask"></a>Mask</h3><h4 id="Solder-Mask-Expansion"><a href="#Solder-Mask-Expansion" class="headerlink" title="Solder Mask Expansion"></a>Solder Mask Expansion</h4><p>阻焊层延伸量：如果阻焊开窗区与焊盘保持一样大，由于PCB生产制造的公差，就无法避免阻焊绿油覆盖到焊盘上，所以一般为了兼顾板厂的工艺偏差，要让阻焊开窗区域比实际焊盘扩大一定的尺寸，现在板厂的建议为（4mil或0.1mm）。此处设置为4mil。</p>
+<h4 id="Paste-Mask-Expansion"><a href="#Paste-Mask-Expansion" class="headerlink" title="Paste Mask Expansion"></a>Paste Mask Expansion</h4><p>钢网层延伸量：是针对表面贴（SMD）元件的，该层用来制作钢膜（片）﹐而钢膜上的孔就对应着电路板上的SMD器件的焊点。在表面贴装（SMD）器件焊接时﹐先将钢膜盖在电路板上（与实际焊盘对应）﹐然后将锡膏涂上﹐用刮片将多余的锡膏刮去﹐移除钢膜﹐这样SMD器件的焊盘就加上了锡膏﹐之后将SMD器件贴附到锡膏上面去（手工或贴片机）﹐最后通过回流焊机完成SMD器件的焊接。通常钢膜上孔径的大小会比电路板上实际的焊小一些﹐通过指定一个扩展规则﹐来放大或缩小锡膏防护层。此处设置1mil。</p>
+<h3 id="Plane"><a href="#Plane" class="headerlink" title="Plane"></a>Plane</h3><h4 id="Power-Plane-Connect-Style"><a href="#Power-Plane-Connect-Style" class="headerlink" title="Power Plane Connect Style"></a>Power Plane Connect Style</h4><p>电源层连接方式：用于设置电源层和导孔的连接风格，选择Relief Connect。</p>
+<h4 id="Power-Plane-Clearance"><a href="#Power-Plane-Clearance" class="headerlink" title="Power Plane Clearance"></a>Power Plane Clearance</h4><p>电源层安全距离：用于设置电源层与穿过它的导孔之间的安全距离，设置为20mil。</p>
+<h4 id="Polygon-Connect-style"><a href="#Polygon-Connect-style" class="headerlink" title="Polygon Connect style"></a>Polygon Connect style</h4><p>敷铜连接方式：用于设置敷铜与焊盘之间的连接方式，选择Relief Connect。</p>
+<h3 id="Testpoints"><a href="#Testpoints" class="headerlink" title="Testpoints"></a>Testpoints</h3><p>保持默认。</p>
+<h3 id="Manufacturing"><a href="#Manufacturing" class="headerlink" title="Manufacturing"></a>Manufacturing</h3><h4 id="Minimum-Annular-Ring"><a href="#Minimum-Annular-Ring" class="headerlink" title="Minimum Annular Ring"></a>Minimum Annular Ring</h4><p>最小焊盘环宽：设置为4mil(实际上板厂通常可以做到3mil，此处留余量)。</p>
+<h4 id="Acute-Angle"><a href="#Acute-Angle" class="headerlink" title="Acute Angle"></a>Acute Angle</h4><p>导线夹角：设置为90°。</p>
+<h4 id="Hole-Size"><a href="#Hole-Size" class="headerlink" title="Hole Size"></a>Hole Size</h4><p>钻孔孔径：设置Minimum为10mil， Maximum为240mil。</p>
+<h4 id="Layer-Pairs"><a href="#Layer-Pairs" class="headerlink" title="Layer Pairs"></a>Layer Pairs</h4><p>配对层设置规则：针对多层板设计中盲导孔，此处保持默认(常规板子设计不使用盲孔)。</p>
+<h4 id="Hole-To-Hole-Clearance"><a href="#Hole-To-Hole-Clearance" class="headerlink" title="Hole To Hole Clearance"></a>Hole To Hole Clearance</h4><p>孔间距：设置为10mil。</p>
+<h4 id="Minimum-Solder-Mask-Sliver"><a href="#Minimum-Solder-Mask-Sliver" class="headerlink" title="Minimum Solder Mask Sliver"></a>Minimum Solder Mask Sliver</h4><p>最小阻焊层间距：设置为10mil。</p>
+<h4 id="Silkscreen-Over-Component-Pads"><a href="#Silkscreen-Over-Component-Pads" class="headerlink" title="Silkscreen Over Component Pads"></a>Silkscreen Over Component Pads</h4><p>丝印与焊盘间距：设置为1mil。</p>
+<h4 id="Silk-To-Silk-Clearance"><a href="#Silk-To-Silk-Clearance" class="headerlink" title="Silk To Silk Clearance"></a>Silk To Silk Clearance</h4><p>丝印之间间距：设置为1mil。</p>
+<h4 id="Net-Antennae"><a href="#Net-Antennae" class="headerlink" title="Net Antennae"></a>Net Antennae</h4><p>网络天线：Tolerance设置为0mil。</p>
+<h2 id="规则设置"><a href="#规则设置" class="headerlink" title="规则设置"></a>规则设置</h2><p>除基本规则外，为了满足制板要求，还需要设置如下规则。</p>
+<h3 id="边框规则"><a href="#边框规则" class="headerlink" title="边框规则"></a>边框规则</h3><p>PCB上的元器件需要与板边框保持一定距离，确保贴片过程可靠。在Electrical-&gt;Clearance下<code>新增</code>一条名为“outline”规则，<code>first objects</code>设置为IsPad，second objects设置为Layer-&gt;Keep-Out layer，选择clearance为16mil(一般要求0.4mm)。</p>
 
       
     </div>
@@ -322,7 +371,7 @@
         <p><span>本文标题:</span><a href="/2019/03/13/altium-rules/">Altium Designer常用规则设置</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-03-13, 18:25:27</p>
-        <p><span>最后更新:</span>2019-03-29, 18:13:38</p>
+        <p><span>最后更新:</span>2019-04-01, 17:31:37</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/03/13/altium-rules/" title="Altium Designer常用规则设置">http://jiaodi.tech/2019/03/13/altium-rules/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/03/13/altium-rules/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -352,7 +401,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Design-Rules"><span class="toc-number">1.</span> <span class="toc-text">Design Rules</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Electrical"><span class="toc-number">1.1.</span> <span class="toc-text">Electrical</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Clearance"><span class="toc-number">1.1.1.</span> <span class="toc-text">Clearance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Short-Circuit"><span class="toc-number">1.1.2.</span> <span class="toc-text">Short-Circuit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Un-Routed-Net"><span class="toc-number">1.1.3.</span> <span class="toc-text">Un-Routed Net</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Routing"><span class="toc-number">1.2.</span> <span class="toc-text">Routing</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Width"><span class="toc-number">1.2.1.</span> <span class="toc-text">Width</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Routing-Topology"><span class="toc-number">1.2.2.</span> <span class="toc-text">Routing Topology</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Design-Rules"><span class="toc-number">1.</span> <span class="toc-text">Design Rules</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Electrical"><span class="toc-number">1.1.</span> <span class="toc-text">Electrical</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Clearance"><span class="toc-number">1.1.1.</span> <span class="toc-text">Clearance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Short-Circuit"><span class="toc-number">1.1.2.</span> <span class="toc-text">Short-Circuit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Un-Routed-Net"><span class="toc-number">1.1.3.</span> <span class="toc-text">Un-Routed Net</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Routing"><span class="toc-number">1.2.</span> <span class="toc-text">Routing</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Width"><span class="toc-number">1.2.1.</span> <span class="toc-text">Width</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Routing-Topology"><span class="toc-number">1.2.2.</span> <span class="toc-text">Routing Topology</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Routing-Priority"><span class="toc-number">1.2.3.</span> <span class="toc-text">Routing Priority</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Routing-Layers"><span class="toc-number">1.2.4.</span> <span class="toc-text">Routing Layers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Routing-Corners"><span class="toc-number">1.2.5.</span> <span class="toc-text">Routing Corners</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Routing-Via-Style"><span class="toc-number">1.2.6.</span> <span class="toc-text">Routing Via Style</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Fanout-Control"><span class="toc-number">1.2.7.</span> <span class="toc-text">Fanout Control</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Differential-Pairs-Routing"><span class="toc-number">1.2.8.</span> <span class="toc-text">Differential Pairs Routing</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMT"><span class="toc-number">1.3.</span> <span class="toc-text">SMT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mask"><span class="toc-number">1.4.</span> <span class="toc-text">Mask</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Solder-Mask-Expansion"><span class="toc-number">1.4.1.</span> <span class="toc-text">Solder Mask Expansion</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Paste-Mask-Expansion"><span class="toc-number">1.4.2.</span> <span class="toc-text">Paste Mask Expansion</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Plane"><span class="toc-number">1.5.</span> <span class="toc-text">Plane</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Power-Plane-Connect-Style"><span class="toc-number">1.5.1.</span> <span class="toc-text">Power Plane Connect Style</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Power-Plane-Clearance"><span class="toc-number">1.5.2.</span> <span class="toc-text">Power Plane Clearance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Polygon-Connect-style"><span class="toc-number">1.5.3.</span> <span class="toc-text">Polygon Connect style</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Testpoints"><span class="toc-number">1.6.</span> <span class="toc-text">Testpoints</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Manufacturing"><span class="toc-number">1.7.</span> <span class="toc-text">Manufacturing</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Minimum-Annular-Ring"><span class="toc-number">1.7.1.</span> <span class="toc-text">Minimum Annular Ring</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Acute-Angle"><span class="toc-number">1.7.2.</span> <span class="toc-text">Acute Angle</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hole-Size"><span class="toc-number">1.7.3.</span> <span class="toc-text">Hole Size</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Layer-Pairs"><span class="toc-number">1.7.4.</span> <span class="toc-text">Layer Pairs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hole-To-Hole-Clearance"><span class="toc-number">1.7.5.</span> <span class="toc-text">Hole To Hole Clearance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Minimum-Solder-Mask-Sliver"><span class="toc-number">1.7.6.</span> <span class="toc-text">Minimum Solder Mask Sliver</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Silkscreen-Over-Component-Pads"><span class="toc-number">1.7.7.</span> <span class="toc-text">Silkscreen Over Component Pads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Silk-To-Silk-Clearance"><span class="toc-number">1.7.8.</span> <span class="toc-text">Silk To Silk Clearance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Net-Antennae"><span class="toc-number">1.7.9.</span> <span class="toc-text">Net Antennae</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#规则设置"><span class="toc-number">2.</span> <span class="toc-text">规则设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#边框规则"><span class="toc-number">2.1.</span> <span class="toc-text">边框规则</span></a></li></ol></li></ol>
         
     </div>
     <style>
