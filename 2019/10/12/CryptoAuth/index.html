@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="&amp;emsp;本文记录密码学基本知识。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-12T08:17:57.205Z">
+<meta property="og:updated_time" content="2019-10-12T08:54:26.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="密码学基本知识">
 <meta name="twitter:description" content="&amp;emsp;本文记录密码学基本知识。">
@@ -306,7 +306,11 @@
           
         <p>&emsp;本文记录密码学基本知识。</p>
 <a id="more"></a>
-
+<h2 id="Crypto-Basics"><a href="#Crypto-Basics" class="headerlink" title="Crypto Basics"></a>Crypto Basics</h2><h3 id="Symmetric-and-Asymmetric-Authentication"><a href="#Symmetric-and-Asymmetric-Authentication" class="headerlink" title="Symmetric and Asymmetric Authentication"></a>Symmetric and Asymmetric Authentication</h3><p>&emsp;Authentication(认证)可以通过两种手段实现：Symmetric (对称)和Asymmetric (非对称)。在对称加密中，host与client具有相同的密钥；对应地，如果应用中使用私钥公钥则为非对称加密。</p>
+<p>&emsp;Asymmetric也被称作public-key infrastructure (PKI，公钥基础设施)。如果系统中存在公钥概念，则为非对称。公钥可以对任何人公开，任何人可以使用公钥向私钥持有人发送加密信息；私钥持有人可以利用私钥加密信息。</p>
+<p>&emsp;对应地，由于对称加密使用相同的密钥，只有持有密钥的双方才能通讯。</p>
+<p>&emsp;对称加密更为简洁，但是密钥的存储有更高风险；非对称加密更为复杂，但是安全性更高。</p>
+<h3 id="Encryption-and-Authentication"><a href="#Encryption-and-Authentication" class="headerlink" title="Encryption and Authentication"></a>Encryption and Authentication</h3>
       
     </div>
     
@@ -317,7 +321,7 @@
         <p><span>本文标题:</span><a href="/2019/10/12/CryptoAuth/">密码学基本知识</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-10-12, 15:38:26</p>
-        <p><span>最后更新:</span>2019-10-12, 16:17:57</p>
+        <p><span>最后更新:</span>2019-10-12, 16:54:26</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/10/12/CryptoAuth/" title="密码学基本知识">http://jiaodi.tech/2019/10/12/CryptoAuth/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/10/12/CryptoAuth/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -347,7 +351,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Crypto-Basics"><span class="toc-number">1.</span> <span class="toc-text">Crypto Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Symmetric-and-Asymmetric-Authentication"><span class="toc-number">1.1.</span> <span class="toc-text">Symmetric and Asymmetric Authentication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Encryption-and-Authentication"><span class="toc-number">1.2.</span> <span class="toc-text">Encryption and Authentication</span></a></li></ol></li></ol>
         
     </div>
     <style>
