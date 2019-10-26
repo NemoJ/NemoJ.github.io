@@ -23,10 +23,12 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="&amp;emsp;本文记录密码学基本知识。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-12T09:51:46.137Z">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/01.jpg">
+<meta property="og:updated_time" content="2019-10-26T10:58:56.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="密码学基本知识">
 <meta name="twitter:description" content="&amp;emsp;本文记录密码学基本知识。">
+<meta name="twitter:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/01.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -313,7 +315,27 @@
 <h3 id="Encryption-and-Authentication"><a href="#Encryption-and-Authentication" class="headerlink" title="Encryption and Authentication"></a>Encryption and Authentication</h3><p>&emsp;Encryption(加密)：用于保护信息，防止被预期外的人读取。</p>
 <p>&emsp;Authentication(认证)：确保某些事物真实性。在密码学中，认证用于判断信息是否真实。</p>
 <p>&emsp;简单来说，加密就是编码与解码，认证则为验证发送者的身份以及信息的完整性。</p>
-<h3 id="Hashing-vs-Encryption"><a href="#Hashing-vs-Encryption" class="headerlink" title="Hashing vs. Encryption"></a>Hashing vs. Encryption</h3>
+<h3 id="Hashing-vs-Encryption"><a href="#Hashing-vs-Encryption" class="headerlink" title="Hashing vs. Encryption"></a>Hashing vs. Encryption</h3><p>&emsp;哈希函数(散列函数)：将一组文本通过数学运算得到一个特定长度的值。该值一般称为hash value， hash， compression， fingerprint， message digest， 或者digest。</p>
+<p>&emsp;hash value表征了原始的一组文本，但通常长度小于原始文本。哈希运算为单向运算，无法通过哈希值获取原始信息；简单来说，当信息被压缩后，则无法被恢复。对于哈希运算，任何原始文本的改变均会导致digest的该表，所以哈希运算可以用于制作数字签名，用以确定和认证发信人和信息。哈希运算常被用于安全密码存储，文件鉴定，消息认证码(message authentication coding , MAC)以及非对称签名验证操作。</p>
+<p>&emsp;加密：基于加密，数据可以被加密和还原。对于一个给定的密钥，输入与输出是一一对应的。如果收信人没有密钥，则无法还原得到原始数据。加密是可逆的，所以被用于需要获取原始信息的场合。然而，发信人的确认和信息的完整性无法通过加密获取，因此需要认证过程。</p>
+<h3 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h3><p>&emsp;Encryption：为追求机密性，对信息进行编码与解码。加密本身无法进行认证；</p>
+<p>&emsp;Authentication:用于检查发信人身份信息以及信息的完整性。信息本身无需加密；</p>
+<p>&emsp;Symmetric authentication：主机与从机使用同一个密钥，双方的密钥都必须进行保护。对称加密执行相对更快；</p>
+<p>Asymmetric authentication：使用公钥/私钥对。从机必须谨慎保管私钥，主机无需保存私钥。公钥与私钥具有数学上的相关性，但是无法通过公钥而推算出私钥。相对对称加密，非对称加密的计算量会增加；</p>
+<p>Key Storage：基于硬件的密钥存储更为安全，因为硬件存储更难进行攻击；</p>
+<p>Hash functions：将一组文本通过数学运算得到一个特定长度的值，通常比原有文本长度小。哈希函数常用于认证以及加密操作。哈希函数为单向晕眩，即通过哈希值无法推导出原有的文本内容。</p>
+<p>Challenge-Response：由主机向从机发起一个挑战(通常为一个随机数)，从机需要给出一个回应用于验证从机的真实性。回应通常为一个表征了密钥的哈希值。然后，主机端也会同时进行回应运算，进而比对两个回应的一致性。</p>
+<p>MAC (Message Authentication Code)：使用密钥和密码算法(例如SHA256)生成一个值(称为MAC值)，改制可以用于确保数据未被修改。挑战-回应中的回应即为一个MAC。</p>
+<p>Sign/Verify：Sign：为一种认证操作，即生成一组数据的哈希摘要(hash digest)，再使用私钥加密生成一个签名。Verify：收信人将收到的信息进行哈希计算，然后将收到的数据签名使用发信人的公钥进行解密。如果二者吻合，则签名有效。</p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/01.jpg" alt=""></p>
+<p>ECDSA (Elliptic Curve Digital Signature Algorithm)：为一种简洁标准的利用sign/verify提供非对称加密的方法，其基于Elliptic Curve (ECC)算法进行签名。ECDSA具有2个阶段：1. 认证公钥； 2. 认证从机(或者配件)的私钥。</p>
+<p>ECDH Key Agreement (Elliptic Curve Diffie-Hellman)：为一种简洁标准的利用sign/verify提供非对称加密的方法，其使用匿名密钥协议，允许持有椭圆曲线公钥/私钥对的双方在一个非保密信道上建立一个共享密钥。共享密钥可以直接作为密钥使用，或者生成一个新的密钥用于后续的对称加密通讯。基于ECC加密具有多种Diffie-Hellman协议。</p>
+<p>Root certificate：为一个公钥，证明Root Certificate Authority (CA)身份。最常见的商用应用均基于ITU-T X.509标准，其通常包含一个来自于Certificate Authority (CA)的数字签名。数字证书基于信任链(a chain of trust)进行认证，数字证书的信任锚(trust anchor)即为Root Certificate Authority (CA)。</p>
+<p>Public-key cryptography：基于私钥和公钥的系列算法。私钥公钥对数学上是相关的，从算法上报证无法通过公钥获取私钥。公钥被用于加密文本或者验证签名。私钥被用于解密密文或者制作数字签名。非对称的定义就在于使用不同的key进行相反的功能；而对称加密使用相同的密钥进行相关计算。公钥算法基于数学分析，目前被证明对于integer factorization, discrete logarithm, and elliptic curve relationships尚无有效解法。</p>
+<h3 id="“CIA”-The-Three-Pillars-of-Security"><a href="#“CIA”-The-Three-Pillars-of-Security" class="headerlink" title="“CIA” The Three Pillars of Security"></a>“CIA” The Three Pillars of Security</h3><p>Confidentiality:确保信息只被目标收信人读取。通常使用加密与解密实现；</p>
+<p>Integrity：用于确保接收到的信息未被修改，使用加密函数实现。对于对称加密，一般使用密钥对数据进行哈希计算，然后将计算得到的MAC值同数据一起发出；接收方进行同样的运算成成MAC值进行比对。对于非对称加密，一般使用sign/verify确保数据完整性。</p>
+<p>Authenticity：用于验证信息的发信人身份真实性。对于对称加密，通常基于向发信人发起挑战，发信人基于密钥对挑战进行哈希计算得到MAC值并发送回去。发起挑战方将进行同样的计算并比对MAC值的一致性。</p>
+
       
     </div>
     
@@ -324,7 +346,7 @@
         <p><span>本文标题:</span><a href="/2019/10/12/CryptoAuth/">密码学基本知识</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-10-12, 15:38:26</p>
-        <p><span>最后更新:</span>2019-10-12, 17:51:46</p>
+        <p><span>最后更新:</span>2019-10-26, 18:58:56</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/10/12/CryptoAuth/" title="密码学基本知识">http://jiaodi.tech/2019/10/12/CryptoAuth/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/10/12/CryptoAuth/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -354,7 +376,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Crypto-Basics"><span class="toc-number">1.</span> <span class="toc-text">Crypto Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Symmetric-and-Asymmetric-Authentication"><span class="toc-number">1.1.</span> <span class="toc-text">Symmetric and Asymmetric Authentication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Encryption-and-Authentication"><span class="toc-number">1.2.</span> <span class="toc-text">Encryption and Authentication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hashing-vs-Encryption"><span class="toc-number">1.3.</span> <span class="toc-text">Hashing vs. Encryption</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Crypto-Basics"><span class="toc-number">1.</span> <span class="toc-text">Crypto Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Symmetric-and-Asymmetric-Authentication"><span class="toc-number">1.1.</span> <span class="toc-text">Symmetric and Asymmetric Authentication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Encryption-and-Authentication"><span class="toc-number">1.2.</span> <span class="toc-text">Encryption and Authentication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hashing-vs-Encryption"><span class="toc-number">1.3.</span> <span class="toc-text">Hashing vs. Encryption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本术语"><span class="toc-number">1.4.</span> <span class="toc-text">基本术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“CIA”-The-Three-Pillars-of-Security"><span class="toc-number">1.5.</span> <span class="toc-text">“CIA” The Three Pillars of Security</span></a></li></ol></li></ol>
         
     </div>
     <style>
