@@ -24,7 +24,11 @@
 <meta property="og:description" content="&amp;emsp;本文记录密码学基本知识。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/01.jpg">
-<meta property="og:updated_time" content="2019-10-26T11:43:14.113Z">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/02.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/03.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/04.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/05.png">
+<meta property="og:updated_time" content="2019-10-28T09:34:27.142Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="密码学基本知识">
 <meta name="twitter:description" content="&amp;emsp;本文记录密码学基本知识。">
@@ -308,17 +312,17 @@
           
         <p>&emsp;本文记录密码学基本知识。</p>
 <a id="more"></a>
-<h2 id="Crypto-Basics"><a href="#Crypto-Basics" class="headerlink" title="Crypto Basics"></a>Crypto Basics</h2><h3 id="Symmetric-and-Asymmetric-Authentication"><a href="#Symmetric-and-Asymmetric-Authentication" class="headerlink" title="Symmetric and Asymmetric Authentication"></a>Symmetric and Asymmetric Authentication</h3><p>&emsp;Authentication(认证)可以通过两种手段实现：Symmetric (对称)和Asymmetric (非对称)。在对称加密中，host与client具有相同的密钥；对应地，如果应用中使用私钥公钥则为非对称加密。</p>
+<h1 id="Crypto-Basics"><a href="#Crypto-Basics" class="headerlink" title="Crypto Basics"></a>Crypto Basics</h1><h2 id="Symmetric-and-Asymmetric-Authentication"><a href="#Symmetric-and-Asymmetric-Authentication" class="headerlink" title="Symmetric and Asymmetric Authentication"></a>Symmetric and Asymmetric Authentication</h2><p>&emsp;Authentication(认证)可以通过两种手段实现：Symmetric (对称)和Asymmetric (非对称)。在对称加密中，host与client具有相同的密钥；对应地，如果应用中使用私钥公钥则为非对称加密。</p>
 <p>&emsp;Asymmetric也被称作public-key infrastructure (PKI，公钥基础设施)。如果系统中存在公钥概念，则为非对称。公钥可以对任何人公开，任何人可以使用公钥向私钥持有人发送加密信息；私钥持有人可以利用私钥加密信息。</p>
 <p>&emsp;对应地，由于对称加密使用相同的密钥，只有持有密钥的双方才能通讯。</p>
 <p>&emsp;对称加密更为简洁，但是密钥的存储有更高风险；非对称加密更为复杂，但是安全性更高。</p>
-<h3 id="Encryption-and-Authentication"><a href="#Encryption-and-Authentication" class="headerlink" title="Encryption and Authentication"></a>Encryption and Authentication</h3><p>&emsp;Encryption(加密)：用于保护信息，防止被预期外的人读取。</p>
+<h2 id="Encryption-and-Authentication"><a href="#Encryption-and-Authentication" class="headerlink" title="Encryption and Authentication"></a>Encryption and Authentication</h2><p>&emsp;Encryption(加密)：用于保护信息，防止被预期外的人读取。</p>
 <p>&emsp;Authentication(认证)：确保某些事物真实性。在密码学中，认证用于判断信息是否真实。</p>
 <p>&emsp;简单来说，加密就是编码与解码，认证则为验证发送者的身份以及信息的完整性。</p>
-<h3 id="Hashing-vs-Encryption"><a href="#Hashing-vs-Encryption" class="headerlink" title="Hashing vs. Encryption"></a>Hashing vs. Encryption</h3><p>&emsp;哈希函数(散列函数)：将一组文本通过数学运算得到一个特定长度的值。该值一般称为hash value， hash， compression， fingerprint， message digest， 或者digest。</p>
+<h2 id="Hashing-vs-Encryption"><a href="#Hashing-vs-Encryption" class="headerlink" title="Hashing vs. Encryption"></a>Hashing vs. Encryption</h2><p>&emsp;哈希函数(散列函数)：将一组文本通过数学运算得到一个特定长度的值。该值一般称为hash value， hash， compression， fingerprint， message digest， 或者digest。</p>
 <p>&emsp;hash value表征了原始的一组文本，但通常长度小于原始文本。哈希运算为单向运算，无法通过哈希值获取原始信息；简单来说，当信息被压缩后，则无法被恢复。对于哈希运算，任何原始文本的改变均会导致digest的该表，所以哈希运算可以用于制作数字签名，用以确定和认证发信人和信息。哈希运算常被用于安全密码存储，文件鉴定，消息认证码(message authentication coding , MAC)以及非对称签名验证操作。</p>
 <p>&emsp;加密：基于加密，数据可以被加密和还原。对于一个给定的密钥，输入与输出是一一对应的。如果收信人没有密钥，则无法还原得到原始数据。加密是可逆的，所以被用于需要获取原始信息的场合。然而，发信人的确认和信息的完整性无法通过加密获取，因此需要认证过程。</p>
-<h3 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h3><p>&emsp;Encryption：为追求机密性，对信息进行编码与解码。加密本身无法进行认证；</p>
+<h2 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h2><p>&emsp;Encryption：为追求机密性，对信息进行编码与解码。加密本身无法进行认证；</p>
 <p>&emsp;Authentication:用于检查发信人身份信息以及信息的完整性。信息本身无需加密；</p>
 <p>&emsp;Symmetric authentication：主机与从机使用同一个密钥，双方的密钥都必须进行保护。对称加密执行相对更快；</p>
 <p>&emsp;Asymmetric authentication：使用公钥/私钥对。从机必须谨慎保管私钥，主机无需保存私钥。公钥与私钥具有数学上的相关性，但是无法通过公钥而推算出私钥。相对对称加密，非对称加密的计算量会增加；</p>
@@ -332,15 +336,43 @@
 <p>&emsp;ECDH Key Agreement (Elliptic Curve Diffie-Hellman)：为一种简洁标准的利用sign/verify提供非对称加密的方法，其使用匿名密钥协议，允许持有椭圆曲线公钥/私钥对的双方在一个非保密信道上建立一个共享密钥。共享密钥可以直接作为密钥使用，或者生成一个新的密钥用于后续的对称加密通讯。基于ECC加密具有多种Diffie-Hellman协议。</p>
 <p>&emsp;Root certificate：为一个公钥，证明Root Certificate Authority (CA)身份。最常见的商用应用均基于ITU-T X.509标准，其通常包含一个来自于Certificate Authority (CA)的数字签名。数字证书基于信任链(a chain of trust)进行认证，数字证书的信任锚(trust anchor)即为Root Certificate Authority (CA)。</p>
 <p>&emsp;Public-key cryptography：基于私钥和公钥的系列算法。私钥公钥对数学上是相关的，从算法上报证无法通过公钥获取私钥。公钥被用于加密文本或者验证签名。私钥被用于解密密文或者制作数字签名。非对称的定义就在于使用不同的key进行相反的功能；而对称加密使用相同的密钥进行相关计算。公钥算法基于数学分析，目前被证明对于integer factorization, discrete logarithm, and elliptic curve relationships尚无有效解法。</p>
-<h3 id="“CIA”-The-Three-Pillars-of-Security"><a href="#“CIA”-The-Three-Pillars-of-Security" class="headerlink" title="“CIA” The Three Pillars of Security"></a>“CIA” The Three Pillars of Security</h3><p>&emsp;Confidentiality:确保信息只被目标收信人读取。通常使用加密与解密实现；</p>
+<h2 id="“CIA”-The-Three-Pillars-of-Security"><a href="#“CIA”-The-Three-Pillars-of-Security" class="headerlink" title="“CIA” The Three Pillars of Security"></a>“CIA” The Three Pillars of Security</h2><p>&emsp;Confidentiality:确保信息只被目标收信人读取。通常使用加密与解密实现；</p>
 <p>&emsp;Integrity：用于确保接收到的信息未被修改，使用加密函数实现。对于对称加密，一般使用密钥对数据进行哈希计算，然后将计算得到的MAC值同数据一起发出；接收方进行同样的运算成成MAC值进行比对。对于非对称加密，一般使用sign/verify确保数据完整性。</p>
 <p>&emsp;Authenticity：用于验证信息的发信人身份真实性。对于对称加密，通常基于向发信人发起挑战，发信人基于密钥对挑战进行哈希计算得到MAC值并发送回去。发起挑战方将进行同样的计算并比对MAC值的一致性。</p>
-<h3 id="基于ECDSA实现非对称加密"><a href="#基于ECDSA实现非对称加密" class="headerlink" title="基于ECDSA实现非对称加密"></a>基于ECDSA实现非对称加密</h3><p>&emsp;基于目的划分，基于ECDSA的非对称加密可以划分为2个过程：一是基于ECDSA算法验证从机的公钥；而是基于ECDSA算法认证从机的私钥与已得到认证的公钥是具备相关性的。</p>
+<h2 id="基于ECDSA实现非对称加密"><a href="#基于ECDSA实现非对称加密" class="headerlink" title="基于ECDSA实现非对称加密"></a>基于ECDSA实现非对称加密</h2><p>&emsp;基于目的划分，基于ECDSA的非对称加密可以划分为2个过程：一是基于ECDSA算法验证从机的公钥；而是基于ECDSA算法认证从机的私钥与已得到认证的公钥是具备相关性的。</p>
 <p>&emsp;对于过程一，还有一个隐含目标是验证全部证书链，指导信任根(i.e.the certificate authority or “issuer”)。</p>
 <p>&emsp;如果以上2个过程全部验证通过，则可以确认从机真实性。</p>
-<h4 id="Making-the-ECDSA-certificates"><a href="#Making-the-ECDSA-certificates" class="headerlink" title="Making the ECDSA certificates"></a>Making the ECDSA certificates</h4><p>&emsp;证书的建立在工厂完成。</p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/02.png" alt=""></p>
+<h3 id="Making-the-ECDSA-certificates"><a href="#Making-the-ECDSA-certificates" class="headerlink" title="Making the ECDSA certificates"></a>Making the ECDSA certificates</h3><p>&emsp;证书的建立在工厂完成。</p>
 <p>&emsp;证书由2个部分构成：1. 证书数据； 2. 签名。</p>
-
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/03.png" alt=""></p>
+<h3 id="Asymmetric-Authentication-Making-the-ECDSA-certificates"><a href="#Asymmetric-Authentication-Making-the-ECDSA-certificates" class="headerlink" title="Asymmetric Authentication: Making the ECDSA certificates"></a>Asymmetric Authentication: Making the ECDSA certificates</h3><p><img src="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/04.png" alt=""></p>
+<p>&emsp;证书数据由3部分构成：1. 静态数据；2. 动态数据； 3. 从机的公钥。</p>
+<p>&emsp;静态数据为样板文件，存储基本信息，如公司的名字、地址以及其它不变的信息。动态数据则为串号、日期、时间、到期日期等。从机的公钥为证书数据的第三部分。注意，从机的公钥和私钥是成对的。从机中存储的私钥永远无法读取。</p>
+<p>&emsp;除证书数据外，签名是证书的另一部分。在证书中，证书数据有2种目的：1. 作为证书的一部分； 2. 经过哈希运算，再通过签名算法生成签名。证书数据与证书签名共同构成了完整证书。</p>
+<p>&emsp;签名流程具体如下：</p>
+<ol>
+<li>复制证书数据；</li>
+<li>将证书数据通过哈希晕眩得到哈希值(digest)。ECDSA P-256指定32byte长度的digest，要求哈希算法为SHA256。得到digest后，该值已经准备就绪供sign module使用；</li>
+<li>sign module中安全地存储了signer的私钥，安全意味着没有人可以获得这个私钥。sign module基于ECC签名算法，利用signer的私钥对证书数据的digest进行签名，其结果则为证书数据的签名。签名同原有的证书数据共同构成了完整的证书。</li>
+</ol>
+<h3 id="Asymmetric-Authentication-Creating-the-Signer’s-Certificate"><a href="#Asymmetric-Authentication-Creating-the-Signer’s-Certificate" class="headerlink" title="Asymmetric Authentication: Creating the Signer’s Certificate"></a>Asymmetric Authentication: Creating the Signer’s Certificate</h3><p>&emsp;signer的证书用于建立与certificate authority(CA, issuer, 凭证管理中心)的链接。signer的证书通过CA对signer的证书数据签名实现。</p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/05.png" alt=""></p>
+<h3 id="Asymmetric-Authentication-ECDSA-is-a-two-phased-process"><a href="#Asymmetric-Authentication-ECDSA-is-a-two-phased-process" class="headerlink" title="Asymmetric Authentication ECDSA is a two phased process"></a>Asymmetric Authentication ECDSA is a two phased process</h3><h4 id="Phase-1-Part-1-Verify-Client’s-Public-Key"><a href="#Phase-1-Part-1-Verify-Client’s-Public-Key" class="headerlink" title="Phase 1, Part 1: Verify Client’s Public Key"></a>Phase 1, Part 1: Verify Client’s Public Key</h4><p>&emsp;ECDSA过程分为2个阶段。阶段1为验证从机和signer的公钥。阶段1将从机和signer的签名链接到issuer(CA)的签名，即建立了信任根。阶段2为验证从机的私钥。当确认从机公钥与私钥的关联性，且已经链接到信任根时，则说明验证通过。</p>
+<p>&emsp;对于阶段1，首先验证从机的公钥。具体流程如下：</p>
+<ol>
+<li>主机请求从机发送信息，包括从机的证书以及signer的证书；</li>
+<li>主机提取从机证书的数据内容(包括从机的静态数据、动态数据和公钥)和signer模块生成的签名；</li>
+<li>主机提取signer证书的数据内容(包括signer的公钥)以及CA生成的签名；</li>
+<li>主机对2组证书的数据进行哈希运算，生成2组32byte的digest(P-256 curve)，对别为从机的digest和signer的digest；</li>
+<li>signer的公钥、从机证书数据的digest和从机的签名参与ECDSA验证计算。用于验证从机的公钥。</li>
+</ol>
+<h4 id="Phase-1-Part-2-Verify-Issuer’s-Signature"><a href="#Phase-1-Part-2-Verify-Issuer’s-Signature" class="headerlink" title="Phase 1, Part 2: Verify Issuer’s Signature"></a>Phase 1, Part 2: Verify Issuer’s Signature</h4><p>&emsp;阶段1还需要验证signer的证书，用于验证信任根。具体流程如下：</p>
+<ol>
+<li>主机对signer的证书数据进行哈希运算，得到digest；</li>
+<li>issuer(CA)的公钥预先存储在MCU中，issuer(CA)的公钥、signer证书数据的digest、signer的签名参与ECDSA验证计算。用于验证signer的证书。</li>
+</ol>
+<h4 id="Asymmetric-Authentication-ECDSA-is-a-two-phased-process-Phase-2-Verify-Private-Key"><a href="#Asymmetric-Authentication-ECDSA-is-a-two-phased-process-Phase-2-Verify-Private-Key" class="headerlink" title="Asymmetric Authentication: ECDSA is a two phased process (Phase 2: Verify Private Key)"></a>Asymmetric Authentication: ECDSA is a two phased process (Phase 2: Verify Private Key)</h4>
       
     </div>
     
@@ -351,7 +383,7 @@
         <p><span>本文标题:</span><a href="/2019/10/12/CryptoAuth/">密码学基本知识</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-10-12, 15:38:26</p>
-        <p><span>最后更新:</span>2019-10-26, 19:43:14</p>
+        <p><span>最后更新:</span>2019-10-28, 17:34:27</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/10/12/CryptoAuth/" title="密码学基本知识">http://jiaodi.tech/2019/10/12/CryptoAuth/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/10/12/CryptoAuth/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -381,7 +413,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Crypto-Basics"><span class="toc-number">1.</span> <span class="toc-text">Crypto Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Symmetric-and-Asymmetric-Authentication"><span class="toc-number">1.1.</span> <span class="toc-text">Symmetric and Asymmetric Authentication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Encryption-and-Authentication"><span class="toc-number">1.2.</span> <span class="toc-text">Encryption and Authentication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hashing-vs-Encryption"><span class="toc-number">1.3.</span> <span class="toc-text">Hashing vs. Encryption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本术语"><span class="toc-number">1.4.</span> <span class="toc-text">基本术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“CIA”-The-Three-Pillars-of-Security"><span class="toc-number">1.5.</span> <span class="toc-text">“CIA” The Three Pillars of Security</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于ECDSA实现非对称加密"><span class="toc-number">1.6.</span> <span class="toc-text">基于ECDSA实现非对称加密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Making-the-ECDSA-certificates"><span class="toc-number">1.6.1.</span> <span class="toc-text">Making the ECDSA certificates</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Crypto-Basics"><span class="toc-number">1.</span> <span class="toc-text">Crypto Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Symmetric-and-Asymmetric-Authentication"><span class="toc-number">1.1.</span> <span class="toc-text">Symmetric and Asymmetric Authentication</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Encryption-and-Authentication"><span class="toc-number">1.2.</span> <span class="toc-text">Encryption and Authentication</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hashing-vs-Encryption"><span class="toc-number">1.3.</span> <span class="toc-text">Hashing vs. Encryption</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本术语"><span class="toc-number">1.4.</span> <span class="toc-text">基本术语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#“CIA”-The-Three-Pillars-of-Security"><span class="toc-number">1.5.</span> <span class="toc-text">“CIA” The Three Pillars of Security</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于ECDSA实现非对称加密"><span class="toc-number">1.6.</span> <span class="toc-text">基于ECDSA实现非对称加密</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Making-the-ECDSA-certificates"><span class="toc-number">1.6.1.</span> <span class="toc-text">Making the ECDSA certificates</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Asymmetric-Authentication-Making-the-ECDSA-certificates"><span class="toc-number">1.6.2.</span> <span class="toc-text">Asymmetric Authentication: Making the ECDSA certificates</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Asymmetric-Authentication-Creating-the-Signer’s-Certificate"><span class="toc-number">1.6.3.</span> <span class="toc-text">Asymmetric Authentication: Creating the Signer’s Certificate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Asymmetric-Authentication-ECDSA-is-a-two-phased-process"><span class="toc-number">1.6.4.</span> <span class="toc-text">Asymmetric Authentication ECDSA is a two phased process</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Phase-1-Part-1-Verify-Client’s-Public-Key"><span class="toc-number">1.6.4.1.</span> <span class="toc-text">Phase 1, Part 1: Verify Client’s Public Key</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Phase-1-Part-2-Verify-Issuer’s-Signature"><span class="toc-number">1.6.4.2.</span> <span class="toc-text">Phase 1, Part 2: Verify Issuer’s Signature</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Asymmetric-Authentication-ECDSA-is-a-two-phased-process-Phase-2-Verify-Private-Key"><span class="toc-number">1.6.4.3.</span> <span class="toc-text">Asymmetric Authentication: ECDSA is a two phased process (Phase 2: Verify Private Key)</span></a></li></ol></li></ol></li></ol></li></ol>
         
     </div>
     <style>
