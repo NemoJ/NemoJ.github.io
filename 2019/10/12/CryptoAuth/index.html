@@ -28,7 +28,10 @@
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/03.png">
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/04.png">
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/05.png">
-<meta property="og:updated_time" content="2019-10-28T09:34:27.142Z">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/06.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/07.png">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/08.png">
+<meta property="og:updated_time" content="2019-10-28T10:08:55.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="密码学基本知识">
 <meta name="twitter:description" content="&amp;emsp;本文记录密码学基本知识。">
@@ -359,6 +362,7 @@
 <h3 id="Asymmetric-Authentication-Creating-the-Signer’s-Certificate"><a href="#Asymmetric-Authentication-Creating-the-Signer’s-Certificate" class="headerlink" title="Asymmetric Authentication: Creating the Signer’s Certificate"></a>Asymmetric Authentication: Creating the Signer’s Certificate</h3><p>&emsp;signer的证书用于建立与certificate authority(CA, issuer, 凭证管理中心)的链接。signer的证书通过CA对signer的证书数据签名实现。</p>
 <p><img src="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/05.png" alt=""></p>
 <h3 id="Asymmetric-Authentication-ECDSA-is-a-two-phased-process"><a href="#Asymmetric-Authentication-ECDSA-is-a-two-phased-process" class="headerlink" title="Asymmetric Authentication ECDSA is a two phased process"></a>Asymmetric Authentication ECDSA is a two phased process</h3><h4 id="Phase-1-Part-1-Verify-Client’s-Public-Key"><a href="#Phase-1-Part-1-Verify-Client’s-Public-Key" class="headerlink" title="Phase 1, Part 1: Verify Client’s Public Key"></a>Phase 1, Part 1: Verify Client’s Public Key</h4><p>&emsp;ECDSA过程分为2个阶段。阶段1为验证从机和signer的公钥。阶段1将从机和signer的签名链接到issuer(CA)的签名，即建立了信任根。阶段2为验证从机的私钥。当确认从机公钥与私钥的关联性，且已经链接到信任根时，则说明验证通过。</p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/06.png" alt=""></p>
 <p>&emsp;对于阶段1，首先验证从机的公钥。具体流程如下：</p>
 <ol>
 <li>主机请求从机发送信息，包括从机的证书以及signer的证书；</li>
@@ -367,12 +371,21 @@
 <li>主机对2组证书的数据进行哈希运算，生成2组32byte的digest(P-256 curve)，对别为从机的digest和signer的digest；</li>
 <li>signer的公钥、从机证书数据的digest和从机的签名参与ECDSA验证计算。用于验证从机的公钥。</li>
 </ol>
-<h4 id="Phase-1-Part-2-Verify-Issuer’s-Signature"><a href="#Phase-1-Part-2-Verify-Issuer’s-Signature" class="headerlink" title="Phase 1, Part 2: Verify Issuer’s Signature"></a>Phase 1, Part 2: Verify Issuer’s Signature</h4><p>&emsp;阶段1还需要验证signer的证书，用于验证信任根。具体流程如下：</p>
+<h4 id="Phase-1-Part-2-Verify-Issuer’s-Signature"><a href="#Phase-1-Part-2-Verify-Issuer’s-Signature" class="headerlink" title="Phase 1, Part 2: Verify Issuer’s Signature"></a>Phase 1, Part 2: Verify Issuer’s Signature</h4><p><img src="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/07.png" alt=""></p>
+<p>&emsp;阶段1还需要验证signer的证书，用于验证信任根。具体流程如下：</p>
 <ol>
 <li>主机对signer的证书数据进行哈希运算，得到digest；</li>
 <li>issuer(CA)的公钥预先存储在MCU中，issuer(CA)的公钥、signer证书数据的digest、signer的签名参与ECDSA验证计算。用于验证signer的证书。</li>
 </ol>
-<h4 id="Asymmetric-Authentication-ECDSA-is-a-two-phased-process-Phase-2-Verify-Private-Key"><a href="#Asymmetric-Authentication-ECDSA-is-a-two-phased-process-Phase-2-Verify-Private-Key" class="headerlink" title="Asymmetric Authentication: ECDSA is a two phased process (Phase 2: Verify Private Key)"></a>Asymmetric Authentication: ECDSA is a two phased process (Phase 2: Verify Private Key)</h4>
+<h4 id="Asymmetric-Authentication-ECDSA-is-a-two-phased-process-Phase-2-Verify-Private-Key"><a href="#Asymmetric-Authentication-ECDSA-is-a-two-phased-process-Phase-2-Verify-Private-Key" class="headerlink" title="Asymmetric Authentication: ECDSA is a two phased process (Phase 2: Verify Private Key)"></a>Asymmetric Authentication: ECDSA is a two phased process (Phase 2: Verify Private Key)</h4><p>&emsp;当阶段1通过后，进入阶段2。阶段2的目的是验证从机的私钥。</p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/CryptoAuth/08.png" alt=""></p>
+<p>&emsp;阶段2的具体流程如下：</p>
+<ol>
+<li>主机生成一个随机数挑战，将其发送给从机；</li>
+<li>从机基于ECDSA签名引擎，利用从机的私钥对随机数进行签名，并将其发送给主机；</li>
+<li>主机使用相同的随机数、从机的公钥以及从机发回的应答进行ECDSA验证计算。如果ECDSA计算成功，则主机可以确认从机的真实性。</li>
+</ol>
+
       
     </div>
     
@@ -383,7 +396,7 @@
         <p><span>本文标题:</span><a href="/2019/10/12/CryptoAuth/">密码学基本知识</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-10-12, 15:38:26</p>
-        <p><span>最后更新:</span>2019-10-28, 17:34:27</p>
+        <p><span>最后更新:</span>2019-10-28, 18:08:55</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/10/12/CryptoAuth/" title="密码学基本知识">http://jiaodi.tech/2019/10/12/CryptoAuth/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/10/12/CryptoAuth/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
