@@ -23,10 +23,12 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="本文为ATECC508A开发笔记。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-28T11:49:21.113Z">
+<meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/01.png">
+<meta property="og:updated_time" content="2019-10-29T04:00:31.337Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ATECC508A开发笔记">
 <meta name="twitter:description" content="本文为ATECC508A开发笔记。">
+<meta name="twitter:image" content="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/01.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -306,6 +308,129 @@
           
         <p>本文为ATECC508A开发笔记。</p>
 <a id="more"></a>
+<h1 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h1><ul>
+<li>Cryptographic Co-processor with Secure Hardware-Based Key Storage</li>
+<li>Performs High-Speed Public Key (PKI) Algorithms<br>– ECDSA: FIPS186-3 Elliptic Curve Digital Signature Algorithm<br>– ECDH: FIPS SP800-56A Elliptic Curve Diffie-Hellman Algorithm</li>
+<li>NIST Standard P256 Elliptic Curve Support</li>
+<li>SHA-256 Hash Algorithm with HMAC Option</li>
+<li>Host and Client Operations</li>
+<li>256-bit Key Length</li>
+<li>Storage for up to 16 Keys</li>
+<li>Two High-Endurance Monotonic Counters</li>
+<li>Guaranteed Unique 72-bit Serial Number</li>
+<li>Internal High-Quality FIPS Random Number Generator (RNG)</li>
+<li>10 Kb EEPROM Memory for Keys, Certificates, and Data</li>
+<li>Multiple Options for Consumption Logging and One-Time Write Information</li>
+<li>Intrusion Latch for External Tamper Switch or Power-on Chip Enablement. Multiple I/O Options:<br>– High-speed Single Pin Interface, with One GPIO Pin<br>– 1 MHz Standard I2C Interface</li>
+<li>2.0V to 5.5V Supply Voltage Range</li>
+<li>1.8V to 5.5V IO levels</li>
+<li>&lt;150 nA Sleep Current</li>
+<li>8-pad UDFN, 8-lead SOIC, and 3-lead CONTACT Packages</li>
+</ul>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><h1 id="Device-Organization"><a href="#Device-Organization" class="headerlink" title="Device Organization"></a>Device Organization</h1><p>&emsp;ATECC508A包含EEPROM存储以及SRAM buffer。</p>
+<p>&emsp;其中EEPROM总计11200bit=1400byte，被分为如下区：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">zone</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">术语</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Data</td>
+<td style="text-align:center">总计1208byte，分为16个只读或者独写存储区，每个存储区由36byte、72byte或者416byte构成，每个存储区可以存储公钥私钥、签名、证书、校准或者其它信息等。每个slot的存取策略由对应地configuration值决定。注意，只有当LockValue被置位后权限才会生效。</td>
+<td style="text-align:center">Slot\<yy> =data区域slot YY存储的全部内容</yy></td>
+</tr>
+<tr>
+<td style="text-align:center">Configuration</td>
+<td style="text-align:center">总计128byte。存储了串号、其它ID信息、每个data slot的访存取策略。configuration区域在被锁定前，均可被修改。</td>
+<td style="text-align:center">SN\&lt;a:b&gt; =configuration区域中的一段字节</td>
+</tr>
+<tr>
+<td style="text-align:center">One Time Programmable (OTP)</td>
+<td style="text-align:center">总计64byte。在锁定前，可以使用标准Write指令写入数据。OTP区域可以用于存储只读数据或者单向熔断型消耗记录信息(one-way fuse type consumption logging information，即只能对位进行复位)。</td>
+<td style="text-align:center">OTP\<bb> = OPT区域的一个字节</bb></td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;文档术语</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">术语</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Block</td>
+<td style="text-align:center">特定存储区上一个256bit/32byte的区域。</td>
+</tr>
+<tr>
+<td style="text-align:center">KeyID</td>
+<td style="text-align:center">用于存储key的slot编号。Key 1即存储在slot<1>。</1></td>
+</tr>
+<tr>
+<td style="text-align:center">param\<b></b></td>
+<td style="text-align:center">命令参数或者配置字节中的1位。</td>
+</tr>
+<tr>
+<td style="text-align:center">SRAM</td>
+<td style="text-align:center">包括输入和输出buffer，以及状态存储位置。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="EEPROM-Data-Zone"><a href="#EEPROM-Data-Zone" class="headerlink" title="EEPROM Data Zone"></a>EEPROM Data Zone</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">slot</th>
+<th style="text-align:center">blocks</th>
+<th style="text-align:center">bytes</th>
+<th style="text-align:center">bits</th>
+<th style="text-align:center">typical use</th>
+<th style="text-align:center">notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0-7</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">36</td>
+<td style="text-align:center">288</td>
+<td style="text-align:center">Private or Secret Key</td>
+<td style="text-align:center">也可用于存储数据</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">416</td>
+<td style="text-align:center">3328</td>
+<td style="text-align:center">Data</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">9-14</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">72</td>
+<td style="text-align:center">576</td>
+<td style="text-align:center">Public Key, Signature or Certificate</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">72</td>
+<td style="text-align:center">576</td>
+<td style="text-align:center">Private Data, Secret Key, Signature, or Certificate</td>
+<td style="text-align:center">仅该slot可以支持128计数限制使用特性</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;注意到不同slot的大小不同，推荐使用slot0-7存储私钥，slot8存储证书，slot9-15存储公钥等。</p>
+<h2 id="EEPROM-Configuration-Zone"><a href="#EEPROM-Configuration-Zone" class="headerlink" title="EEPROM Configuration Zone"></a>EEPROM Configuration Zone</h2><p>&emsp;配置区共128byte，具体如下：</p>
+<p><img src="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/01.png" alt=""></p>
 
       
     </div>
@@ -317,7 +442,7 @@
         <p><span>本文标题:</span><a href="/2019/10/28/atecc508a/">ATECC508A开发笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-10-28, 19:38:42</p>
-        <p><span>最后更新:</span>2019-10-28, 19:49:21</p>
+        <p><span>最后更新:</span>2019-10-29, 12:00:31</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/10/28/atecc508a/" title="ATECC508A开发笔记">http://jiaodi.tech/2019/10/28/atecc508a/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/10/28/atecc508a/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -347,7 +472,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Features"><span class="toc-number">1.</span> <span class="toc-text">Features</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Device-Organization"><span class="toc-number">3.</span> <span class="toc-text">Device Organization</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#EEPROM-Data-Zone"><span class="toc-number">3.1.</span> <span class="toc-text">EEPROM Data Zone</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EEPROM-Configuration-Zone"><span class="toc-number">3.2.</span> <span class="toc-text">EEPROM Configuration Zone</span></a></li></ol></li></ol>
         
     </div>
     <style>
