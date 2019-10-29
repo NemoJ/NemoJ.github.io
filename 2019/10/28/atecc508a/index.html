@@ -24,7 +24,7 @@
 <meta property="og:description" content="本文为ATECC508A开发笔记。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/01.png">
-<meta property="og:updated_time" content="2019-10-29T04:00:31.337Z">
+<meta property="og:updated_time" content="2019-10-29T07:25:01.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ATECC508A开发笔记">
 <meta name="twitter:description" content="本文为ATECC508A开发笔记。">
@@ -431,6 +431,25 @@
 <p>&emsp;注意到不同slot的大小不同，推荐使用slot0-7存储私钥，slot8存储证书，slot9-15存储公钥等。</p>
 <h2 id="EEPROM-Configuration-Zone"><a href="#EEPROM-Configuration-Zone" class="headerlink" title="EEPROM Configuration Zone"></a>EEPROM Configuration Zone</h2><p>&emsp;配置区共128byte，具体如下：</p>
 <p><img src="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/01.png" alt=""></p>
+<p>&emsp;Configuration区重要配置如下：</p>
+<ul>
+<li>byte0-15为只读区，包含芯片的串号、版本号、I2C使能等信息；</li>
+<li>byte16配置芯片I2C地址；</li>
+<li>byte18为OTPMode，设置OTP区的读写权限；</li>
+<li>byte19为ChipMode，设置芯片看门狗时长、输入逻辑电平、SelectorMode；</li>
+<li>byte20-51为SlotConfig，共计32byte，其中每两个byte对应一个数据区slot，用于控制该slot的访问以及使用权限；</li>
+<li>byte52-59为Counter<0>，共8byte，为一个单调计数器，可以通过SlotConfig.LimitedUse位关联key；</0></li>
+<li>byte60-67为Counter<1>，共8byte，不能关联到key；</1></li>
+<li>byte68-83为LastKeyUse，共16byte，用于限制KeyID 15的使用次数，初始值为0xFF；</li>
+<li>byte84为UserExtra，当数据区锁定后，可以通过UpdateExtra命令进行修改；</li>
+<li>byte85为Selector，用于选定Pause指令执行后保持活跃状态的器件；</li>
+<li>byte86为LockValue，用于使能配置区设定的数据与OTP区访问规则；</li>
+<li>byte87为LockConfig，控制配置区的修改权限；</li>
+<li>byte88-89为SlotLocked，每个bit对应一个slot。如果slot对应的位为0，则slot中的内容任何条件下无法被修改；</li>
+<li>byte90-91为RFU，必须为0；</li>
+<li>byte92-95为X509format，共4byte，对应4个独立的格式字节，关联了设备中存储的X.509证书公钥格式；</li>
+<li>byte96-127为KeyConfig，共32byte，其中每两个byte对应一个数据区slot，用于额外的访问以及使用权限。</li>
+</ul>
 
       
     </div>
@@ -442,7 +461,7 @@
         <p><span>本文标题:</span><a href="/2019/10/28/atecc508a/">ATECC508A开发笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-10-28, 19:38:42</p>
-        <p><span>最后更新:</span>2019-10-29, 12:00:31</p>
+        <p><span>最后更新:</span>2019-10-29, 15:25:01</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/10/28/atecc508a/" title="ATECC508A开发笔记">http://jiaodi.tech/2019/10/28/atecc508a/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/10/28/atecc508a/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
