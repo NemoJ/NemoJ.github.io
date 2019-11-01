@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/01.png">
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/02.png">
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/03.png">
-<meta property="og:updated_time" content="2019-11-01T01:34:51.538Z">
+<meta property="og:updated_time" content="2019-11-01T01:49:01.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ATECC508A开发笔记">
 <meta name="twitter:description" content="本文为ATECC508A开发笔记。">
@@ -721,6 +721,12 @@
 <li>signer对digest进行签名，并将签名写入到用于设备验证的ATECC508A中，改签名允许被读取；</li>
 <li>锁定用于设备验证的ATECC508A私钥、公开数据、签名相关slot。</li>
 </ol>
+<blockquote>
+<ol>
+<li>出于安全性考虑，signer的公钥也应该永远无法被读取，也就是不能以写入形式保存在ATECC508A中，要用生成方式；因为如果私钥是已知的，则必然存在泄露风险，最佳的方案就是永远无法获知的私钥；</li>
+<li>同时，需要限定单个signer的签名生成次数，例如限定100次，防止signer丢失被重复使用。</li>
+</ol>
+</blockquote>
 
       
     </div>
@@ -732,7 +738,7 @@
         <p><span>本文标题:</span><a href="/2019/10/28/atecc508a/">ATECC508A开发笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-10-28, 19:38:42</p>
-        <p><span>最后更新:</span>2019-11-01, 09:34:51</p>
+        <p><span>最后更新:</span>2019-11-01, 09:49:01</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/10/28/atecc508a/" title="ATECC508A开发笔记">http://jiaodi.tech/2019/10/28/atecc508a/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/10/28/atecc508a/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
