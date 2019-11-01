@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/01.png">
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/02.png">
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/03.png">
-<meta property="og:updated_time" content="2019-10-31T12:25:45.472Z">
+<meta property="og:updated_time" content="2019-11-01T01:26:20.101Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ATECC508A开发笔记">
 <meta name="twitter:description" content="本文为ATECC508A开发笔记。">
@@ -691,6 +691,36 @@
 </blockquote>
 <h1 id="MicroECC移植"><a href="#MicroECC移植" class="headerlink" title="MicroECC移植"></a>MicroECC移植</h1><p>&emsp;基于MicroECC可以实现公钥私钥对生成、签名、认证等功能。注意Curve support selection选择uECC_SUPPORTS_secp256k1。</p>
 <p>&emsp;利用uECC_verify()函数可以验证ATECC508A芯片。</p>
+<h1 id="用于设备验证的ATECC508A设置"><a href="#用于设备验证的ATECC508A设置" class="headerlink" title="用于设备验证的ATECC508A设置"></a>用于设备验证的ATECC508A设置</h1><p>&emsp;根据<a href="https://jiaodi.tech/2019/10/12/CryptoAuth/">密码学基本知识</a>文中介绍，当ATECC508A用于设备验证时，其需要具备如下要素：</p>
+<ol>
+<li>ATECC508A上存在一对关联的公钥和私钥，其中私钥无法用任何方式读取，而公钥允许被读取；</li>
+<li>ATECC508A的公钥以及其它信息(非必需)构成一组公开数据，经过哈希计算后得到digest；</li>
+<li>使用signer私钥对该digest进行签名，并将签名保存在ATECC508A中，该签名允许读取；</li>
+</ol>
+<p>&emsp;设备对ATECC508A进行验证的流程如下：</p>
+<ol>
+<li>signer的公钥需要预先保存在设备中；</li>
+<li>设备利用signer的公钥、ATECC508A上用于签名的公开数据(包含ATECC508A的公钥)哈希值和签名进行验证，确认该签名是否有效。如果有效，则说明该ATECC508A的签名来自于signer；</li>
+<li>如果签名确认有效，则需要进一步验证ATECC508A的私钥；当前已经可以获取ATECC508A的公钥，设备向ATECC508A发送一组随机数进行挑战，ATECC508A利用其私钥对该随机数进行签名，将其作为应答发回设备；</li>
+<li>设备利用ATECC508A的的公钥、用于挑战的随机数以及ATECC508A的应答，确认是否有效。如果有效则说明该ATECC508A的公钥与私钥是关联的。则验证真实；</li>
+</ol>
+<h1 id="作为signer的ATECC508A设置"><a href="#作为signer的ATECC508A设置" class="headerlink" title="作为signer的ATECC508A设置"></a>作为signer的ATECC508A设置</h1><p>&emsp;当ATECC508A作为signer时，其需要具备如下要素：</p>
+<ol>
+<li>ATECC508A上存在一对关联的公钥和私钥，其中私钥无法用任何方式读取，而公钥允许被读取；</li>
+<li>ATECC508A的公钥以及其它信息(非必需)构成一组公开数据，经过哈希计算后得到digest；</li>
+<li>使用CA私钥对该digest进行签名，并将签名保存在ATECC508A中，该签名允许读取；</li>
+</ol>
+<blockquote>
+<p>实际上CA签名只用于信任链建立，如果将signer公钥存储在设备程序中，则步骤2和3可以省略。</p>
+<p>以下流程基于省略步骤2和3的方式。</p>
+</blockquote>
+<p>&emsp;利用ATECC508A作为signer对用于设备验证的ATECC508A进行签名，具体流程如下：</p>
+<ol>
+<li>用于设备验证的ATECC508A生成一对相关联的私钥和公钥，其中私钥无法用任何方式读取，而公钥允许被读取；</li>
+<li>用于设备验证的ATECC508A以及其它信息(非必需)构成一组公开数据，经过哈希计算后得到digest；</li>
+<li>signer对digest进行签名，并将签名写入到用于设备验证的ATECC508A中，改签名允许被读取；</li>
+<li>锁定用于设备验证的ATECC508A私钥、公开数据、签名相关slot。</li>
+</ol>
 
       
     </div>
@@ -702,7 +732,7 @@
         <p><span>本文标题:</span><a href="/2019/10/28/atecc508a/">ATECC508A开发笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-10-28, 19:38:42</p>
-        <p><span>最后更新:</span>2019-10-31, 20:25:45</p>
+        <p><span>最后更新:</span>2019-11-01, 09:26:20</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/10/28/atecc508a/" title="ATECC508A开发笔记">http://jiaodi.tech/2019/10/28/atecc508a/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/10/28/atecc508a/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -732,7 +762,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Features"><span class="toc-number">1.</span> <span class="toc-text">Features</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Device-Organization"><span class="toc-number">3.</span> <span class="toc-text">Device Organization</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#EEPROM-Data-Zone"><span class="toc-number">3.1.</span> <span class="toc-text">EEPROM Data Zone</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EEPROM-Configuration-Zone"><span class="toc-number">3.2.</span> <span class="toc-text">EEPROM Configuration Zone</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#node-auth-basic代码分析"><span class="toc-number">4.</span> <span class="toc-text">node-auth-basic代码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#client-provision"><span class="toc-number">4.1.</span> <span class="toc-text">client_provision()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#client-rebuild-certs"><span class="toc-number">4.2.</span> <span class="toc-text">client_rebuild_certs()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#host-verify-cert-chain"><span class="toc-number">4.3.</span> <span class="toc-text">host_verify_cert_chain()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#host-generate-challenge"><span class="toc-number">4.4.</span> <span class="toc-text">host_generate_challenge()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#client-generate-response"><span class="toc-number">4.5.</span> <span class="toc-text">client_generate_response()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#host-verify-response"><span class="toc-number">4.6.</span> <span class="toc-text">host_verify_response()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MicroECC移植"><span class="toc-number">5.</span> <span class="toc-text">MicroECC移植</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Features"><span class="toc-number">1.</span> <span class="toc-text">Features</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Device-Organization"><span class="toc-number">3.</span> <span class="toc-text">Device Organization</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#EEPROM-Data-Zone"><span class="toc-number">3.1.</span> <span class="toc-text">EEPROM Data Zone</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EEPROM-Configuration-Zone"><span class="toc-number">3.2.</span> <span class="toc-text">EEPROM Configuration Zone</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#node-auth-basic代码分析"><span class="toc-number">4.</span> <span class="toc-text">node-auth-basic代码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#client-provision"><span class="toc-number">4.1.</span> <span class="toc-text">client_provision()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#client-rebuild-certs"><span class="toc-number">4.2.</span> <span class="toc-text">client_rebuild_certs()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#host-verify-cert-chain"><span class="toc-number">4.3.</span> <span class="toc-text">host_verify_cert_chain()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#host-generate-challenge"><span class="toc-number">4.4.</span> <span class="toc-text">host_generate_challenge()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#client-generate-response"><span class="toc-number">4.5.</span> <span class="toc-text">client_generate_response()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#host-verify-response"><span class="toc-number">4.6.</span> <span class="toc-text">host_verify_response()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MicroECC移植"><span class="toc-number">5.</span> <span class="toc-text">MicroECC移植</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用于设备验证的ATECC508A设置"><span class="toc-number">6.</span> <span class="toc-text">用于设备验证的ATECC508A设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#作为signer的ATECC508A设置"><span class="toc-number">7.</span> <span class="toc-text">作为signer的ATECC508A设置</span></a></li></ol>
         
     </div>
     <style>
