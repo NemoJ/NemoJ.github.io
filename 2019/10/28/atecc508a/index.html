@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/01.png">
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/02.png">
 <meta property="og:image" content="https://github.com/NemoJ/blog_pics/raw/master/ATECC508A/03.png">
-<meta property="og:updated_time" content="2019-11-08T02:12:15.535Z">
+<meta property="og:updated_time" content="2019-11-08T03:52:04.116Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ATECC508A开发笔记">
 <meta name="twitter:description" content="本文为ATECC508A开发笔记。">
@@ -759,14 +759,14 @@
 <tr>
 <td style="text-align:center">15-12</td>
 <td style="text-align:center">WriteConfig</td>
-<td style="text-align:center">0010</td>
-<td style="text-align:center">0100</td>
-<td style="text-align:center">0010</td>
-<td style="text-align:center">0100</td>
-<td style="text-align:center">0000</td>
-<td style="text-align:center">1000</td>
-<td style="text-align:center">1000</td>
-<td style="text-align:center">0110</td>
+<td style="text-align:center">0010(Never)</td>
+<td style="text-align:center">0100(Encrypt)</td>
+<td style="text-align:center">0010(Never)</td>
+<td style="text-align:center">0100(Encrypt)</td>
+<td style="text-align:center">0000(Always)</td>
+<td style="text-align:center">1000(Never)</td>
+<td style="text-align:center">1000(Never)</td>
+<td style="text-align:center">0110(Encrypt)</td>
 </tr>
 <tr>
 <td style="text-align:center">11-8</td>
@@ -839,6 +839,30 @@
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">0011</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">DeriveKeyConfig</td>
+<td style="text-align:center">NoAuthRoll</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NoAuthRoll</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NoAuthRoll</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">ReadConfig</td>
+<td style="text-align:center">Secret</td>
+<td style="text-align:center">Encrypted</td>
+<td style="text-align:center">Secret</td>
+<td style="text-align:center">Encrypted</td>
+<td style="text-align:center">Secret</td>
+<td style="text-align:center">Secret</td>
+<td style="text-align:center">Secret</td>
+<td style="text-align:center">Secret</td>
 </tr>
 </tbody>
 </table>
@@ -958,14 +982,14 @@
 <tr>
 <td style="text-align:center">4-2</td>
 <td style="text-align:center">KeyType</td>
-<td style="text-align:center">100</td>
-<td style="text-align:center">111</td>
-<td style="text-align:center">100</td>
-<td style="text-align:center">111</td>
-<td style="text-align:center">111</td>
-<td style="text-align:center">111</td>
-<td style="text-align:center">111</td>
-<td style="text-align:center">100</td>
+<td style="text-align:center">100(P256)</td>
+<td style="text-align:center">111(NotECC)</td>
+<td style="text-align:center">100(P256)</td>
+<td style="text-align:center">111(NotECC)</td>
+<td style="text-align:center">111(NotECC)</td>
+<td style="text-align:center">111(NotECC)</td>
+<td style="text-align:center">111(NotECC)</td>
+<td style="text-align:center">100(P256)</td>
 </tr>
 <tr>
 <td style="text-align:center">1</td>
@@ -1025,8 +1049,8 @@
 <tr>
 <td style="text-align:center">15-12</td>
 <td style="text-align:center">WriteConfig</td>
-<td style="text-align:center">0100</td>
-<td style="text-align:center">0100</td>
+<td style="text-align:center">0100(Encrypt)</td>
+<td style="text-align:center">0100(Encrypt)</td>
 <td style="text-align:center">0000</td>
 <td style="text-align:center">0000</td>
 <td style="text-align:center">0000</td>
@@ -1052,11 +1076,11 @@
 <td style="text-align:center">1</td>
 <td style="text-align:center">1</td>
 <td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
 <td style="text-align:center">6</td>
@@ -1064,7 +1088,7 @@
 <td style="text-align:center">1</td>
 <td style="text-align:center">1</td>
 <td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
@@ -1091,7 +1115,7 @@
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 </tr>
 <tr>
@@ -1100,11 +1124,35 @@
 <td style="text-align:center">0100</td>
 <td style="text-align:center">0100</td>
 <td style="text-align:center">1111</td>
-<td style="text-align:center">0100</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
-<td style="text-align:center">0011</td>
+<td style="text-align:center">1111</td>
+<td style="text-align:center">1111</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">DeriveKeyConfig</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NotAllowed</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">ReadConfig</td>
+<td style="text-align:center">Encrypted</td>
+<td style="text-align:center">Encrypted</td>
+<td style="text-align:center">ClearText</td>
+<td style="text-align:center">ClearText</td>
+<td style="text-align:center">ClearText</td>
+<td style="text-align:center">ClearText</td>
+<td style="text-align:center">ClearText</td>
+<td style="text-align:center">ClearText</td>
 </tr>
 </tbody>
 </table>
@@ -1224,14 +1272,14 @@
 <tr>
 <td style="text-align:center">4-2</td>
 <td style="text-align:center">KeyType</td>
-<td style="text-align:center">100</td>
-<td style="text-align:center">111</td>
-<td style="text-align:center">100</td>
-<td style="text-align:center">111</td>
-<td style="text-align:center">111</td>
-<td style="text-align:center">111</td>
-<td style="text-align:center">111</td>
-<td style="text-align:center">100</td>
+<td style="text-align:center">100(P256)</td>
+<td style="text-align:center">111(NotECC)</td>
+<td style="text-align:center">100(P256)</td>
+<td style="text-align:center">111(NotECC)</td>
+<td style="text-align:center">111(NotECC)</td>
+<td style="text-align:center">111(NotECC)</td>
+<td style="text-align:center">111(NotECC)</td>
+<td style="text-align:center">100(P256)</td>
 </tr>
 <tr>
 <td style="text-align:center">1</td>
@@ -1270,7 +1318,7 @@
         <p><span>本文标题:</span><a href="/2019/10/28/atecc508a/">ATECC508A开发笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-10-28, 19:38:42</p>
-        <p><span>最后更新:</span>2019-11-08, 10:12:15</p>
+        <p><span>最后更新:</span>2019-11-08, 11:52:04</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/10/28/atecc508a/" title="ATECC508A开发笔记">http://jiaodi.tech/2019/10/28/atecc508a/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/10/28/atecc508a/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
