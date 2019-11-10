@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="本文为ATECC508A一个典型配置案例。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-09T09:34:19.771Z">
+<meta property="og:updated_time" content="2019-11-10T09:21:32.943Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ATECC508A配置案例">
 <meta name="twitter:description" content="本文为ATECC508A一个典型配置案例。">
@@ -311,60 +311,61 @@
 <ol>
 <li>signer：出于批量制作考虑。signer的私钥需要从外部写入，使用CA对signer进行签名。对该组密钥设置如下：slot0存储私钥，slot9存储公钥，slot10存储CA签名。其中私钥由外部写入，公钥和签名设置为直接读取，私钥限定使用次数；</li>
 <li>device：私钥/公钥对采用生成方式，利用signer对device进行签名。对该组密钥设置如下：slot1存储私钥，slot11存储公钥，slot12存储signer签名。其中私钥使用508A生成，公钥和签名设置为直接读取，私钥限定使用次数；</li>
-<li>测试slot15使用次数功能：slot15对应LastKeyUse中使用次数，测试该功能。对该组密钥设置如下：slot2存储私钥，slot13存储公钥，slot14存储signer签名。其中私钥使用508A生成，公钥和签名设置为直接读取，私钥限定使用次数；</li>
+<li>测试slot15使用次数功能device2：slot15对应LastKeyUse中使用次数，测试该功能。对该组密钥设置如下：slot15存储私钥，slot13存储公钥，slot14存储signer签名。其中私钥使用508A生成，公钥和签名设置为直接读取，私钥限定使用次数；</li>
+<li>slot8存储公司信息以及生产信息等；</li>
 </ol>
-<h2 id="SlotConfig与KeyConfig配置"><a href="#SlotConfig与KeyConfig配置" class="headerlink" title="SlotConfig与KeyConfig配置"></a>SlotConfig与KeyConfig配置</h2><p>SlotConfig的配置如下(0-7)：</p>
+<h2 id="SlotConfig与KeyConfig配置"><a href="#SlotConfig与KeyConfig配置" class="headerlink" title="SlotConfig与KeyConfig配置"></a>SlotConfig与KeyConfig配置</h2><p>&emsp;SlotConfig的配置如下(0-7)：</p>
 <table>
 <thead>
 <tr>
 <th style="text-align:center">bit</th>
 <th style="text-align:center">name</th>
-<th style="text-align:center">slot0(dev_pri)</th>
-<th style="text-align:center">slot1</th>
-<th style="text-align:center">slot2(signer_pri)</th>
+<th style="text-align:center">slot0(signer_pri)</th>
+<th style="text-align:center">slot1(dev1_pri)</th>
+<th style="text-align:center">slot2</th>
 <th style="text-align:center">slot3</th>
-<th style="text-align:center">slot4(access_key)</th>
+<th style="text-align:center">slot4</th>
 <th style="text-align:center">slot5</th>
 <th style="text-align:center">slot6</th>
-<th style="text-align:center">slot7(CA_pri)</th>
+<th style="text-align:center">slot7</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:center">all</td>
 <td style="text-align:center">SlotConfig</td>
-<td style="text-align:center">0x208F</td>
-<td style="text-align:center">0x44C4</td>
-<td style="text-align:center">0x2087</td>
-<td style="text-align:center">0x44C4</td>
-<td style="text-align:center">0x0F8F</td>
+<td style="text-align:center">0x20AF</td>
+<td style="text-align:center">0x20AF</td>
 <td style="text-align:center">0x8F8F</td>
-<td style="text-align:center">0x8F9F</td>
-<td style="text-align:center">0x6483</td>
+<td style="text-align:center">0x8F8F</td>
+<td style="text-align:center">0x8F8F</td>
+<td style="text-align:center">0x8F8F</td>
+<td style="text-align:center">0x8F8F</td>
+<td style="text-align:center">0x8F8F</td>
 </tr>
 <tr>
 <td style="text-align:center">15-12</td>
 <td style="text-align:center">WriteConfig</td>
 <td style="text-align:center">0010(Never)</td>
-<td style="text-align:center">0100(Encrypt)</td>
 <td style="text-align:center">0010(Never)</td>
-<td style="text-align:center">0100(Encrypt)</td>
-<td style="text-align:center">0000(Always)</td>
 <td style="text-align:center">1000(Never)</td>
 <td style="text-align:center">1000(Never)</td>
-<td style="text-align:center">0110(Encrypt)</td>
+<td style="text-align:center">1000(Never)</td>
+<td style="text-align:center">1000(Never)</td>
+<td style="text-align:center">1000(Never)</td>
+<td style="text-align:center">1000(Never)</td>
 </tr>
 <tr>
 <td style="text-align:center">11-8</td>
 <td style="text-align:center">WriteKey</td>
 <td style="text-align:center">0000</td>
-<td style="text-align:center">0100</td>
 <td style="text-align:center">0000</td>
-<td style="text-align:center">0100</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
-<td style="text-align:center">0100</td>
+<td style="text-align:center">1111</td>
+<td style="text-align:center">1111</td>
+<td style="text-align:center">1111</td>
 </tr>
 <tr>
 <td style="text-align:center">7</td>
@@ -382,9 +383,9 @@
 <td style="text-align:center">6</td>
 <td style="text-align:center">EncryptRead</td>
 <td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
 <td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
@@ -393,8 +394,8 @@
 <tr>
 <td style="text-align:center">5</td>
 <td style="text-align:center">LimitedUse</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
@@ -411,40 +412,40 @@
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 </tr>
 <tr>
 <td style="text-align:center">3-0</td>
 <td style="text-align:center">ReadKey</td>
 <td style="text-align:center">1111</td>
-<td style="text-align:center">0100</td>
-<td style="text-align:center">0111</td>
-<td style="text-align:center">0100</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
-<td style="text-align:center">0011</td>
+<td style="text-align:center">1111</td>
+<td style="text-align:center">1111</td>
+<td style="text-align:center">1111</td>
+<td style="text-align:center">1111</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
 <td style="text-align:center">DeriveKeyConfig</td>
 <td style="text-align:center">NoAuthRoll</td>
-<td style="text-align:center">NotAllowed</td>
 <td style="text-align:center">NoAuthRoll</td>
 <td style="text-align:center">NotAllowed</td>
 <td style="text-align:center">NotAllowed</td>
 <td style="text-align:center">NotAllowed</td>
 <td style="text-align:center">NotAllowed</td>
-<td style="text-align:center">NoAuthRoll</td>
+<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NotAllowed</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
 <td style="text-align:center">ReadConfig</td>
 <td style="text-align:center">Secret</td>
-<td style="text-align:center">Encrypted</td>
 <td style="text-align:center">Secret</td>
-<td style="text-align:center">Encrypted</td>
+<td style="text-align:center">Secret</td>
+<td style="text-align:center">Secret</td>
 <td style="text-align:center">Secret</td>
 <td style="text-align:center">Secret</td>
 <td style="text-align:center">Secret</td>
@@ -458,8 +459,8 @@
 <tr>
 <th style="text-align:center">bit</th>
 <th style="text-align:center">name</th>
-<th style="text-align:center">slot0</th>
-<th style="text-align:center">slot1</th>
+<th style="text-align:center">slot0(signer_pri)</th>
+<th style="text-align:center">slot1(dev1_pri)</th>
 <th style="text-align:center">slot2</th>
 <th style="text-align:center">slot3</th>
 <th style="text-align:center">slot4</th>
@@ -473,13 +474,13 @@
 <td style="text-align:center">all</td>
 <td style="text-align:center">KeyConfig</td>
 <td style="text-align:center">0x0033</td>
-<td style="text-align:center">0x001C</td>
-<td style="text-align:center">0x0013</td>
-<td style="text-align:center">0x001C</td>
-<td style="text-align:center">0x003C</td>
-<td style="text-align:center">0x001C</td>
-<td style="text-align:center">0x001C</td>
 <td style="text-align:center">0x0033</td>
+<td style="text-align:center">0x003C</td>
+<td style="text-align:center">0x003C</td>
+<td style="text-align:center">0x003C</td>
+<td style="text-align:center">0x003C</td>
+<td style="text-align:center">0x003C</td>
+<td style="text-align:center">0x003C</td>
 </tr>
 <tr>
 <td style="text-align:center">15-14</td>
@@ -557,49 +558,49 @@
 <td style="text-align:center">5</td>
 <td style="text-align:center">Lockable</td>
 <td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
 <td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
 <td style="text-align:center">1</td>
 </tr>
 <tr>
 <td style="text-align:center">4-2</td>
 <td style="text-align:center">KeyType</td>
 <td style="text-align:center">100(P256)</td>
-<td style="text-align:center">111(NotECC)</td>
 <td style="text-align:center">100(P256)</td>
 <td style="text-align:center">111(NotECC)</td>
 <td style="text-align:center">111(NotECC)</td>
 <td style="text-align:center">111(NotECC)</td>
 <td style="text-align:center">111(NotECC)</td>
-<td style="text-align:center">100(P256)</td>
+<td style="text-align:center">111(NotECC)</td>
+<td style="text-align:center">111(NotECC)</td>
 </tr>
 <tr>
 <td style="text-align:center">1</td>
 <td style="text-align:center">PubInfo</td>
 <td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
 <td style="text-align:center">1</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
 <td style="text-align:center">0</td>
 <td style="text-align:center">Private</td>
 <td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
 <td style="text-align:center">1</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
 </tr>
 </tbody>
 </table>
@@ -616,63 +617,63 @@
 <th style="text-align:center">slotC</th>
 <th style="text-align:center">slotD</th>
 <th style="text-align:center">slotE</th>
-<th style="text-align:center">slotF</th>
+<th style="text-align:center">slotF(dev2_pri)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:center">all</td>
 <td style="text-align:center">SlotConfig</td>
-<td style="text-align:center">0x44C4</td>
-<td style="text-align:center">0x44C4</td>
 <td style="text-align:center">0x0F0F</td>
 <td style="text-align:center">0x0F0F</td>
 <td style="text-align:center">0x0F0F</td>
 <td style="text-align:center">0x0F0F</td>
 <td style="text-align:center">0x0F0F</td>
 <td style="text-align:center">0x0F0F</td>
+<td style="text-align:center">0x0F0F</td>
+<td style="text-align:center">0x20AF</td>
 </tr>
 <tr>
 <td style="text-align:center">15-12</td>
 <td style="text-align:center">WriteConfig</td>
-<td style="text-align:center">0100(Encrypt)</td>
-<td style="text-align:center">0100(Encrypt)</td>
 <td style="text-align:center">0000(Always)</td>
 <td style="text-align:center">0000(Always)</td>
 <td style="text-align:center">0000(Always)</td>
 <td style="text-align:center">0000(Always)</td>
 <td style="text-align:center">0000(Always)</td>
 <td style="text-align:center">0000(Always)</td>
+<td style="text-align:center">0000(Always)</td>
+<td style="text-align:center">0010(Always)</td>
 </tr>
 <tr>
 <td style="text-align:center">11-8</td>
 <td style="text-align:center">WriteKey</td>
-<td style="text-align:center">0100</td>
-<td style="text-align:center">0100</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
+<td style="text-align:center">1111</td>
+<td style="text-align:center">0000</td>
 </tr>
 <tr>
 <td style="text-align:center">7</td>
 <td style="text-align:center">IsSecret</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
 <td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
 </tr>
 <tr>
 <td style="text-align:center">6</td>
 <td style="text-align:center">EncryptRead</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
@@ -690,7 +691,7 @@
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
 <td style="text-align:center">4</td>
@@ -707,8 +708,8 @@
 <tr>
 <td style="text-align:center">3-0</td>
 <td style="text-align:center">ReadKey</td>
-<td style="text-align:center">0100</td>
-<td style="text-align:center">0100</td>
+<td style="text-align:center">1111</td>
+<td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1111</td>
@@ -726,19 +727,19 @@
 <td style="text-align:center">NotAllowed</td>
 <td style="text-align:center">NotAllowed</td>
 <td style="text-align:center">NotAllowed</td>
-<td style="text-align:center">NotAllowed</td>
+<td style="text-align:center">NoAuthRoll</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
 <td style="text-align:center">ReadConfig</td>
-<td style="text-align:center">Encrypted</td>
-<td style="text-align:center">Encrypted</td>
 <td style="text-align:center">ClearText</td>
 <td style="text-align:center">ClearText</td>
 <td style="text-align:center">ClearText</td>
 <td style="text-align:center">ClearText</td>
 <td style="text-align:center">ClearText</td>
 <td style="text-align:center">ClearText</td>
+<td style="text-align:center">ClearText</td>
+<td style="text-align:center">Secret</td>
 </tr>
 </tbody>
 </table>
@@ -755,21 +756,21 @@
 <th style="text-align:center">slotC</th>
 <th style="text-align:center">slotD</th>
 <th style="text-align:center">slotE</th>
-<th style="text-align:center">slotF</th>
+<th style="text-align:center">slotF(dev2_pri)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:center">all</td>
 <td style="text-align:center">KeyConfig</td>
-<td style="text-align:center">0x001C</td>
-<td style="text-align:center">0x001C</td>
 <td style="text-align:center">0x003C</td>
 <td style="text-align:center">0x003C</td>
 <td style="text-align:center">0x003C</td>
 <td style="text-align:center">0x003C</td>
 <td style="text-align:center">0x003C</td>
 <td style="text-align:center">0x003C</td>
+<td style="text-align:center">0x003C</td>
+<td style="text-align:center">0x0033</td>
 </tr>
 <tr>
 <td style="text-align:center">15-14</td>
@@ -847,20 +848,20 @@
 <td style="text-align:center">5</td>
 <td style="text-align:center">Lockable</td>
 <td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
 <td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
 <td style="text-align:center">1</td>
 </tr>
 <tr>
 <td style="text-align:center">4-2</td>
 <td style="text-align:center">KeyType</td>
-<td style="text-align:center">100(P256)</td>
 <td style="text-align:center">111(NotECC)</td>
-<td style="text-align:center">100(P256)</td>
+<td style="text-align:center">111(NotECC)</td>
+<td style="text-align:center">111(NotECC)</td>
 <td style="text-align:center">111(NotECC)</td>
 <td style="text-align:center">111(NotECC)</td>
 <td style="text-align:center">111(NotECC)</td>
@@ -870,9 +871,9 @@
 <tr>
 <td style="text-align:center">1</td>
 <td style="text-align:center">PubInfo</td>
-<td style="text-align:center">1</td>
 <td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
@@ -882,9 +883,9 @@
 <tr>
 <td style="text-align:center">0</td>
 <td style="text-align:center">Private</td>
-<td style="text-align:center">1</td>
 <td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
 <td style="text-align:center">0</td>
@@ -893,6 +894,10 @@
 </tr>
 </tbody>
 </table>
+<h2 id="配置流程"><a href="#配置流程" class="headerlink" title="配置流程"></a>配置流程</h2><h3 id="暂不使用LimitedUse功能"><a href="#暂不使用LimitedUse功能" class="headerlink" title="暂不使用LimitedUse功能"></a>暂不使用LimitedUse功能</h3><h4 id="配置区配置"><a href="#配置区配置" class="headerlink" title="配置区配置"></a>配置区配置</h4><p>&emsp;由于将SlotConfig.LimitedUse配置为1后，则无法使用ACES CE查看508A的具体配置，故暂不使用该功能。</p>
+<p>&emsp;SlotLocked配置为0xFF，KeyConfig.Lockable配置为1。当数据区配置完毕后，将所有slot全部锁定，禁止修改。</p>
+<p>&emsp;此时，对于slot0、slot1和slotF，SlotConfig配置为0x208F，其余配置与上表一致。</p>
+<p>&emsp;配置区配置完成后，进行锁定。</p>
 
       
     </div>
@@ -904,7 +909,7 @@
         <p><span>本文标题:</span><a href="/2019/11/09/ATECC508A-config/">ATECC508A配置案例</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2019-11-09, 17:02:36</p>
-        <p><span>最后更新:</span>2019-11-09, 17:34:19</p>
+        <p><span>最后更新:</span>2019-11-10, 17:21:32</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/11/09/ATECC508A-config/" title="ATECC508A配置案例">http://jiaodi.tech/2019/11/09/ATECC508A-config/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2019/11/09/ATECC508A-config/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -934,7 +939,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#配置案例"><span class="toc-number">1.</span> <span class="toc-text">配置案例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#方案目标"><span class="toc-number">1.1.</span> <span class="toc-text">方案目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SlotConfig与KeyConfig配置"><span class="toc-number">1.2.</span> <span class="toc-text">SlotConfig与KeyConfig配置</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#配置案例"><span class="toc-number">1.</span> <span class="toc-text">配置案例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#方案目标"><span class="toc-number">1.1.</span> <span class="toc-text">方案目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SlotConfig与KeyConfig配置"><span class="toc-number">1.2.</span> <span class="toc-text">SlotConfig与KeyConfig配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置流程"><span class="toc-number">1.3.</span> <span class="toc-text">配置流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#暂不使用LimitedUse功能"><span class="toc-number">1.3.1.</span> <span class="toc-text">暂不使用LimitedUse功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置区配置"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">配置区配置</span></a></li></ol></li></ol></li></ol></li></ol>
         
     </div>
     <style>
