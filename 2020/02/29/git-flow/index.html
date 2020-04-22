@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="焦迪">
+
+
+
+<meta name="description" content="&amp;emsp;本文介绍Git分支管理策略。">
+<meta name="keywords" content="Git,Git flow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 分支管理">
+<meta property="og:url" content="http://jiaodi.tech/2020/02/29/git-flow/index.html">
+<meta property="og:site_name" content="焦迪的博客">
+<meta property="og:description" content="&amp;emsp;本文介绍Git分支管理策略。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/04.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/05.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/06.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/07.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/08.png">
+<meta property="og:updated_time" content="2020-03-02T06:49:20.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git 分支管理">
+<meta name="twitter:description" content="&amp;emsp;本文介绍Git分支管理策略。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/01.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="焦迪的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="https://github.com/NemoJ/blog_pics/raw/master/blog/jay.JPG">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Git 分支管理 | 焦迪的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="https://github.com/NemoJ/blog_pics/raw/master/blog/jay.JPG" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">焦迪</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Shape of my heart.</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:nemojiao@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/nemoj" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/802-11/">802.11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ATECC508A/">ATECC508A</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Allegro/">Allegro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Altium-Designer/">Altium Designer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Buck/">Buck</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C2000/">C2000</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CCS/">CCS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cadence/">Cadence</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code-Style/">Code Style</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Systems/">Computer Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Crypto/">Crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DCDC/">DCDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DMA/">DMA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DSP/">DSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/F28379D/">F28379D</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FMC/">FMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flash/">Flash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git-flow/">Git flow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HDC1010/">HDC1010</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/I2C/">I2C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IWDG/">IWDG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keil/">Keil</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LwIP/">LwIP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MLCC/">MLCC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPU/">MPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Noise/">Noise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCB/">PCB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHY/">PHY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWM/">PWM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pierce/">Pierce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QUADSPI/">QUADSPI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTC/">RTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SDRAM/">SDRAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STM32CubeMX/">STM32CubeMX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STM32F7/">STM32F7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sensor/">Sensor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Systick/">Systick</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Timer/">Timer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UART/">UART</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WWDG/">WWDG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XDS100/">XDS100</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crystal/">crystal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/interrupt/">interrupt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oscillator/">oscillator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/串口/">串口</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前馈电容/">前馈电容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态响应/">动态响应</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/封装/">封装</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/差分线/">差分线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/等长线/">等长线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高速电路/">高速电路</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://zhangxb.tech/">张晓斌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://gaomf.cn/">高明飞</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://tongzai.tech/">桐仔</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://apex.linn.top/">Tomy Stark</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">雨下整夜，此刻初晴.</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">焦迪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="https://github.com/NemoJ/blog_pics/raw/master/blog/jay.JPG" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">焦迪</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Shape of my heart.</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:nemojiao@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/nemoj" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-git-flow" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/29/git-flow/" class="article-date">
+      <time datetime="2020-02-29T09:23:39.000Z" itemprop="datePublished">2020-02-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Git 分支管理
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Git/">Git</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git-flow/">Git flow</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>&emsp;本文介绍Git分支管理策略。</p>
+<a id="more"></a>
+<h1 id="Git分支管理策略"><a href="#Git分支管理策略" class="headerlink" title="Git分支管理策略"></a>Git分支管理策略</h1><p>&emsp;本文根据以下文章整理综合：</p>
+<blockquote>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-git-mange/index.html" target="_blank" rel="noopener">Git 分支管理最佳实践</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank" rel="noopener">Git分支管理策略</a></p>
+<p><a href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%89%93%E6%A0%87%E7%AD%BE" target="_blank" rel="noopener">2.6 Git 基础 - 打标签</a></p>
+</blockquote>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>&emsp;Git 是目前最流行的源代码管理工具。大量的软件项目由 GitHub、Bitbucket 和 GitLab 这样的云服务平台或是私有的 Git 仓库来管理。在使用 Git 时通常会遇到的一个问题是采用何种分支管理实践，即如何管理仓库中作用不同的各类分支。和软件开发中的其他实践一样，Git 分支管理并没有普遍适用的最佳做法，而只有对每个团队和项目而言最适合的做法。简单来说，在项目开发中使用多个分支会带来额外的管理和维护开销，但是多个分支对于项目的团队合作、新功能开发和发布管理都是有一定好处的。不同的团队可以根据团队人员组成和意愿、项目的发布周期等因素选择最适合的策略，找到最适合团队的管理方式。本文将介绍三种常见的 Git 分支管理方式。</p>
+<h2 id="单主干"><a href="#单主干" class="headerlink" title="单主干"></a>单主干</h2><p>&emsp;单主干的分支实践（Trunk-based development，TBD）在 SVN 中比较流行。<a href="http://paulhammant.com/2013/05/06/googles-scaled-trunk-based-development/" target="_blank" rel="noopener">Google</a> 和 <a href="http://paulhammant.com/2013/03/13/facebook-tbd-take-2/" target="_blank" rel="noopener">Facebook</a> 都使用这种方式。trunk 是 SVN 中主干分支的名称，对应到 Git 中则是 master 分支。TBD 的特点是所有团队成员都在单个主干分支上进行开发。当需要发布时，先考虑使用标签（tag），即 tag 某个 commit 来作为发布的版本。如果仅靠 tag 不能满足要求，则从主干分支创建发布分支。bug 修复在主干分支中进行，再 cherry-pick 到发布分支。图 1 是 TBD 中分支流程的示意图。</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/01.png" alt="图 1. TBD 中的分支流程的示意图"></p>
+<p>&emsp;由于所有开发人员都在同一个分支上工作，团队需要合理的分工和充分的沟通来保证不同开发人员的代码尽可能少的发生冲突。持续集成和自动化测试是必要的，用来及时发现主干分支中的 bug。因为主干分支是所有开发人员公用的，一个开发人员引入的 bug 可能对其他很多人造成影响。不过好处是由于分支所带来的额外开销非常小。开发人员不需要频繁在不同的分支之间切换。</p>
+<h2 id="GitHub-flow"><a href="#GitHub-flow" class="headerlink" title="GitHub flow"></a>GitHub flow</h2><p>&emsp;<a href="http://scottchacon.com/2011/08/31/github-flow.html" target="_blank" rel="noopener">GitHub flow</a> 是 GitHub 所使用的一种简单的流程。该流程只使用两类分支，并依托于 GitHub 的 pull request 功能。在 GitHub flow 中，master 分支中包含稳定的代码。该分支已经或即将被部署到生产环境。master 分支的作用是提供一个稳定可靠的代码基础。任何开发人员都不允许把未测试或未审查的代码直接提交到 master 分支。</p>
+<p>&emsp;对代码的任何修改，包括 bug 修复、hotfix、新功能开发等都在单独的分支中进行。不管是一行代码的小改动，还是需要几个星期开发的新功能，都采用同样的方式来管理。当需要进行修改时，从 master 分支创建一个新的分支。新分支的名称应该简单清晰地描述该分支的作用。所有相关的代码修改都在新分支中进行。开发人员可以自由地提交代码和 push 到远程仓库。</p>
+<p>&emsp;当新分支中的代码全部完成之后，通过 GitHub 提交一个新的 pull request。团队中的其他人员会对代码进行审查，提出相关的修改意见。由持续集成服务器（如 Jenkins）对新分支进行自动化测试。当代码通过自动化测试和代码审查之后，该分支的代码被合并到 master 分支。再从 master 分支部署到生产环境。图 2 是 GitHub flow 分支流程的示意图。</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/02.png" alt="图 2. Github flow 中的分支流程的示意图"></p>
+<p>&emsp;GitHub flow 的好处在于非常简单实用。开发人员需要注意的事项非常少，很容易形成习惯。当需要进行任何修改时，总是从 master 分支创建新分支。完成之后通过 pull request 和相关的代码审查来合并回 master 分支。GitHub flow 要求项目有完善的自动化测试、持续集成和部署等相关的基础设施。每个新分支都需要测试和部署，如果这些不能自动化进行，会增加开发人员的工作量，导致无法有效地实施该流程。这种分支实践也要求团队有代码审查的相应流程。</p>
+<h2 id="git-flow"><a href="#git-flow" class="headerlink" title="git-flow"></a>git-flow</h2><p>&emsp;<a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">git-flow</a> 应该是目前流传最广的 Git 分支管理实践。git-flow 围绕的核心概念是版本发布（release）。因此 git-flow 适用于有较长版本发布周期的项目。虽然目前推崇的做法是持续集成和随时发布。有的项目甚至可以一天发布很多次。随时发布对于 SaaS 服务类的项目来说是很适合的。不过仍然有很大数量的项目的发布周期是几个星期甚至几个月。较长的发布周期可能是由于非技术相关的因素造成的，比如人员限制、管理层决策和市场营销策略等。</p>
+<p>&emsp;git-flow 流程中包含 5 类分支，分别是 master、develop、新功能分支（feature）、发布分支（release）和 hotfix。这些分支的作用和生命周期各不相同。master 分支中包含的是可以部署到生产环境中的代码，这一点和 GitHub flow 是相同的。develop 分支中包含的是下个版本需要发布的内容。从某种意义上来说，develop 是一个进行代码集成的分支。当 develop 分支集成了足够的新功能和 bug 修复代码之后，通过一个发布流程来完成新版本的发布。发布完成之后，develop 分支的代码会被合并到 master 分支中。</p>
+<p>&emsp;其余三类分支的描述如下表所示。这三类分支只在需要时从 develop 或 master 分支创建。在完成之后合并到 develop 或 master 分支。合并完成之后该分支被删除。这几类分支的名称应该遵循一定的命名规范，以方便开发人员识别。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">分支类型</th>
+<th style="text-align:center">命名规范</th>
+<th style="text-align:center">创建自</th>
+<th style="text-align:center">合并到</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">feature</td>
+<td style="text-align:center">feature/*</td>
+<td style="text-align:center">develop</td>
+<td style="text-align:center">develop</td>
+<td style="text-align:center">新功能</td>
+</tr>
+<tr>
+<td style="text-align:center">release</td>
+<td style="text-align:center">release/*</td>
+<td style="text-align:center">develop</td>
+<td style="text-align:center">develop 和 master</td>
+<td style="text-align:center">一次新版本的发布</td>
+</tr>
+<tr>
+<td style="text-align:center">hotfix</td>
+<td style="text-align:center">hotfix/*</td>
+<td style="text-align:center">master</td>
+<td style="text-align:center">develop 和 master</td>
+<td style="text-align:center">生产环境中发现的紧急 bug 的修复</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;对于开发过程中的不同任务，需要在对应的分支上进行工作并正确地进行合并。每个任务开始前需要按照指定的步骤完成分支的创建。例如当需要开发一个新的功能时，基本的流程如下：</p>
+<ul>
+<li>从 develop 分支创建一个新的 feature 分支，如 feature/my-awesome-feature。</li>
+<li>在该 feature 分支上进行开发，提交代码，push 到远端仓库。</li>
+<li>当代码完成之后，合并到 develop 分支并删除当前 feature 分支。</li>
+</ul>
+<p>&emsp;在进行版本发布和 hotfix 时也有类似的流程。当需要发布新版本时，采用的是如下的流程：</p>
+<ul>
+<li>从 develop 分支创建一个新的 release 分支，如 release/1.4。</li>
+<li>把 release 分支部署到持续集成服务器上进行测试。测试包括自动化集成测试和手动的用户接受测试。</li>
+<li>对于测试中发现的问题，直接在 release 分支上提交修改。完成修改之后再次部署和测试。</li>
+<li>当 release 分支中的代码通过测试之后，把 release 分支合并到 develop 和 master 分支，并在 master 分支上添加相应的 tag。</li>
+</ul>
+<h2 id="Git-flow详解"><a href="#Git-flow详解" class="headerlink" title="Git-flow详解"></a>Git-flow详解</h2><h3 id="主分支Master"><a href="#主分支Master" class="headerlink" title="主分支Master"></a>主分支Master</h3><p>&emsp;首先，代码库应该有一个、且仅有一个主分支。所有提供给用户使用的正式版本，都在这个主分支上发布。</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/03.png" alt=""></p>
+<p>&emsp;Git主分支的名字，默认叫做Master。它是自动建立的，版本库初始化以后，默认就是在主分支在进行开发。</p>
+<h3 id="开发分支Develop"><a href="#开发分支Develop" class="headerlink" title="开发分支Develop"></a>开发分支Develop</h3><p>&emsp;主分支只用来分布重大版本，日常开发应该在另一条分支上完成。我们把开发用的分支，叫做Develop。</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/04.png" alt=""></p>
+<p>&emsp;这个分支可以用来生成代码的最新隔夜版本（nightly）。如果想正式对外发布，就在Master分支上，对Develop分支进行”合并”（merge）。</p>
+<p>&emsp;Git创建Develop分支的命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b develop master</span><br></pre></td></tr></table></figure>
+<p>&emsp;将Develop分支发布到Master分支的命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 切换到Master分支</span><br><span class="line">git checkout master</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 对Develop分支进行合并</span><br><span class="line">git merge --no-ff develop</span><br></pre></td></tr></table></figure>
+<p>&emsp;注意上一条命令的–no-ff参数：默认情况下，Git执行”快进式合并”（fast-farward merge），会直接将Master分支指向Develop分支。</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/05.png" alt=""></p>
+<p>&emsp;使用–no-ff参数后，会执行正常合并，在Master分支上生成一个新节点。为了保证版本演进的清晰，我们希望采用这种做法。关于合并的更多解释，请参考Benjamin Sandofsky的<a href="http://sandofsky.com/blog/git-workflow.html" target="_blank" rel="noopener">《Understanding the Git Workflow》</a>。</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/06.png" alt=""></p>
+<h3 id="临时性分支"><a href="#临时性分支" class="headerlink" title="临时性分支"></a>临时性分支</h3><p>&emsp;前面讲到版本库的两条主要分支：Master和Develop。前者用于正式发布，后者用于日常开发。其实，常设分支只需要这两条就够了，不需要其他了。</p>
+<p>&emsp;但是，除了常设分支以外，还有一些临时性分支，用于应对一些特定目的的版本开发。临时性分支主要有三种：</p>
+<ul>
+<li><p>功能（feature）分支</p>
+</li>
+<li><p>预发布（release）分支</p>
+</li>
+<li><p>修补bug（fixbug）分支</p>
+</li>
+</ul>
+<p>&emsp;这三种分支都属于临时性需要，使用完以后，应该删除，使得代码库的常设分支始终只有Master和Develop。</p>
+<h3 id="功能分支"><a href="#功能分支" class="headerlink" title="功能分支"></a>功能分支</h3><p>&emsp;接下来，一个个来看这三种”临时性分支”。</p>
+<p>&emsp;第一种是功能分支，它是为了开发某种特定功能，从Develop分支上面分出来的。开发完成后，要再并入Develop。</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/07.png" alt=""></p>
+<p>&emsp;功能分支的名字，可以采用feature-*的形式命名。</p>
+<p>&emsp;创建一个功能分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature-x develop</span><br></pre></td></tr></table></figure>
+<p>&emsp;开发完成后，将功能分支合并到develop分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout develop</span><br><span class="line"></span><br><span class="line">git merge --no-ff feature-x</span><br></pre></td></tr></table></figure>
+<p>&emsp;删除feature分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d feature-x</span><br></pre></td></tr></table></figure>
+<h3 id="预发布分支"><a href="#预发布分支" class="headerlink" title="预发布分支"></a>预发布分支</h3><p>&emsp;第二种是预发布分支，它是指发布正式版本之前（即合并到Master分支之前），我们可能需要有一个预发布的版本进行测试。</p>
+<p>&emsp;预发布分支是从Develop分支上面分出来的，预发布结束以后，必须合并进Develop和Master分支。它的命名，可以采用release-*的形式。</p>
+<p>&emsp;创建一个预发布分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b release-1.2 develop</span><br></pre></td></tr></table></figure>
+<p>&emsp;确认没有问题后，合并到master分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line"></span><br><span class="line">git merge --no-ff release-1.2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 对合并生成的新节点，做一个标签</span><br><span class="line">git tag -a 1.2</span><br></pre></td></tr></table></figure>
+<p>&emsp;再合并到develop分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout develop</span><br><span class="line"></span><br><span class="line">git merge --no-ff release-1.2</span><br></pre></td></tr></table></figure>
+<p>&emsp;最后，删除预发布分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d release-1.2</span><br></pre></td></tr></table></figure>
+<h3 id="修补bug分支"><a href="#修补bug分支" class="headerlink" title="修补bug分支"></a>修补bug分支</h3><p>&emsp;最后一种是修补bug分支。软件正式发布以后，难免会出现bug。这时就需要创建一个分支，进行bug修补。</p>
+<p>&emsp;修补bug分支是从Master分支上面分出来的。修补结束以后，再合并进Master和Develop分支。它的命名，可以采用fixbug-*的形式。</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/git_flow/08.png" alt=""></p>
+<p>&emsp;创建一个修补bug分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b fixbug-0.1 master</span><br></pre></td></tr></table></figure>
+<p>&emsp;修补结束后，合并到master分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line"></span><br><span class="line">git merge --no-ff fixbug-0.1</span><br><span class="line"></span><br><span class="line">git tag -a 0.1.1</span><br></pre></td></tr></table></figure>
+<p>&emsp;再合并到develop分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout develop</span><br><span class="line"></span><br><span class="line">git merge --no-ff fixbug-0.1</span><br></pre></td></tr></table></figure>
+<p>&emsp;最后，删除”修补bug分支”：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d fixbug-0.1</span><br></pre></td></tr></table></figure>
+<h2 id="Git打标签"><a href="#Git打标签" class="headerlink" title="Git打标签"></a>Git打标签</h2><p>&emsp;像其他版本控制系统（VCS）一样，Git 可以给历史中的某一个提交打上标签，以示重要。 比较有代表性的是人们会使用这个功能来标记发布结点（v1.0 等等）。 在本节中，你将会学习如何列出已有的标签、如何创建新标签、以及不同类型的标签分别是什么。</p>
+<h3 id="列出标签"><a href="#列出标签" class="headerlink" title="列出标签"></a>列出标签</h3><p>&emsp;在 Git 中列出已有的标签是非常简单直观的。 只需要输入 <code>git tag</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git tag</span><br><span class="line">v0.1</span><br><span class="line">v1.3</span><br></pre></td></tr></table></figure>
+<p>&emsp;你也可以使用特定的模式查找标签。 例如，Git 自身的源代码仓库包含标签的数量超过 500 个。 如果只对 1.8.5 系列感兴趣，可以运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git tag -l 'v1.8.5*'</span><br><span class="line">v1.8.5</span><br><span class="line">v1.8.5-rc0</span><br><span class="line">v1.8.5-rc1</span><br><span class="line">v1.8.5-rc2</span><br><span class="line">v1.8.5-rc3</span><br><span class="line">v1.8.5.1</span><br><span class="line">v1.8.5.2</span><br><span class="line">v1.8.5.3</span><br><span class="line">v1.8.5.4</span><br><span class="line">v1.8.5.5</span><br></pre></td></tr></table></figure>
+<h3 id="创建标签"><a href="#创建标签" class="headerlink" title="创建标签"></a>创建标签</h3><p>&emsp;Git 使用两种主要类型的标签：轻量标签（lightweight）与附注标签（annotated）。</p>
+<p>&emsp;一个轻量标签很像一个不会改变的分支——它只是一个特定提交的引用。</p>
+<p>&emsp;然而，附注标签是存储在 Git 数据库中的一个完整对象。 它们是可以被校验的；其中包含打标签者的名字、电子邮件地址、日期时间；还有一个标签信息；并且可以使用 GNU Privacy Guard （GPG）签名与验证。 通常建议创建附注标签，这样你可以拥有以上所有信息；但是如果你只是想用一个临时的标签，或者因为某些原因不想要保存那些信息，轻量标签也是可用的。</p>
+<h3 id="附注标签"><a href="#附注标签" class="headerlink" title="附注标签"></a>附注标签</h3><p>&emsp;在 Git 中创建一个附注标签是很简单的。 最简单的方式是当你在运行 <code>tag</code> 命令时指定 <code>-a</code> 选项：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git tag -a v1.4 -m "my version 1.4"</span><br><span class="line"><span class="meta">$</span> git tag</span><br><span class="line">v0.1</span><br><span class="line">v1.3</span><br><span class="line">v1.4</span><br></pre></td></tr></table></figure>
+<p>&emsp;<code>-m</code> 选项指定了一条将会存储在标签中的信息。 如果没有为附注标签指定一条信息，Git 会运行编辑器要求你输入信息。</p>
+<p>&emsp;通过使用 <code>git show</code> 命令可以看到标签信息与对应的提交信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git show v1.4</span><br><span class="line">tag v1.4</span><br><span class="line">Tagger: Ben Straub &lt;ben@straub.cc&gt;</span><br><span class="line">Date:   Sat May 3 20:19:12 2014 -0700</span><br><span class="line"></span><br><span class="line">my version 1.4</span><br><span class="line"></span><br><span class="line">commit ca82a6dff817ec66f44342007202690a93763949</span><br><span class="line">Author: Scott Chacon &lt;schacon@gee-mail.com&gt;</span><br><span class="line">Date:   Mon Mar 17 21:52:11 2008 -0700</span><br><span class="line"></span><br><span class="line">    changed the version number</span><br></pre></td></tr></table></figure>
+<p>  &emsp;输出显示了打标签者的信息、打标签的日期时间、附注信息，然后显示具体的提交信息。</p>
+<h3 id="轻量标签"><a href="#轻量标签" class="headerlink" title="轻量标签"></a>轻量标签</h3><p>&emsp;另一种给提交打标签的方式是使用轻量标签。 轻量标签本质上是将提交校验和存储到一个文件中——没有保存任何其他信息。 创建轻量标签，不需要使用 <code>-a</code>、<code>-s</code> 或 <code>-m</code> 选项，只需要提供标签名字：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git tag v1.4-lw</span><br><span class="line"><span class="meta">$</span> git tag</span><br><span class="line">v0.1</span><br><span class="line">v1.3</span><br><span class="line">v1.4</span><br><span class="line">v1.4-lw</span><br><span class="line">v1.5</span><br></pre></td></tr></table></figure>
+<p>&emsp;这时，如果在标签上运行 <code>git show</code>，你不会看到额外的标签信息。 命令只会显示出提交信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git show v1.4-lw</span><br><span class="line">commit ca82a6dff817ec66f44342007202690a93763949</span><br><span class="line">Author: Scott Chacon &lt;schacon@gee-mail.com&gt;</span><br><span class="line">Date:   Mon Mar 17 21:52:11 2008 -0700</span><br><span class="line"></span><br><span class="line">    changed the version number</span><br></pre></td></tr></table></figure>
+<h3 id="后期打标签"><a href="#后期打标签" class="headerlink" title="后期打标签"></a>后期打标签</h3><p>&emsp;你也可以对过去的提交打标签。 假设提交历史是这样的：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git log --pretty=oneline</span><br><span class="line">15027957951b64cf874c3557a0f3547bd83b3ff6 Merge branch 'experiment'</span><br><span class="line">a6b4c97498bd301d84096da251c98a07c7723e65 beginning write support</span><br><span class="line">0d52aaab4479697da7686c15f77a3d64d9165190 one more thing</span><br><span class="line">6d52a271eda8725415634dd79daabbc4d9b6008e Merge branch 'experiment'</span><br><span class="line">0b7434d86859cc7b8c3d5e1dddfed66ff742fcbc added a commit function</span><br><span class="line">4682c3261057305bdd616e23b64b0857d832627b added a todo file</span><br><span class="line">166ae0c4d3f420721acbb115cc33848dfcc2121a started write support</span><br><span class="line">9fceb02d0ae598e95dc970b74767f19372d61af8 updated rakefile</span><br><span class="line">964f16d36dfccde844893cac5b347e7b3d44abbc commit the todo</span><br><span class="line">8a5cbc430f1a9c3d00faaeffd07798508422908a updated readme</span><br></pre></td></tr></table></figure>
+<p>&emsp;现在，假设在 v1.2 时你忘记给项目打标签，也就是在 “updated rakefile” 提交。 你可以在之后补上标签。 要在那个提交上打标签，你需要在命令的末尾指定提交的校验和（或部分校验和）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git tag -a v1.2 9fceb02</span><br></pre></td></tr></table></figure>
+<p>&emsp;可以看到你已经在那次提交上打上标签了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git tag</span><br><span class="line">v0.1</span><br><span class="line">v1.2</span><br><span class="line">v1.3</span><br><span class="line">v1.4</span><br><span class="line">v1.4-lw</span><br><span class="line">v1.5</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> git show v1.2</span><br><span class="line">tag v1.2</span><br><span class="line">Tagger: Scott Chacon &lt;schacon@gee-mail.com&gt;</span><br><span class="line">Date:   Mon Feb 9 15:32:16 2009 -0800</span><br><span class="line"></span><br><span class="line">version 1.2</span><br><span class="line">commit 9fceb02d0ae598e95dc970b74767f19372d61af8</span><br><span class="line">Author: Magnus Chacon &lt;mchacon@gee-mail.com&gt;</span><br><span class="line">Date:   Sun Apr 27 20:43:35 2008 -0700</span><br><span class="line"></span><br><span class="line">    updated rakefile</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="共享标签"><a href="#共享标签" class="headerlink" title="共享标签"></a>共享标签</h3><p>&emsp;默认情况下，<code>git push</code> 命令并不会传送标签到远程仓库服务器上。 在创建完标签后你必须显式地推送标签到共享服务器上。 这个过程就像共享远程分支一样——你可以运行 <code>git push origin [tagname]</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git push origin v1.5</span><br><span class="line">Counting objects: 14, done.</span><br><span class="line">Delta compression using up to 8 threads.</span><br><span class="line">Compressing objects: 100% (12/12), done.</span><br><span class="line">Writing objects: 100% (14/14), 2.05 KiB | 0 bytes/s, done.</span><br><span class="line">Total 14 (delta 3), reused 0 (delta 0)</span><br><span class="line">To git@github.com:schacon/simplegit.git</span><br><span class="line"> * [new tag]         v1.5 -&gt; v1.5</span><br></pre></td></tr></table></figure>
+<p>&emsp;如果想要一次性推送很多标签，也可以使用带有 <code>--tags</code> 选项的 <code>git push</code> 命令。 这将会把所有不在远程仓库服务器上的标签全部传送到那里。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git push origin --tags</span><br><span class="line">Counting objects: 1, done.</span><br><span class="line">Writing objects: 100% (1/1), 160 bytes | 0 bytes/s, done.</span><br><span class="line">Total 1 (delta 0), reused 0 (delta 0)</span><br><span class="line">To git@github.com:schacon/simplegit.git</span><br><span class="line"> * [new tag]         v1.4 -&gt; v1.4</span><br><span class="line"> * [new tag]         v1.4-lw -&gt; v1.4-lw</span><br></pre></td></tr></table></figure>
+<p>&emsp;现在，当其他人从仓库中克隆或拉取，他们也能得到你的那些标签。</p>
+<h3 id="删除标签"><a href="#删除标签" class="headerlink" title="删除标签"></a>删除标签</h3><p>&emsp;要删除掉你本地仓库上的标签，可以使用命令 <code>git tag -d &lt;tagname&gt;</code>。例如，可以使用下面的命令删除掉一个轻量级标签：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git tag -d v1.4-lw</span><br><span class="line">Deleted tag 'v1.4-lw' (was e7d5add)</span><br></pre></td></tr></table></figure>
+<p>&emsp;应该注意的是上述命令并不会从任何远程仓库中移除这个标签，你必须使用 <code>git push &lt;remote&gt; :refs/tags/&lt;tagname&gt;</code> 来更新你的远程仓库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git push origin :refs/tags/v1.4-lw</span><br><span class="line">To /git@github.com:schacon/simplegit.git</span><br><span class="line"> - [deleted]         v1.4-lw</span><br></pre></td></tr></table></figure>
+<h3 id="检出标签"><a href="#检出标签" class="headerlink" title="检出标签"></a>检出标签</h3><p>&emsp;如果你想查看某个标签所指向的文件版本，可以使用 <code>git checkout</code> 命令，虽然说这会使你的仓库处于“分离头指针（detacthed HEAD）”状态——这个状态有些不好的副作用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git checkout 2.0.0</span><br><span class="line">Note: checking out '2.0.0'.</span><br><span class="line"></span><br><span class="line">You are in 'detached HEAD' state. You can look around, make experimental</span><br><span class="line">changes and commit them, and you can discard any commits you make in this</span><br><span class="line">state without impacting any branches by performing another checkout.</span><br><span class="line"></span><br><span class="line">If you want to create a new branch to retain commits you create, you may</span><br><span class="line">do so (now or later) by using -b with the checkout command again. Example:</span><br><span class="line"></span><br><span class="line">  git checkout -b &lt;new-branch&gt;</span><br><span class="line"></span><br><span class="line">HEAD is now at 99ada87... Merge pull request #89 from schacon/appendix-final</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> git checkout 2.0-beta-0.1</span><br><span class="line">Previous HEAD position was 99ada87... Merge pull request #89 from schacon/appendix-final</span><br><span class="line">HEAD is now at df3f601... add atlas.json and cover image</span><br></pre></td></tr></table></figure>
+<p>&emsp;在“分离头指针”状态下，如果你做了某些更改然后提交它们，标签不会发生变化，但你的新提交将不属于任何分支，并且将无法访问，除非确切的提交哈希。因此，如果你需要进行更改——比如说你正在修复旧版本的错误——这通常需要创建一个新分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git checkout -b version2 v2.0.0</span><br><span class="line">Switched to a new branch 'version2'</span><br></pre></td></tr></table></figure>
+<p>&emsp;当然，如果在这之后又进行了一次提交，<code>version2</code> 分支会因为这个改动向前移动，<code>version2</code> 分支就会和 <code>v2.0.0</code> 标签稍微有些不同，这时就应该当心了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&emsp;在项目开发中，可以使用Git-flow方式，具体执行方式如下：</p>
+<ol>
+<li><p>项目工程模板构成的初始分支为master；</p>
+</li>
+<li><p>具体项目从master分支上创建相应的develop分支，例如，对于单通道LVDT项目，即创建分支single_ch_lvdt_develop；</p>
+</li>
+<li><p>项目开始开发后，每一个功能的开发需要从develop分支(分支single_ch_lvdt_develop)上创建新分支，例如开发can通讯模块，可以创建分支can_dev；当功能模块开发自测完毕后，需要将其合并到develop分支(分支single_ch_lvdt_develop)；</p>
+<blockquote>
+<ul>
+<li>从develop分支上创建功能开发分支，需要确保本地仓库的develop分支为最新(利用git pull等及时更新)；</li>
+<li>develop分支为项目开发分支，由于功能分支均创建于develop分支，所以允许多个开发人员同步开发不同功能，再将其分别合并到develop分支；</li>
+<li>注意，将功能分支合并到develop分支前，需要进行code review，以确保证代码质量；</li>
+<li>从创建功能分支到合并功能分支到develop分支这段时间，develop分支可能已经被更新。因此合并过程中可能需要解决冲突，合并过程需要进行code review，以便保证代码质量；</li>
+</ul>
+</blockquote>
+</li>
+<li><p>预发布分支用于项目提测阶段；预发布分支测试无误后，需要合并到master分支，注意打标签；</p>
+</li>
+<li><p>修补bug分支创建于master，用于修复紧急bug。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/02/29/git-flow/">Git 分支管理</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
+        <p><span>发布时间:</span>2020-02-29, 17:23:39</p>
+        <p><span>最后更新:</span>2020-03-02, 14:49:20</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/02/29/git-flow/" title="Git 分支管理">http://jiaodi.tech/2020/02/29/git-flow/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2020/02/29/git-flow/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/02/24/hw-code-style-guide/">
+                    华为软件编程规范和范例
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git分支管理策略"><span class="toc-number">1.</span> <span class="toc-text">Git分支管理策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单主干"><span class="toc-number">1.2.</span> <span class="toc-text">单主干</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GitHub-flow"><span class="toc-number">1.3.</span> <span class="toc-text">GitHub flow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-flow"><span class="toc-number">1.4.</span> <span class="toc-text">git-flow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-flow详解"><span class="toc-number">1.5.</span> <span class="toc-text">Git-flow详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主分支Master"><span class="toc-number">1.5.1.</span> <span class="toc-text">主分支Master</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发分支Develop"><span class="toc-number">1.5.2.</span> <span class="toc-text">开发分支Develop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#临时性分支"><span class="toc-number">1.5.3.</span> <span class="toc-text">临时性分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#功能分支"><span class="toc-number">1.5.4.</span> <span class="toc-text">功能分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预发布分支"><span class="toc-number">1.5.5.</span> <span class="toc-text">预发布分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修补bug分支"><span class="toc-number">1.5.6.</span> <span class="toc-text">修补bug分支</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git打标签"><span class="toc-number">1.6.</span> <span class="toc-text">Git打标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列出标签"><span class="toc-number">1.6.1.</span> <span class="toc-text">列出标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建标签"><span class="toc-number">1.6.2.</span> <span class="toc-text">创建标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附注标签"><span class="toc-number">1.6.3.</span> <span class="toc-text">附注标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#轻量标签"><span class="toc-number">1.6.4.</span> <span class="toc-text">轻量标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后期打标签"><span class="toc-number">1.6.5.</span> <span class="toc-text">后期打标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享标签"><span class="toc-number">1.6.6.</span> <span class="toc-text">共享标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除标签"><span class="toc-number">1.6.7.</span> <span class="toc-text">删除标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#检出标签"><span class="toc-number">1.6.8.</span> <span class="toc-text">检出标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.7.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/02/24/hw-code-style-guide/" title="下一篇: 华为软件编程规范和范例">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/git-flow/">Git 分支管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/24/hw-code-style-guide/">华为软件编程规范和范例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/ATECC508A-config/">ATECC508A配置案例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/atecc508a/">ATECC508A开发笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/CryptoAuth/">密码学基本知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/02/cs-ch01/">CSAPP CH1-A Tour of Computer Systems</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/13/altium-rules/">Altium Designer常用规则设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/19/git-guide/">Git学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/stm32f767-lwip/">STM32F767上LwIP的移植</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/27/stm32f767-mpu/">STM32F767 MPU的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/16/stm32f767-sdram/">STM32F767 FMC-SDRAM的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/30/stm32f767-qspi/">STM32F767 QUADSPI的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/stm32f767-flash/">STM32F767 Flash的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/21/stm32f767-rtc/">STM32F767 RTC的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/19/stm32f767-uart-dma/">STM32F767 DMA的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/07/stm32f767-pwm/">STM32F767 PWM的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/28/feedforward-cap/">优化前馈电容改善DCDC的瞬态响应(未完成)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/25/stm32f767-wwdg/">STM32F767 WWDG的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/stm32f767-iwdg/">STM32F767 IWDG的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/16/stm32f767-timer/">STM32F767 Timer中断的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/08/stm32f767-gpio-it/">STM32F767 GPIO中断的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/05/stm32f767-GPIO-UART/">STM32F767 GPIO与UART的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/29/stm32f767-delay/">STM32F767 delay函数的HAL库实现与优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/stm32f767-system/">STM32F767系统内核与时钟设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/18/stm32f767newpro/">新建一个STM32F767工程(基于HAL库)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/17/stm32f767-start/">使用STM32CubeMX新建STM32F7工程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/12/mlcc-noise/">电源应用中MLCC啸叫问题的分析与解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/04/pierce-oscillator/">Pierce振荡器的原理与设计方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/28/F28379D-new-pro-cpu1/">F28379D新建工程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/23/python-pyinstaller/">PyInstaller基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/14/HDC1010-C2000/">使用F28069驱动温湿度传感器HDC1010</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/14/IEEEStd802-11/">IEEE Std 802.11a/g/n/ac</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/08/XDS100-VCP/">加载C2000 XDS100仿真器的虚拟串口(VCP)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/06/MarkdownSyntax/">Markdown基本语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/21/BuckPowerStage/">Buck电路的功率部分设计</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/myserial/">使用C#构建一个串口程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/09/allegro-guide-2/">Allegro学习笔记-差分线与等长线</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/allegro-guide-1/">Allegro学习笔记-基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/04/cadence-allegro-package/">使用Ultra Librarian创建Cadence原理图与PCB封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/06/新建一个C2000工程/">新建一个C2000工程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/06/安装CCS与controlSUITE/">安装CCS与controlSUITE</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 焦迪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
