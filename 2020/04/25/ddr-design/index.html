@@ -24,7 +24,7 @@
 <meta property="og:description" content="本文记录DDR设计相关知识。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/01.png">
-<meta property="og:updated_time" content="2020-04-25T10:36:08.293Z">
+<meta property="og:updated_time" content="2020-04-25T13:18:31.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DDR Design">
 <meta name="twitter:description" content="本文记录DDR设计相关知识。">
@@ -312,10 +312,13 @@
 <a id="more"></a>
 <h1 id="TN-46-06"><a href="#TN-46-06" class="headerlink" title="TN-46-06"></a>TN-46-06</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>&emsp;高频下，PCB无法简单当作导线，而应当被视为RF传输线。因此，在当今高速数字系统设计中，为了报证信号完整性，需要对传输线理论具备基本的理解。</p>
 <p>&emsp;信号完整性主要受两方面影响。首先是传输线效应引起的振铃与反射，其实是电路之间的相互作用，如串扰以及电源平面上的噪声。通过建模分析，传输线可以达到最低的衰减以及失真。</p>
-<h2 id="传输线理论"><a href="#传输线理论" class="headerlink" title="传输线理论"></a>传输线理论</h2><p>&emsp;传输线的基本概念之一：特征阻抗。</p>
-<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/01.png" alt=""></p>
+<h2 id="传输线理论"><a href="#传输线理论" class="headerlink" title="传输线理论"></a>传输线理论</h2><h3 id="特征阻抗"><a href="#特征阻抗" class="headerlink" title="特征阻抗"></a>特征阻抗</h3><p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/01.png" alt=""></p>
 <p>&emsp;特征阻抗的表达式如下：<br>$$<br>Z_{0}=\sqrt{\frac{R+j\omega L}{G+j\omega C}}<br>$$<br>&emsp;忽略R与G，可得：<br>$$<br>Z_{0}=\sqrt{\frac{L}{C}}<br>$$</p>
-
+<h3 id="趋肤效应"><a href="#趋肤效应" class="headerlink" title="趋肤效应"></a>趋肤效应</h3><p>&emsp;趋肤效应：导体的电导率随着频率上升而降低。信号只在导体的表层中承载。</p>
+<p>&emsp;趋肤深度(cm)计算公式：<br>$$<br>\delta = \frac{6.6}{\sqrt{f}}<br>$$<br>&emsp;考虑到某些DDR的速率，导电层的趋肤深度仅为十分之几mil，从而增大了交流电阻。趋肤效应是计算传输线特征阻抗时，无法忽略电阻部分的主要原因。</p>
+<h3 id="匹配的传输线"><a href="#匹配的传输线" class="headerlink" title="匹配的传输线"></a>匹配的传输线</h3><p>&emsp;当传输线的两端都以其特征阻抗端接时，则认为该传输线是匹配的。匹配意味着传输线上没有反射。匹配的传输线是传递高频信号的最佳线。如果传输线不匹配，则会发生信号反射。线路上的反射信号会使得信号失真，当失真足够大，则接收器无法可靠地接收信号。</p>
+<h2 id="端接"><a href="#端接" class="headerlink" title="端接"></a>端接</h2><p>&emsp;当存在不匹配情况时，通过端接，可以将驱动器阻抗匹配至传输线阻抗，即使得驱动器输出阻抗+端接阻抗=传输线阻抗。如果驱动器阻抗未知，可以通过dV/dI曲线近似得到，该曲线可以通过IBIS(Input Output Buffer Information System)模型得到。</p>
+<h3 id="串联电阻"><a href="#串联电阻" class="headerlink" title="串联电阻"></a>串联电阻</h3>
       
     </div>
     
@@ -326,7 +329,7 @@
         <p><span>本文标题:</span><a href="/2020/04/25/ddr-design/">DDR Design</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2020-04-25, 17:37:10</p>
-        <p><span>最后更新:</span>2020-04-25, 18:36:08</p>
+        <p><span>最后更新:</span>2020-04-25, 21:18:31</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/04/25/ddr-design/" title="DDR Design">http://jiaodi.tech/2020/04/25/ddr-design/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2020/04/25/ddr-design/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -356,7 +359,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TN-46-06"><span class="toc-number">1.</span> <span class="toc-text">TN-46-06</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传输线理论"><span class="toc-number">1.2.</span> <span class="toc-text">传输线理论</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TN-46-06"><span class="toc-number">1.</span> <span class="toc-text">TN-46-06</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传输线理论"><span class="toc-number">1.2.</span> <span class="toc-text">传输线理论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特征阻抗"><span class="toc-number">1.2.1.</span> <span class="toc-text">特征阻抗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#趋肤效应"><span class="toc-number">1.2.2.</span> <span class="toc-text">趋肤效应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配的传输线"><span class="toc-number">1.2.3.</span> <span class="toc-text">匹配的传输线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#端接"><span class="toc-number">1.3.</span> <span class="toc-text">端接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#串联电阻"><span class="toc-number">1.3.1.</span> <span class="toc-text">串联电阻</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
