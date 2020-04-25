@@ -24,7 +24,7 @@
 <meta property="og:description" content="本文记录DDR设计相关知识。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/01.png">
-<meta property="og:updated_time" content="2020-04-25T10:26:55.819Z">
+<meta property="og:updated_time" content="2020-04-25T10:36:08.293Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DDR Design">
 <meta name="twitter:description" content="本文记录DDR设计相关知识。">
@@ -310,10 +310,11 @@
           
         <p>本文记录DDR设计相关知识。</p>
 <a id="more"></a>
-<h1 id="TN-46-06"><a href="#TN-46-06" class="headerlink" title="TN-46-06"></a>TN-46-06</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>&emsp;高频下，PCB无法简单当作导线，而应当被视为RF传输线。因此，在当今高速数字系统中为了报证信号完整性，需要对传输线理论具备基本的理解。</p>
+<h1 id="TN-46-06"><a href="#TN-46-06" class="headerlink" title="TN-46-06"></a>TN-46-06</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>&emsp;高频下，PCB无法简单当作导线，而应当被视为RF传输线。因此，在当今高速数字系统设计中，为了报证信号完整性，需要对传输线理论具备基本的理解。</p>
 <p>&emsp;信号完整性主要受两方面影响。首先是传输线效应引起的振铃与反射，其实是电路之间的相互作用，如串扰以及电源平面上的噪声。通过建模分析，传输线可以达到最低的衰减以及失真。</p>
 <h2 id="传输线理论"><a href="#传输线理论" class="headerlink" title="传输线理论"></a>传输线理论</h2><p>&emsp;传输线的基本概念之一：特征阻抗。</p>
 <p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/01.png" alt=""></p>
+<p>&emsp;特征阻抗的表达式如下：<br>$$<br>Z_{0}=\sqrt{\frac{R+j\omega L}{G+j\omega C}}<br>$$<br>&emsp;忽略R与G，可得：<br>$$<br>Z_{0}=\sqrt{\frac{L}{C}}<br>$$</p>
 
       
     </div>
@@ -325,7 +326,7 @@
         <p><span>本文标题:</span><a href="/2020/04/25/ddr-design/">DDR Design</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2020-04-25, 17:37:10</p>
-        <p><span>最后更新:</span>2020-04-25, 18:26:55</p>
+        <p><span>最后更新:</span>2020-04-25, 18:36:08</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/04/25/ddr-design/" title="DDR Design">http://jiaodi.tech/2020/04/25/ddr-design/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2020/04/25/ddr-design/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
