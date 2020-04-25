@@ -25,7 +25,9 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/01.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/02.png">
-<meta property="og:updated_time" content="2020-04-25T13:20:40.068Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/04.png">
+<meta property="og:updated_time" content="2020-04-25T14:00:30.311Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DDR Design">
 <meta name="twitter:description" content="本文记录DDR设计相关知识。">
@@ -320,7 +322,11 @@
 <h3 id="匹配的传输线"><a href="#匹配的传输线" class="headerlink" title="匹配的传输线"></a>匹配的传输线</h3><p>&emsp;当传输线的两端都以其特征阻抗端接时，则认为该传输线是匹配的。匹配意味着传输线上没有反射。匹配的传输线是传递高频信号的最佳线。如果传输线不匹配，则会发生信号反射。线路上的反射信号会使得信号失真，当失真足够大，则接收器无法可靠地接收信号。</p>
 <p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/02.png" alt=""></p>
 <h2 id="端接"><a href="#端接" class="headerlink" title="端接"></a>端接</h2><p>&emsp;当存在不匹配情况时，通过端接，可以将驱动器阻抗匹配至传输线阻抗，即使得驱动器输出阻抗+端接阻抗=传输线阻抗。如果驱动器阻抗未知，可以通过dV/dI曲线近似得到，该曲线可以通过IBIS(Input Output Buffer Information System)模型得到。</p>
-<h3 id="串联电阻"><a href="#串联电阻" class="headerlink" title="串联电阻"></a>串联电阻</h3>
+<h3 id="串联电阻"><a href="#串联电阻" class="headerlink" title="串联电阻"></a>串联电阻</h3><p>&emsp;如果驱动器阻抗无法增加到最佳阻抗，在驱动器旁边放置一个串联电阻，可以将阻抗提升到所需的水平。例如驱动器的阻抗为18Ω，对于63Ω的传输线，则串联电阻需要为18Ω。</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/03.png" alt=""></p>
+<p>&emsp;如果传输线两端(DQ线)均需要驱动，则需要2个驱动电阻。</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/04.png" alt=""></p>
+
       
     </div>
     
@@ -331,7 +337,7 @@
         <p><span>本文标题:</span><a href="/2020/04/25/ddr-design/">DDR Design</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2020-04-25, 17:37:10</p>
-        <p><span>最后更新:</span>2020-04-25, 21:20:40</p>
+        <p><span>最后更新:</span>2020-04-25, 22:00:30</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/04/25/ddr-design/" title="DDR Design">http://jiaodi.tech/2020/04/25/ddr-design/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2020/04/25/ddr-design/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
