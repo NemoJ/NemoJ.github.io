@@ -27,7 +27,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/02.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/03.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/04.png">
-<meta property="og:updated_time" content="2020-04-25T14:00:30.311Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/05.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/06.png">
+<meta property="og:updated_time" content="2020-04-25T15:46:27.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DDR Design">
 <meta name="twitter:description" content="本文记录DDR设计相关知识。">
@@ -324,8 +326,21 @@
 <h2 id="端接"><a href="#端接" class="headerlink" title="端接"></a>端接</h2><p>&emsp;当存在不匹配情况时，通过端接，可以将驱动器阻抗匹配至传输线阻抗，即使得驱动器输出阻抗+端接阻抗=传输线阻抗。如果驱动器阻抗未知，可以通过dV/dI曲线近似得到，该曲线可以通过IBIS(Input Output Buffer Information System)模型得到。</p>
 <h3 id="串联电阻"><a href="#串联电阻" class="headerlink" title="串联电阻"></a>串联电阻</h3><p>&emsp;如果驱动器阻抗无法增加到最佳阻抗，在驱动器旁边放置一个串联电阻，可以将阻抗提升到所需的水平。例如驱动器的阻抗为18Ω，对于63Ω的传输线，则串联电阻需要为18Ω。</p>
 <p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/03.png" alt=""></p>
-<p>&emsp;如果传输线两端(DQ线)均需要驱动，则需要2个驱动电阻。</p>
+<h3 id="两个串联电阻"><a href="#两个串联电阻" class="headerlink" title="两个串联电阻"></a>两个串联电阻</h3><p>&emsp;如果传输线两端(DQ线)均需要驱动，则需要2个驱动电阻。</p>
 <p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/04.png" alt=""></p>
+<h3 id="反向端接"><a href="#反向端接" class="headerlink" title="反向端接"></a>反向端接</h3><p>&emsp;如前所述，完全匹配的传输线是设备之间的最佳互连。 但是，一条完全匹配的线也将信号分成两部分（一半在驱动器阻抗中，一半在负载中）。 因此出现了一个问题：是否有另一种方法可以在不将信号减半的情况下连接设备？ 答案是“是”。</p>
+<p>&emsp;如果只有传输线的一端匹配，信号将在不匹配的一端反射，最终终止在匹配端。驱动端阻抗匹配而接收端阻抗不匹配的配置方式称为反向端接。来自于源端的信号通过传输线传输，从未端接的一端反射，之后通过传输线返回并终止于源端电阻。尽管存在反射，但是这种反射并不会使得接收端的信号失真。</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/05.png" alt=""></p>
+<p>&emsp;对于点对点DQ连接，主要存在两个问题：系统阻抗和负载电容。在特定的负载电容以及驱动阻抗下，数字系统中存在一个最大速率的极限值。当负载电容或者驱动阻抗上升时，则最大数据速率降低；同样的，当负载电容或驱动阻抗下降，则最大数据速率提高。这就是为什么减小数字接收器上输入电容如此重要的原因。降低驱动阻抗的问题并不简单：当不降低传输线阻抗的情况下，降低驱动阻抗会引起信号完整性问题。对于点对点DQ连接的最佳解决方案是使得驱动器阻抗等于传输线的特征阻抗，同时该阻抗尽可能降低。这将允许系统在最高速率下直连，同时无需其它元件。</p>
+<p>&emsp;驱动器还存在一个问题，即驱动器的阻抗并不是恒定的。当电平从低到高或者从高到低时，其阻抗会发生变化。驱动器还有寄生电容和寄生电感，从而使得其驱动阻抗并不是纯阻性的。串联电阻可以有效降低驱动器阻抗变化对信号完整性的影响。</p>
+<p>&emsp;如果考虑到以上准则，点对点连接容易设计，但是需要注意考虑到寄生参数。有时候，使用相比于传输线阻抗较小的驱动器阻抗也是有益的。有时候，较小的驱动阻抗可以在牺牲一点信号完整性的情况下提供更高的数据速率。当有多组设计要求时(时钟和地址等)，具体的配置分析将复杂化。多个参数需要更改和平衡才能获取最佳性能。</p>
+<h2 id="点对点设计举例"><a href="#点对点设计举例" class="headerlink" title="点对点设计举例"></a>点对点设计举例</h2><p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/06.png" alt=""></p>
+<p>&emsp;综合考虑眼图、组件数以及功耗，选定如上拓扑。此拓扑下，驱动器和接收器中间放置一个串联电阻，并支持组件之间的读取和写入操作。结合上述讨论，这不是最佳配置，这只是仅使用一个电阻下的折衷方案。</p>
+<p>&emsp;仿真结果这里不再列出，仅列出2个结论：</p>
+<ul>
+<li>较小的串联电阻可以改善边沿传输特性，但是会有更大的过冲；</li>
+<li>信号的上升时间也在信号完整性中发挥重要作用。一个建议：在满足时续要求的情况下，尽可能降低信号的上升时间。</li>
+</ul>
 
       
     </div>
@@ -337,7 +352,7 @@
         <p><span>本文标题:</span><a href="/2020/04/25/ddr-design/">DDR Design</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2020-04-25, 17:37:10</p>
-        <p><span>最后更新:</span>2020-04-25, 22:00:30</p>
+        <p><span>最后更新:</span>2020-04-25, 23:46:27</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/04/25/ddr-design/" title="DDR Design">http://jiaodi.tech/2020/04/25/ddr-design/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2020/04/25/ddr-design/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -367,7 +382,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TN-46-06"><span class="toc-number">1.</span> <span class="toc-text">TN-46-06</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传输线理论"><span class="toc-number">1.2.</span> <span class="toc-text">传输线理论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特征阻抗"><span class="toc-number">1.2.1.</span> <span class="toc-text">特征阻抗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#趋肤效应"><span class="toc-number">1.2.2.</span> <span class="toc-text">趋肤效应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配的传输线"><span class="toc-number">1.2.3.</span> <span class="toc-text">匹配的传输线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#端接"><span class="toc-number">1.3.</span> <span class="toc-text">端接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#串联电阻"><span class="toc-number">1.3.1.</span> <span class="toc-text">串联电阻</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TN-46-06"><span class="toc-number">1.</span> <span class="toc-text">TN-46-06</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传输线理论"><span class="toc-number">1.2.</span> <span class="toc-text">传输线理论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特征阻抗"><span class="toc-number">1.2.1.</span> <span class="toc-text">特征阻抗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#趋肤效应"><span class="toc-number">1.2.2.</span> <span class="toc-text">趋肤效应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配的传输线"><span class="toc-number">1.2.3.</span> <span class="toc-text">匹配的传输线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#端接"><span class="toc-number">1.3.</span> <span class="toc-text">端接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#串联电阻"><span class="toc-number">1.3.1.</span> <span class="toc-text">串联电阻</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两个串联电阻"><span class="toc-number">1.3.2.</span> <span class="toc-text">两个串联电阻</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向端接"><span class="toc-number">1.3.3.</span> <span class="toc-text">反向端接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#点对点设计举例"><span class="toc-number">1.4.</span> <span class="toc-text">点对点设计举例</span></a></li></ol></li></ol>
         
     </div>
     <style>
