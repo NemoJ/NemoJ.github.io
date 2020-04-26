@@ -29,7 +29,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/04.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/05.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/06.png">
-<meta property="og:updated_time" content="2020-04-25T15:46:27.412Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/07.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/08.png">
+<meta property="og:updated_time" content="2020-04-26T01:47:59.953Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DDR Design">
 <meta name="twitter:description" content="本文记录DDR设计相关知识。">
@@ -341,6 +343,14 @@
 <li>较小的串联电阻可以改善边沿传输特性，但是会有更大的过冲；</li>
 <li>信号的上升时间也在信号完整性中发挥重要作用。一个建议：在满足时续要求的情况下，尽可能降低信号的上升时间。</li>
 </ul>
+<h1 id="TN-46-14"><a href="#TN-46-14" class="headerlink" title="TN-46-14"></a>TN-46-14</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><p>&emsp;设计人员可以从经过的技术中受益，这些技术可以用于点对点接口中的SDRAM和DDR设备的端接，布局和布线。源自电子理论和美光设计经验，本技术说明中的准则旨在用于点对点系统中的信号完整性（SI）优化。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>&emsp;在本技术说明中，VSS指数字地，VSSQ指DQ和信号地； 除非另有说明，否则两者是等效的。 VDD是设备内核的数字电源，而VDDQ是DQ和I / O信号的电源。 除非另有说明，否则它们也等效。</p>
+<h2 id="建议使用6层PCB"><a href="#建议使用6层PCB" class="headerlink" title="建议使用6层PCB"></a>建议使用6层PCB</h2><p>&emsp;设计良好的PCB对于消除数字开关噪声至关重要。地平面需要为数字电路提供低阻(Low-Z)抗返回路径。</p>
+<p>&emsp;Micron建议使用最低6层的PCB：层1 (top) 和6(bottom)为信号层；层2、3和5作为地/电源；层4作为地/电源或者信号。</p>
+<p>&emsp;图1展示了3个信号层的层叠方式，图2展示了4个信号层的层叠方式。较差的SI以及其他问题使得3层或者4层PCB无法使用，除非在非常有限的情形下。</p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/07.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/NemoJ/blog_pics/master/ddr_design/08.png" alt=""></p>
+<h3 id="TSOP封装"><a href="#TSOP封装" class="headerlink" title="TSOP封装"></a>TSOP封装</h3><p>&emsp;</p>
 
       
     </div>
@@ -352,7 +362,7 @@
         <p><span>本文标题:</span><a href="/2020/04/25/ddr-design/">DDR Design</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2020-04-25, 17:37:10</p>
-        <p><span>最后更新:</span>2020-04-25, 23:46:27</p>
+        <p><span>最后更新:</span>2020-04-26, 09:47:59</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/04/25/ddr-design/" title="DDR Design">http://jiaodi.tech/2020/04/25/ddr-design/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2020/04/25/ddr-design/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -382,7 +392,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TN-46-06"><span class="toc-number">1.</span> <span class="toc-text">TN-46-06</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传输线理论"><span class="toc-number">1.2.</span> <span class="toc-text">传输线理论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特征阻抗"><span class="toc-number">1.2.1.</span> <span class="toc-text">特征阻抗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#趋肤效应"><span class="toc-number">1.2.2.</span> <span class="toc-text">趋肤效应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配的传输线"><span class="toc-number">1.2.3.</span> <span class="toc-text">匹配的传输线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#端接"><span class="toc-number">1.3.</span> <span class="toc-text">端接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#串联电阻"><span class="toc-number">1.3.1.</span> <span class="toc-text">串联电阻</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两个串联电阻"><span class="toc-number">1.3.2.</span> <span class="toc-text">两个串联电阻</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向端接"><span class="toc-number">1.3.3.</span> <span class="toc-text">反向端接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#点对点设计举例"><span class="toc-number">1.4.</span> <span class="toc-text">点对点设计举例</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TN-46-06"><span class="toc-number">1.</span> <span class="toc-text">TN-46-06</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传输线理论"><span class="toc-number">1.2.</span> <span class="toc-text">传输线理论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特征阻抗"><span class="toc-number">1.2.1.</span> <span class="toc-text">特征阻抗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#趋肤效应"><span class="toc-number">1.2.2.</span> <span class="toc-text">趋肤效应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配的传输线"><span class="toc-number">1.2.3.</span> <span class="toc-text">匹配的传输线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#端接"><span class="toc-number">1.3.</span> <span class="toc-text">端接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#串联电阻"><span class="toc-number">1.3.1.</span> <span class="toc-text">串联电阻</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两个串联电阻"><span class="toc-number">1.3.2.</span> <span class="toc-text">两个串联电阻</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向端接"><span class="toc-number">1.3.3.</span> <span class="toc-text">反向端接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#点对点设计举例"><span class="toc-number">1.4.</span> <span class="toc-text">点对点设计举例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TN-46-14"><span class="toc-number">2.</span> <span class="toc-text">TN-46-14</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介-1"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">2.1.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建议使用6层PCB"><span class="toc-number">2.2.</span> <span class="toc-text">建议使用6层PCB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TSOP封装"><span class="toc-number">2.2.1.</span> <span class="toc-text">TSOP封装</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
