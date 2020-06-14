@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="本文记录SI与PI相关知识。">
+<meta name="description" content="有关信号完整性相关定义。">
 <meta name="keywords" content="高速电路,SI,PI,PDN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Signal Integrity and Power Integrity">
+<meta property="og:title" content="信号完整性相关定义">
 <meta property="og:url" content="http://jiaodi.tech/2020/04/22/si-pi-guide/index.html">
 <meta property="og:site_name" content="焦迪的博客">
-<meta property="og:description" content="本文记录SI与PI相关知识。">
+<meta property="og:description" content="有关信号完整性相关定义。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-23T08:40:53.451Z">
+<meta property="og:updated_time" content="2020-06-14T11:20:31.660Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Signal Integrity and Power Integrity">
-<meta name="twitter:description" content="本文记录SI与PI相关知识。">
+<meta name="twitter:title" content="信号完整性相关定义">
+<meta name="twitter:description" content="有关信号完整性相关定义。">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Signal Integrity and Power Integrity | 焦迪的博客</title>
+<title>信号完整性相关定义 | 焦迪的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -281,7 +281,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Signal Integrity and Power Integrity
+      信号完整性相关定义
     </h1>
   
 
@@ -306,8 +306,29 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>本文记录SI与PI相关知识。</p>
+        <p>有关信号完整性相关定义。</p>
 <a id="more"></a>
+<p>&emsp;本文的主要参考资源如下：</p>
+<blockquote>
+<p><a href="https://blog.druggo.org/post/2006/08/10/Signal-IntegrityEMCCrosstalk" target="_blank" rel="noopener"><a href="https://blog.druggo.org/" target="_blank" rel="noopener">HighWayToHell</a></a></p>
+</blockquote>
+<h2 id="信号完整性-signal-integrity"><a href="#信号完整性-signal-integrity" class="headerlink" title="信号完整性(signal integrity)"></a>信号完整性(signal integrity)</h2><p>信号完整性(Signal integrity)是指一个信号在电路中产生正确的相应的能力。信号具有良好的信号完整性(signal integrity)是指当在需要的时候，具有所必需达到的电压电平数值。</p>
+<h2 id="串扰-crosstalk"><a href="#串扰-crosstalk" class="headerlink" title="串扰(crosstalk)"></a>串扰(crosstalk)</h2><p>串扰(Crosstalk)是指在两个不同的电性能网络之间的相互作用。产生串扰(crosstalk)被称为Aggressor，而另一个收到干扰的被称为Victim。通常，一个网络既是Aggressor，又是Victim。</p>
+<h2 id="电磁兼容性-EMI"><a href="#电磁兼容性-EMI" class="headerlink" title="电磁兼容性(EMI)"></a>电磁兼容性(EMI)</h2><p>电磁干扰(Electromagnetic Interference)，或者电磁兼容性(EMI)，是从一个传输线(transmission line)(例如电缆、导线或封装的管脚)得到的具有天线特性的结果。印制电路板、集成电路和许多电缆发射并影响电磁兼容性(EMI)的问题。FCC定义了对于一定的频率的最大发射的水平(例如应用于飞行控制器领域)。</p>
+<h2 id="时域-time-domain-和频域-frequency-domain"><a href="#时域-time-domain-和频域-frequency-domain" class="headerlink" title="时域(time domain)和频域(frequency domain)"></a>时域(time domain)和频域(frequency domain)</h2><p>时域(time domain)是一个波形的示波器观察，它通常用于找出管脚到管脚的延时(delays)、偏移(skew)、过冲(overshoot)、、下冲(undershoot)以及设置时间(settling times)。频域(frequency domain)是一个波形的频谱分析仪的观察，它通常用于波形与FCC和其它EMI控制限制之间的比较。(有一个比喻，它就象收音机——你在时域(time domain)中听见，但是你要找到你喜欢的电台是在频域(frequency domain)内。)</p>
+<h2 id="传输线-transmission-line"><a href="#传输线-transmission-line" class="headerlink" title="传输线(transmission line)"></a>传输线(transmission line)</h2><p>传输线(transmission line)是一个网络(导线)，并且它的电流返回到地或电源。</p>
+<h2 id="阻抗-impedance"><a href="#阻抗-impedance" class="headerlink" title="阻抗(impedance)"></a>阻抗(impedance)</h2><p>阻抗(Impedance)是传输线(transmission line)上输入电压对输入电流的比率值(Z0=V/I)。当一个源送出一个信号到线上，它将阻碍它驱动，直到2*TD时，源并没有看到它的改变，在这里TD是线的延时(delay)。</p>
+<h2 id="反射-reflection"><a href="#反射-reflection" class="headerlink" title="反射(reflection)"></a>反射(reflection)</h2><p>反 射(reflection)就是在传输线(transmission line)上的回波(echo)。信号功率(电压和电流)的一部分传输到线上并达到负载处，但是有一部分被反射(reflected)了。如果负载和线具 有相同的(impedance)，反射(Reflections)就不会发生了。</p>
+<h2 id="过冲-overshoot"><a href="#过冲-overshoot" class="headerlink" title="过冲(overshoot)"></a>过冲(overshoot)</h2><p>过冲(Overshoot)就是第一个峰值或谷值超过设定电压 - 对于上升沿是指最高电压而对于下降沿是指最低电压。下冲(Undershoot)是指下一个谷值或 峰值。过分的过冲(overshoot)能够引起保护二极管工作，导致过早地失效。</p>
+<h2 id="下冲-undershoot-ringback"><a href="#下冲-undershoot-ringback" class="headerlink" title="下冲(undershoot)(ringback)"></a>下冲(undershoot)(ringback)</h2><p>下冲(Undershoot)是第二个峰值或谷值超过设定电压 - 对于上升沿过度的谷值或对于下降沿太大的峰值。过分的下冲(undershoot)能够引起假的时钟或数据错误(误操作)。</p>
+<h2 id="振荡-ringing"><a href="#振荡-ringing" class="headerlink" title="振荡(ringing)"></a>振荡(ringing)</h2><p>振荡(Ringing)就是在反复出现过冲(overshoots)和下冲(undershoots)。</p>
+<h2 id="设置时间-settling-time"><a href="#设置时间-settling-time" class="headerlink" title="设置时间(settling time)"></a>设置时间(settling time)</h2><p>设置时间(Settling time)就是对于一个振荡的信号稳定到指定的最终值所需要的时间。</p>
+<h2 id="管脚到管脚-pin-to-pin-的延时-delay"><a href="#管脚到管脚-pin-to-pin-的延时-delay" class="headerlink" title="管脚到管脚(pin-to-pin)的延时(delay)"></a>管脚到管脚(pin-to-pin)的延时(delay)</h2><p>管 脚到管脚(Pin-to-pin)延时(delay)是指在驱动器端状态的改变到接收器端状态的改变之间的时间。这些改变通常发生在给定电压的50%，最 小延时发生在当输出第一个越过给定的阈值(threshold)，最大延时发生在当输出最后一个越过电压阈值(threshold) ，测量所有这些情况。</p>
+<h2 id="偏差-skew"><a href="#偏差-skew" class="headerlink" title="偏差(skew)"></a>偏差(skew)</h2><p>信号的偏移(skew)是对于同一个网络到达不同的接收器端之间的时间偏差。偏移(Skew)还被用于在逻辑门上时钟和数据达到的时间偏差。</p>
+<h2 id="斜率-slew-rate"><a href="#斜率-slew-rate" class="headerlink" title="斜率(slew rate)"></a>斜率(slew rate)</h2><p>Slew rate就是边沿斜率(一个信号的电压有关的时间改变的比率). I/O 的技术规范 (如PCI)状态在两个电压之间，这就是斜率(slew rate)，它是可以测量的。</p>
+<h2 id="静态线-quiescent-line"><a href="#静态线-quiescent-line" class="headerlink" title="静态线(quiescent line)"></a>静态线(quiescent line)</h2><p>在当前的时钟周期内它不出现切换。另外也被称为 “stuck-at” 线或static线。串扰(Crosstalk)能够引起一个静态线在时钟周期内出现切换。</p>
+<h2 id="假时钟-false-clocking"><a href="#假时钟-false-clocking" class="headerlink" title="假时钟(false clocking)"></a>假时钟(false clocking)</h2><p>假时钟是指时钟越过阈值(threshold)无意识地改变了状态(有时在VIL 或VIH之间)。通常由于过分的下冲(undershoot)或串扰(crosstalk)引起。</p>
+<h2 id="IBIS"><a href="#IBIS" class="headerlink" title="IBIS"></a>IBIS</h2><p>IBIS是描述一个输入/输出(I/O)的 EIA/ANSI标准。它既包括DC (V/I)特性曲线，也包括瞬态(transient)(V/T)特性曲线 curves as tables of points. HyperLynx的网页 (Web site)上有连接到 IBIS的主页，另外还有许多供应商的IBIS 模型网页。</p>
 
       
     </div>
@@ -316,12 +337,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/04/22/si-pi-guide/">Signal Integrity and Power Integrity</a></p>
+        <p><span>本文标题:</span><a href="/2020/04/22/si-pi-guide/">信号完整性相关定义</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2020-04-22, 18:30:02</p>
-        <p><span>最后更新:</span>2020-04-23, 16:40:53</p>
+        <p><span>最后更新:</span>2020-06-14, 19:20:31</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/04/22/si-pi-guide/" title="Signal Integrity and Power Integrity">http://jiaodi.tech/2020/04/22/si-pi-guide/</a>
+            <span>原始链接:</span><a class="post-url" href="/2020/04/22/si-pi-guide/" title="信号完整性相关定义">http://jiaodi.tech/2020/04/22/si-pi-guide/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2020/04/22/si-pi-guide/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -355,7 +376,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#信号完整性-signal-integrity"><span class="toc-number">1.</span> <span class="toc-text">信号完整性(signal integrity)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#串扰-crosstalk"><span class="toc-number">2.</span> <span class="toc-text">串扰(crosstalk)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#电磁兼容性-EMI"><span class="toc-number">3.</span> <span class="toc-text">电磁兼容性(EMI)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时域-time-domain-和频域-frequency-domain"><span class="toc-number">4.</span> <span class="toc-text">时域(time domain)和频域(frequency domain)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传输线-transmission-line"><span class="toc-number">5.</span> <span class="toc-text">传输线(transmission line)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阻抗-impedance"><span class="toc-number">6.</span> <span class="toc-text">阻抗(impedance)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反射-reflection"><span class="toc-number">7.</span> <span class="toc-text">反射(reflection)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过冲-overshoot"><span class="toc-number">8.</span> <span class="toc-text">过冲(overshoot)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下冲-undershoot-ringback"><span class="toc-number">9.</span> <span class="toc-text">下冲(undershoot)(ringback)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#振荡-ringing"><span class="toc-number">10.</span> <span class="toc-text">振荡(ringing)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置时间-settling-time"><span class="toc-number">11.</span> <span class="toc-text">设置时间(settling time)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管脚到管脚-pin-to-pin-的延时-delay"><span class="toc-number">12.</span> <span class="toc-text">管脚到管脚(pin-to-pin)的延时(delay)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#偏差-skew"><span class="toc-number">13.</span> <span class="toc-text">偏差(skew)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#斜率-slew-rate"><span class="toc-number">14.</span> <span class="toc-text">斜率(slew rate)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态线-quiescent-line"><span class="toc-number">15.</span> <span class="toc-text">静态线(quiescent line)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#假时钟-false-clocking"><span class="toc-number">16.</span> <span class="toc-text">假时钟(false clocking)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IBIS"><span class="toc-number">17.</span> <span class="toc-text">IBIS</span></a></li></ol>
         
     </div>
     <style>
@@ -400,7 +421,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/25/ddr-design/">DDR Design</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/22/si-pi-guide/">Signal Integrity and Power Integrity</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/git-flow/">Git 分支管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/24/hw-code-style-guide/">华为软件编程规范和范例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/ATECC508A-config/">ATECC508A配置案例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/atecc508a/">ATECC508A开发笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/CryptoAuth/">密码学基本知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/02/cs-ch01/">CSAPP CH1-A Tour of Computer Systems</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/13/altium-rules/">Altium Designer常用规则设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/19/git-guide/">Git学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/stm32f767-lwip/">STM32F767上LwIP的移植</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/27/stm32f767-mpu/">STM32F767 MPU的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/16/stm32f767-sdram/">STM32F767 FMC-SDRAM的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/30/stm32f767-qspi/">STM32F767 QUADSPI的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/stm32f767-flash/">STM32F767 Flash的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/21/stm32f767-rtc/">STM32F767 RTC的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/19/stm32f767-uart-dma/">STM32F767 DMA的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/07/stm32f767-pwm/">STM32F767 PWM的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/28/feedforward-cap/">优化前馈电容改善DCDC的瞬态响应(未完成)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/25/stm32f767-wwdg/">STM32F767 WWDG的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/stm32f767-iwdg/">STM32F767 IWDG的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/16/stm32f767-timer/">STM32F767 Timer中断的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/08/stm32f767-gpio-it/">STM32F767 GPIO中断的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/05/stm32f767-GPIO-UART/">STM32F767 GPIO与UART的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/29/stm32f767-delay/">STM32F767 delay函数的HAL库实现与优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/stm32f767-system/">STM32F767系统内核与时钟设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/18/stm32f767newpro/">新建一个STM32F767工程(基于HAL库)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/17/stm32f767-start/">使用STM32CubeMX新建STM32F7工程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/12/mlcc-noise/">电源应用中MLCC啸叫问题的分析与解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/04/pierce-oscillator/">Pierce振荡器的原理与设计方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/28/F28379D-new-pro-cpu1/">F28379D新建工程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/23/python-pyinstaller/">PyInstaller基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/14/HDC1010-C2000/">使用F28069驱动温湿度传感器HDC1010</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/14/IEEEStd802-11/">IEEE Std 802.11a/g/n/ac</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/08/XDS100-VCP/">加载C2000 XDS100仿真器的虚拟串口(VCP)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/06/MarkdownSyntax/">Markdown基本语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/21/BuckPowerStage/">Buck电路的功率部分设计</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/myserial/">使用C#构建一个串口程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/09/allegro-guide-2/">Allegro学习笔记-差分线与等长线</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/allegro-guide-1/">Allegro学习笔记-基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/04/cadence-allegro-package/">使用Ultra Librarian创建Cadence原理图与PCB封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/06/新建一个C2000工程/">新建一个C2000工程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/06/安装CCS与controlSUITE/">安装CCS与controlSUITE</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/25/ddr-design/">DDR Design</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/22/si-pi-guide/">信号完整性相关定义</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/git-flow/">Git 分支管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/24/hw-code-style-guide/">华为软件编程规范和范例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/ATECC508A-config/">ATECC508A配置案例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/atecc508a/">ATECC508A开发笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/CryptoAuth/">密码学基本知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/02/cs-ch01/">CSAPP CH1-A Tour of Computer Systems</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/13/altium-rules/">Altium Designer常用规则设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/19/git-guide/">Git学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/stm32f767-lwip/">STM32F767上LwIP的移植</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/27/stm32f767-mpu/">STM32F767 MPU的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/16/stm32f767-sdram/">STM32F767 FMC-SDRAM的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/30/stm32f767-qspi/">STM32F767 QUADSPI的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/stm32f767-flash/">STM32F767 Flash的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/21/stm32f767-rtc/">STM32F767 RTC的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/19/stm32f767-uart-dma/">STM32F767 DMA的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/07/stm32f767-pwm/">STM32F767 PWM的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/28/feedforward-cap/">优化前馈电容改善DCDC的瞬态响应(未完成)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/25/stm32f767-wwdg/">STM32F767 WWDG的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/stm32f767-iwdg/">STM32F767 IWDG的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/16/stm32f767-timer/">STM32F767 Timer中断的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/08/stm32f767-gpio-it/">STM32F767 GPIO中断的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/05/stm32f767-GPIO-UART/">STM32F767 GPIO与UART的基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/29/stm32f767-delay/">STM32F767 delay函数的HAL库实现与优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/stm32f767-system/">STM32F767系统内核与时钟设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/18/stm32f767newpro/">新建一个STM32F767工程(基于HAL库)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/17/stm32f767-start/">使用STM32CubeMX新建STM32F7工程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/12/mlcc-noise/">电源应用中MLCC啸叫问题的分析与解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/04/pierce-oscillator/">Pierce振荡器的原理与设计方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/28/F28379D-new-pro-cpu1/">F28379D新建工程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/23/python-pyinstaller/">PyInstaller基本用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/14/HDC1010-C2000/">使用F28069驱动温湿度传感器HDC1010</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/14/IEEEStd802-11/">IEEE Std 802.11a/g/n/ac</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/08/XDS100-VCP/">加载C2000 XDS100仿真器的虚拟串口(VCP)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/06/MarkdownSyntax/">Markdown基本语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/21/BuckPowerStage/">Buck电路的功率部分设计</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/myserial/">使用C#构建一个串口程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/09/allegro-guide-2/">Allegro学习笔记-差分线与等长线</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/allegro-guide-1/">Allegro学习笔记-基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/04/cadence-allegro-package/">使用Ultra Librarian创建Cadence原理图与PCB封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/06/新建一个C2000工程/">新建一个C2000工程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/06/安装CCS与controlSUITE/">安装CCS与controlSUITE</a></li></ul>
 
 
 
