@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="焦迪的博客">
 <meta property="og:description" content="&amp;emsp;本文记录STM32基于LWIP进行TCP通讯的性能提升方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-23T16:03:41.535Z">
+<meta property="og:updated_time" content="2020-08-09T11:31:23.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="禁用TCP ACK Delay以提升TCP数据发送性能">
 <meta name="twitter:description" content="&amp;emsp;本文记录STM32基于LWIP进行TCP通讯的性能提升方法。">
@@ -322,9 +322,17 @@
 </blockquote>
 <p>&emsp;禁用TCP ACK Delay的方法如下：</p>
 <ol>
-<li>打开Windows注册表；</li>
-<li></li>
+<li>WIN+R键，输入regedit，打开Windows注册表；</li>
+<li>选择HKEY_LOCAL_MACHINE-&gt;SYSTEM-&gt; CurrentControlSet-&gt; services -&gt;Tcpip -&gt; Parameters -&gt;Interfaces -&gt; {NIC-id}；</li>
 </ol>
+<blockquote>
+<p>NIC即为network interface controller，即网卡。在Windows CMD下可以通过getmac获取网卡的Physical Address与Transport Name，其中Transport Name即为NIC-id；</p>
+</blockquote>
+<ol start="3">
+<li>在进行数据传输的网卡处增加2项注册表键值：对于32位系统，type选择DWORD；对于64位系统，type选择QWORD。键值名字分别为TCPAckFrequency和TCPNoDelay，值均为1；</li>
+<li>重启电脑。</li>
+</ol>
+<h2 id="实际效果"><a href="#实际效果" class="headerlink" title="实际效果"></a>实际效果</h2><p>按照如上设置后，TCP ACK会立即发送。</p>
 
       
     </div>
@@ -336,7 +344,7 @@
         <p><span>本文标题:</span><a href="/2020/07/23/disable-tcp-ack-delay/">禁用TCP ACK Delay以提升TCP数据发送性能</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">焦迪</a></p>
         <p><span>发布时间:</span>2020-07-23, 23:00:05</p>
-        <p><span>最后更新:</span>2020-07-24, 00:03:41</p>
+        <p><span>最后更新:</span>2020-08-09, 19:31:23</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/07/23/disable-tcp-ack-delay/" title="禁用TCP ACK Delay以提升TCP数据发送性能">http://jiaodi.tech/2020/07/23/disable-tcp-ack-delay/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jiaodi.tech/2020/07/23/disable-tcp-ack-delay/　　作者: 焦迪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -366,7 +374,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题描述"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题描述"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实际效果"><span class="toc-number">3.</span> <span class="toc-text">实际效果</span></a></li></ol>
         
     </div>
     <style>
